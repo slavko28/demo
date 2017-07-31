@@ -1,5 +1,6 @@
 package com.toptop.domain;
 
+import com.toptop.domain.enums.EmployeeType;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
@@ -17,13 +18,17 @@ import java.io.Serializable;
 @Setter
 @EqualsAndHashCode
 @ToString
-public class Worker implements Serializable{
+public class CompanyEmployee implements Serializable {
 
     private static final long serialVersionUID = -8656867795070348248L;
 
     @Id
     @GeneratedValue
     private Long id;
+
+    @NotNull
+    @Enumerated(EnumType.STRING)
+    private EmployeeType type;
 
     @NotNull
     private String firstName;
@@ -35,5 +40,16 @@ public class Worker implements Serializable{
 
     @NotNull
     private String phoneNumber;
+
+    @ManyToOne(optional = false)
+    private Company company;
+
+    private String email;
+
+    private String descriptionDetails;
+
+    private String license;
+
+    private String passport;
 
 }

@@ -1,14 +1,14 @@
 package com.toptop.domain;
 
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import com.toptop.domain.enums.OrderStatus;
+import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.time.LocalDateTime;
+
+import static javax.persistence.EnumType.STRING;
 
 /**
  * Created by slavkosoltys on 30.07.17.
@@ -18,7 +18,7 @@ import java.time.LocalDateTime;
 @Setter
 @EqualsAndHashCode
 @ToString
-public class CustomerOrder implements Serializable {
+public class CompanyOrder implements Serializable {
 
     private static final long serialVersionUID = 3610318214071648278L;
 
@@ -26,11 +26,15 @@ public class CustomerOrder implements Serializable {
     @GeneratedValue
     private Long id;
 
+    @NonNull
+    @Enumerated(STRING)
+    private OrderStatus orderStatus;
+
     @NotNull
     private LocalDateTime orderDate;
 
     @NotNull
-    private double budget;
+    private double budget; // TODO change to jodamoney
 
     @NotNull
     private String downloadingPlace;
@@ -50,8 +54,11 @@ public class CustomerOrder implements Serializable {
     private String description;
 
     @ManyToOne
-    private Customer customer;
+    private Company company;
 
-    private boolean enabled;
+    @ManyToOne
+    private CompanyEmployee manager; // from
 
+    @OneToOne
+    private OrderDetails orderDetails;
 }

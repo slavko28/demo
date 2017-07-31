@@ -1,45 +1,39 @@
 package com.toptop.domain;
 
-import com.toptop.domain.enums.OrderStatus;
 import lombok.*;
 
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
-import static javax.persistence.EnumType.STRING;
-
 @Entity
 @Getter
 @Setter
 @EqualsAndHashCode
 @ToString
-public class OrderList implements Serializable {
+public class OrderDetails implements Serializable {
 
     private static final long serialVersionUID = -6693482470482522203L;
+
     @Id
     @GeneratedValue
     private Long id;
 
     @NonNull
-    @Enumerated(STRING)
-    private OrderStatus orderStatus;
-
-    @NonNull
     private Double transportationCost;
 
     @NonNull
-    private Double orderProfit;
+    private Double orderProfit; // TODO change to jodamoney
 
     private LocalDateTime completeDate;
 
     @NonNull
-    @ManyToOne(optional = false)
-    private CustomerOrder order;
+    @OneToOne(optional = false)
+    private CompanyOrder companyOrder;
 
     @NonNull
     @ManyToOne(optional = false)
-    private Carrier carrier;
+    private Company carrier;
 
     @NonNull
     @ManyToOne(optional = false)
@@ -51,9 +45,9 @@ public class OrderList implements Serializable {
 
     @NonNull
     @ManyToOne(optional = false)
-    private Worker driver;
+    private CompanyEmployee driver;
 
     @NonNull
     @ManyToOne(optional = false)
-    private User user;
+    private User manager;
 }

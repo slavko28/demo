@@ -40,4 +40,7 @@ public class Company implements Serializable {
 
     @NotNull
     private String phone;
+
+    @OneToMany(mappedBy = "company", fetch = FetchType.LAZY)
+    private Set<CompanyOrder> companyOrders;
 }
