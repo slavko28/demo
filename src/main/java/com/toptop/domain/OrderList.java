@@ -1,6 +1,6 @@
 package com.toptop.domain;
 
-import com.toptop.domain.enums.Status;
+import com.toptop.domain.enums.OrderStatus;
 import lombok.*;
 
 import javax.persistence.*;
@@ -23,7 +23,7 @@ public class OrderList implements Serializable {
 
     @NonNull
     @Enumerated(STRING)
-    private Status status;
+    private OrderStatus orderStatus;
 
     @NonNull
     private Double transportationCost;
@@ -35,11 +35,11 @@ public class OrderList implements Serializable {
 
     @NonNull
     @ManyToOne(optional = false)
-    private PartnerOrder order;
+    private CustomerOrder order;
 
     @NonNull
     @ManyToOne(optional = false)
-    private Partner carrier;
+    private Carrier carrier;
 
     @NonNull
     @ManyToOne(optional = false)
@@ -51,7 +51,7 @@ public class OrderList implements Serializable {
 
     @NonNull
     @ManyToOne(optional = false)
-    private PartnerWorkers driver;
+    private Worker driver;
 
     @NonNull
     @ManyToOne(optional = false)

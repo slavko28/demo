@@ -5,9 +5,7 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 
@@ -19,14 +17,23 @@ import java.io.Serializable;
 @Setter
 @EqualsAndHashCode
 @ToString
-public class CompanyRole implements Serializable {
+public class Worker implements Serializable{
 
-    private static final long serialVersionUID = 7093098339616784469L;
+    private static final long serialVersionUID = -8656867795070348248L;
 
     @Id
     @GeneratedValue
-    private Integer id;
+    private Long id;
 
     @NotNull
-    private String name;
+    private String firstName;
+
+    @NotNull
+    private String lastName;
+
+    private String midName;
+
+    @NotNull
+    private String phoneNumber;
+
 }

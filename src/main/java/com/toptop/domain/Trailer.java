@@ -41,7 +41,7 @@ public class Trailer implements Serializable{
     private int loadCapacity;
 
     @ManyToOne(optional = false)
-    private Partner company;
+    private Carrier carrier;
 
     @ManyToOne(optional = false)
     private TrailerType type;

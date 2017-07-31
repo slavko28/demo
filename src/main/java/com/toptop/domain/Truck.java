@@ -35,7 +35,7 @@ public class Truck implements Serializable{
     private String licensePlate;
 
     @ManyToOne(optional = false)
-    private Partner company;
+    private Carrier carrier;
 
     private int volume;
 

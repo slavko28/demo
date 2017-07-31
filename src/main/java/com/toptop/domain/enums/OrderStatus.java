@@ -1,5 +1,5 @@
 package com.toptop.domain.enums;
 
-public enum Status {
+public enum OrderStatus {
     TO_DO, IN_PROGRESS, DONE
 }
