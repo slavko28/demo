@@ -25,7 +25,7 @@ public class TrailerType implements Serializable {
 
     @Id
     @GeneratedValue
-    private int id;
+    private Integer id;
 
     @NotNull
     private String type;

@@ -25,7 +25,7 @@ public class CompanyRole implements Serializable {
 
     @Id
     @GeneratedValue
-    private int id;
+    private Integer id;
 
     @NotNull
     private String name;
