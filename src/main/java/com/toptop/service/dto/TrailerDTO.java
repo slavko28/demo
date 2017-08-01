@@ -17,7 +17,6 @@ public class TrailerDTO implements Serializable {
 
     private Long id;
 
-    @NotNull
     private String model;
 
     @NotNull
@@ -29,6 +28,7 @@ public class TrailerDTO implements Serializable {
     @NotNull
     private int loadCapacity;
 
+    @NotNull
     private Long companyId;
 
     @NotNull
