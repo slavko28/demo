@@ -1,39 +1,30 @@
-package com.toptop.domain;
+package com.toptop.service.dto;
 
+import com.toptop.domain.Company;
 import com.toptop.domain.enums.OrderStatus;
-import lombok.*;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 
-import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
-import static javax.persistence.EnumType.STRING;
-
-/**
- * Created by slavkosoltys on 30.07.17.
- */
-@Entity
 @Getter
 @Setter
 @EqualsAndHashCode
 @ToString
-public class CompanyOrder implements Serializable {
+public class CompanyOrderDTO implements Serializable {
 
-    private static final long serialVersionUID = 3610318214071648278L;
-
-    @Id
-    @GeneratedValue
     private Long id;
 
-    @NonNull
-    @Enumerated(STRING)
+    @NotNull
     private OrderStatus orderStatus;
 
     @NotNull
     private LocalDateTime orderDate;
 
-    @NotNull
     private Double budget; // TODO change to jodamoney
 
     @NotNull
@@ -53,12 +44,10 @@ public class CompanyOrder implements Serializable {
     @NotNull
     private String description;
 
-    @ManyToOne
     private Company company;
 
-    @ManyToOne
-    private CompanyEmployee manager; // from
+    private Long managerId;
 
-    @OneToOne
-    private OrderDetails orderDetails;
+    private Long orderDetailsId;
+
 }
