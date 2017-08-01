@@ -3,12 +3,12 @@ package com.toptop.domain.enums;
 public enum EmployeeType {
 
     /**
-     * водій компанії(без доступу до системи)
+     * Company driver.
      */
     COMPANY_DRIVER,
 
     /**
-     *  контактна особа компанії(без доступу до системи)
+     * Company contact person (responsible for order).
      */
     COMPANY_MANAGER
 }

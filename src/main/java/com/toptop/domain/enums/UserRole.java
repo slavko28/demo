@@ -3,17 +3,17 @@ package com.toptop.domain.enums;
 public enum UserRole {
 
     /**
-     * адміністратор системи
+     * System administrator.
      */
     ADMIN,
 
     /**
-     * менеджер
+     * Manager (system user).
      */
     MANAGER,
 
     /**
-     * бухгалтер
+     * Accountant (system user).
      */
     ACCOUNTANT
 }

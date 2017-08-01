@@ -3,24 +3,36 @@ package com.toptop.domain.enums;
 public enum TrailerType {
 
     /**
-     * http://bestshippingservice.co.uk/types-of-trucks-and-trailers/ TODO: add types
+     * The most common type.
      */
-    SEMI_TRAILER,
+    VAN_TRAILER,
 
     /**
-     *
+     * Are similar to box trailers except the sides are movable curtains
+     * made of reinforced fabric coated with a waterproof coating.
      */
-    SEMI_TRAILER_WITH_LIFT,
+    CURTAIN_SIDER_TRAILER,
 
     /**
-     *
+     * The most common type.
      */
-    JUMBO_TRAILER,
+    BOX_TRAILER,
 
     /**
-     *
+     * Box trailers with a heating/cooling unit (reefer) attached,
+     * used for hauling produce, frozen foods, meat, flowers, etc.
      */
-    FULL_TRAILER;
+    REFRIGERATED_TRAILER,
 
+    /**
+     * Used for hauling liquids such as gasoline and alcohol.
+     */
+    TANK_TRAILER,
+
+    /**
+     * Are trailers in which one end can be raised to allow the cargo (often building materials
+     * or Agricultural produce) to slide out the other end.
+     */
+    DUMP_TRUCK_TRAILER
 
 }

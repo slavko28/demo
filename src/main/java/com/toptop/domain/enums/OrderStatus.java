@@ -3,37 +3,37 @@ package com.toptop.domain.enums;
 public enum OrderStatus {
 
     /**
-     * всі вхідні замовлення
+     * All incoming orders from customers.
      */
     INCOMING,
 
     /**
-     * попереднє опрацювання (пошук транспорту)
+     * Preliminary processing (transport searching... ).
      */
     PREPARING,
 
     /**
-     * готові до виконання
+     * Ready to processing.
      */
     READY_TO_PROCESS,
 
     /**
-     *  в процесі виконання
+     * Processing.
      */
     PROCESSING,
 
     /**
-     * виконані
+     * Order done.
      */
     DONE,
 
     /**
-     * анульовані
+     * Order canceled by customer.
      */
     CANCELED,
 
     /**
-     * закриті
+     * Order done and account is paid.
      */
     CLOSED
 }
