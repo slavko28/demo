@@ -1,14 +1,13 @@
 package com.toptop.service.dto;
 
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import com.toptop.domain.*;
+import lombok.*;
 
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
+@RequiredArgsConstructor
 @Getter
 @Setter
 @EqualsAndHashCode
@@ -26,32 +25,21 @@ public class OrderDetailsDTO implements Serializable {
     private LocalDateTime completeDate;
 
     @NotNull
-    private Long companyOrderId;
+    private CompanyOrder order;
 
     @NotNull
-    private Long carrierId;
+    private Company carrier;
 
     @NotNull
-    private Long truckId;
-
-    private String TruckLicensePlate;
+    private Truck truck;
 
     @NotNull
-    private Long trailerId;
-
-    private String trailerLicensePlate;
+    private Trailer trailer;
 
     @NotNull
-    private Long driverId;
-
-    private String driverFirstName;
-
-    private String driverLastName;
+    private CompanyEmployee driver;
 
     @NotNull
-    private Long managerId;
+    private CompanyEmployee manager;
 
-    private String managerFirstName;
-
-    private String managerLastName;
 }

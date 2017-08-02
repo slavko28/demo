@@ -1,15 +1,13 @@
 package com.toptop.service.dto;
 
 import com.toptop.domain.Authority;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.Set;
 
+@RequiredArgsConstructor
 @Getter
 @Setter
 @EqualsAndHashCode

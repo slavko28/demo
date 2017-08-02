@@ -1,13 +1,11 @@
 package com.toptop.service.dto;
 
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 
+@RequiredArgsConstructor
 @Getter
 @Setter
 @EqualsAndHashCode
@@ -22,6 +20,7 @@ public class TruckDTO implements Serializable {
     @NotNull
     private String licensePlate;
 
+    @NotNull
     private Long companyId;
 
     private int volume;

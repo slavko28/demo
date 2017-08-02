@@ -1,14 +1,12 @@
 package com.toptop.service.dto;
 
 import com.toptop.domain.enums.TrailerType;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 
+@RequiredArgsConstructor
 @Getter
 @Setter
 @EqualsAndHashCode
