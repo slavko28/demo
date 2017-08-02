@@ -1,10 +1,7 @@
 package com.toptop.domain;
 
 import com.toptop.domain.enums.EmployeeType;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -14,6 +11,7 @@ import java.io.Serializable;
  * Created by slavkosoltys on 30.07.17.
  */
 @Entity
+@RequiredArgsConstructor
 @Getter
 @Setter
 @EqualsAndHashCode

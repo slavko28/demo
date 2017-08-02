@@ -1,19 +1,21 @@
 package com.toptop.domain;
 
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
+import java.util.HashSet;
 import java.util.Set;
 
 /**
  * Created by slavkosoltys on 30.07.17.
  */
 @Entity
+@RequiredArgsConstructor
 @Getter
 @Setter
 @EqualsAndHashCode
@@ -41,6 +43,6 @@ public class Company implements Serializable {
     @NotNull
     private String phone;
 
-    @OneToMany(mappedBy = "company", fetch = FetchType.LAZY)
-    private Set<CompanyOrder> companyOrders;
+    @OneToMany(mappedBy = "company")
+    private Set<CompanyOrder> companyOrders = new HashSet<>();
 }

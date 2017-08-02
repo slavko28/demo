@@ -7,6 +7,8 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.HashSet;
+import java.util.Set;
 
 import static javax.persistence.EnumType.STRING;
 
@@ -14,6 +16,8 @@ import static javax.persistence.EnumType.STRING;
  * Created by slavkosoltys on 30.07.17.
  */
 @Entity
+@NoArgsConstructor
+@RequiredArgsConstructor
 @Getter
 @Setter
 @EqualsAndHashCode
@@ -37,13 +41,15 @@ public class CompanyOrder implements Serializable {
     private Double budget; // TODO change to jodamoney
 
     @NotNull
-    private String downloadingPlace;
+    @OneToMany
+    private Set<Address> downloadingPlace = new HashSet<>();
 
     @NotNull
     private String downloadingType;
 
     @NotNull
-    private String uploadingPlace;
+    @OneToMany
+    private Set<Address> uploadingPlace = new HashSet<>();
 
     private int volume;
 
@@ -53,11 +59,11 @@ public class CompanyOrder implements Serializable {
     @NotNull
     private String description;
 
-    @ManyToOne
+    @ManyToOne(optional = false)
     private Company company;
 
-    @ManyToOne
-    private CompanyEmployee manager; // from
+    @ManyToOne(optional = false)
+    private CompanyEmployee manager;
 
     @OneToOne
     private OrderDetails orderDetails;

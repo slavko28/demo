@@ -1,9 +1,6 @@
 package com.toptop.domain;
 
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -15,6 +12,7 @@ import java.io.Serializable;
  * Created by slavkosoltys on 30.07.17.
  */
 @Entity
+@RequiredArgsConstructor
 @Getter
 @Setter
 @EqualsAndHashCode
