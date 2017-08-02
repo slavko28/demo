@@ -44,5 +44,5 @@ public class Company implements Serializable {
     private String phone;
 
     @OneToMany(mappedBy = "company")
-    private Set<CompanyOrder> companyOrders = new HashSet<>();
+    private Set<CompanyOrder> orders = new HashSet<>();
 }
