@@ -15,6 +15,8 @@ import java.io.Serializable;
 @ToString
 public class Address implements Serializable {
 
+    private static final long serialVersionUID = 6153028233967159564L;
+
     @Id
     @GeneratedValue
     private Long id;
