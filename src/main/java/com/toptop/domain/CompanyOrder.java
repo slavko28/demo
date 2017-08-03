@@ -66,5 +66,5 @@ public class CompanyOrder implements Serializable {
     private CompanyEmployee manager;
 
     @OneToOne
-    private OrderDetails orderDetails;
+    private OrderDetail orderDetail;
 }

@@ -13,7 +13,7 @@ import java.time.LocalDateTime;
 @Setter
 @EqualsAndHashCode
 @ToString
-public class OrderDetails implements Serializable {
+public class OrderDetail implements Serializable {
 
     private static final long serialVersionUID = -6693482470482522203L;
 
