@@ -29,7 +29,8 @@ public class CompanyEmployeeDTO implements Serializable {
     @NotNull
     private String phoneNumber;
 
-    private Company company;
+    @NotNull
+    private String companyId;
 
     private String email;
 
