@@ -9,7 +9,9 @@ import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.Set;
 
-@RequiredArgsConstructor
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
 @Getter
 @Setter
 @EqualsAndHashCode
