@@ -16,8 +16,9 @@ import static javax.persistence.EnumType.STRING;
  * Created by slavkosoltys on 30.07.17.
  */
 @Entity
+@AllArgsConstructor
 @NoArgsConstructor
-@RequiredArgsConstructor
+@Builder
 @Getter
 @Setter
 @EqualsAndHashCode

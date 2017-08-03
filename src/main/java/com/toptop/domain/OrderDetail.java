@@ -7,8 +7,9 @@ import java.io.Serializable;
 import java.time.LocalDateTime;
 
 @Entity
+@AllArgsConstructor
 @NoArgsConstructor
-@RequiredArgsConstructor
+@Builder
 @Getter
 @Setter
 @EqualsAndHashCode

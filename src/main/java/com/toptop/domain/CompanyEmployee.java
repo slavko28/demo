@@ -11,7 +11,9 @@ import java.io.Serializable;
  * Created by slavkosoltys on 30.07.17.
  */
 @Entity
-@RequiredArgsConstructor
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
 @Getter
 @Setter
 @EqualsAndHashCode

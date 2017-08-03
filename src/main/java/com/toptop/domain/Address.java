@@ -8,7 +8,9 @@ import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 
 @Entity
-@RequiredArgsConstructor
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
 @Getter
 @Setter
 @EqualsAndHashCode
