@@ -1,14 +1,12 @@
 package com.toptop.service.dto;
 
 import com.toptop.domain.Address;
-import com.toptop.domain.Company;
 import com.toptop.domain.enums.OrderStatus;
 import lombok.*;
 
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.time.LocalDateTime;
-import java.util.HashSet;
 import java.util.Set;
 
 @RequiredArgsConstructor
