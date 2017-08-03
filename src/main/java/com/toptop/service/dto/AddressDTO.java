@@ -1,30 +1,25 @@
-package com.toptop.domain;
+package com.toptop.service.dto;
 
 import com.toptop.domain.enums.AddressType;
 import lombok.*;
 
-import javax.persistence.*;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 
-@Entity
 @RequiredArgsConstructor
 @Getter
 @Setter
 @EqualsAndHashCode
 @ToString
-public class Address implements Serializable {
+public class AddressDTO implements Serializable{
 
-    private static final long serialVersionUID = 6153028233967159564L;
-
-    @Id
-    @GeneratedValue
     private Long id;
 
     @NotNull
     private String country;
     private String zipCode;
-
     @NotNull
     private String region;
 
