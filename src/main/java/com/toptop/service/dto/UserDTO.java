@@ -5,6 +5,7 @@ import lombok.*;
 
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
+import java.util.HashSet;
 import java.util.Set;
 
 @RequiredArgsConstructor
@@ -23,13 +24,13 @@ public class UserDTO implements Serializable {
     private String lastName;
 
     @NotNull
-    private String email;
+    private String email; // TODO: add Constants MAIL_REGEX
 
     @NotNull
-    private String login;
+    private String login; // TODO: add Constants LOGIN_REGEX
 
     @NotNull
-    private String phoneNumber;
+    private String phoneNumber; // TODO: add Constants PHONE_REGEX
 
     @NotNull
     private Set<Authority> authorities;

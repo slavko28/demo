@@ -1,6 +1,5 @@
 package com.toptop.service.dto;
 
-import com.toptop.domain.*;
 import lombok.*;
 
 import javax.validation.constraints.NotNull;
@@ -12,7 +11,7 @@ import java.time.LocalDateTime;
 @Setter
 @EqualsAndHashCode
 @ToString
-public class OrderDetailsDTO implements Serializable {
+public class OrderDetailDTO implements Serializable {
 
     private Long id;
 
@@ -25,21 +24,33 @@ public class OrderDetailsDTO implements Serializable {
     private LocalDateTime completeDate;
 
     @NotNull
-    private CompanyOrder order;
+    private Long orderId;
 
     @NotNull
-    private Company carrier;
+    private Long carrierId;
 
     @NotNull
-    private Truck truck;
+    private Long truckId;
+
+    private String truckLicensePlate;
 
     @NotNull
-    private Trailer trailer;
+    private Long trailerId;
+
+    private String trailerLicensePlate;
 
     @NotNull
-    private CompanyEmployee driver;
+    private Long driverId;
+
+    private String driverFirstName;
+
+    private String driverLastName;
 
     @NotNull
-    private CompanyEmployee manager;
+    private Long managerId;
+
+    private String managerFirstName;
+
+    private String managerLastName;
 
 }

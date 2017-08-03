@@ -30,7 +30,7 @@ public class CompanyEmployeeDTO implements Serializable {
     private String phoneNumber;
 
     @NotNull
-    private String companyId;
+    private Long companyId;
 
     private String email;
 
