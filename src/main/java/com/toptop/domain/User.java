@@ -13,7 +13,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 /**
- * Created by slavkosoltys on 30.07.17.
+ * User.
  */
 @Entity
 @AllArgsConstructor

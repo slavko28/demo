@@ -8,7 +8,7 @@ import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 
 /**
- * Created by slavkosoltys on 30.07.17.
+ * Company employee.
  */
 @Entity
 @AllArgsConstructor

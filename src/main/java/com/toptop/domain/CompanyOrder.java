@@ -13,7 +13,7 @@ import java.util.Set;
 import static javax.persistence.EnumType.STRING;
 
 /**
- * Created by slavkosoltys on 30.07.17.
+ * Company order.
  */
 @Entity
 @AllArgsConstructor
