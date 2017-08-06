@@ -3,13 +3,9 @@ package com.toptop.domain;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
-import java.util.HashSet;
 import java.util.Set;
 
 /**
@@ -49,7 +45,10 @@ public class User implements Serializable{
     @NotNull
     private String phoneNumber;
 
-    @NotNull
-    @OneToMany
-    private Set<Authority> authorities = new HashSet<>();
+    @ManyToMany
+    @JoinTable(
+            name = "user_authority",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "authority_id"))
+    private Set<Authority> authorities;
 }
