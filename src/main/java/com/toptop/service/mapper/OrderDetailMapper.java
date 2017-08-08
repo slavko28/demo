@@ -21,7 +21,7 @@ public interface OrderDetailMapper {
     @Mapping(source = "driver.firstName", target = "driverFirstName")
     @Mapping(source = "driver.lastName", target = "driverLastName")
     @Mapping(source = "manager.id", target = "managerId")
-    @Mapping(source = "manager.firstName", target = "managerFirstName")
+    @Mapping(source = "manager.name", target = "managerFirstName")
     @Mapping(source = "manager.lastName", target = "managerLastName")
     OrderDetailDTO map(OrderDetail orderDetail);
 

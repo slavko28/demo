@@ -1,11 +1,10 @@
 package com.toptop.service.dto;
 
-import com.toptop.domain.Authority;
+import com.toptop.domain.Role;
 import lombok.*;
 
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
-import java.util.HashSet;
 import java.util.Set;
 
 @AllArgsConstructor
@@ -35,5 +34,5 @@ public class UserDTO implements Serializable {
     private String phoneNumber; // TODO: add Constants PHONE_REGEX
 
     @NotNull
-    private Set<Authority> authorities;
+    private Set<Role> authorities;
 }
