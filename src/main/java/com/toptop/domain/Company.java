@@ -29,22 +29,14 @@ public class Company implements Serializable {
     @Id
     @GeneratedValue
     private Long id;
-
-    @NotNull
     private String shortName;
-
-    @NotNull
     private String fullName;
-
-    @NotNull
     private int companyCod;
 
-    @NotNull
-    private String address;
-
-    @NotNull
+    @OneToMany
+    private Set<Address> addresses;
     private String phone;
 
     @OneToMany(mappedBy = "company")
-    private Set<CompanyOrder> orders = new HashSet<>();
+    private Set<CompanyOrder> orders;
 }

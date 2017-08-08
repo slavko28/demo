@@ -25,31 +25,17 @@ public class CompanyEmployee implements Serializable {
     @Id
     @GeneratedValue
     private Long id;
-
-    @NotNull
     @Enumerated(EnumType.STRING)
     private EmployeeType type;
-
-    @NotNull
     private String firstName;
-
-    @NotNull
     private String lastName;
-
     private String midName;
-
-    @NotNull
     private String phoneNumber;
-
     @ManyToOne(optional = false)
     private Company company;
-
     private String email;
-
     private String descriptionDetails;
-
     private String license;
-
     private String passport;
 
 }

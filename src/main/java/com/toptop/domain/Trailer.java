@@ -25,24 +25,12 @@ public class Trailer implements Serializable{
     @Id
     @GeneratedValue
     private Long id;
-
-    @NotNull
     private String model;
-
-    @NotNull
     private String licensePlate;
-
-    @NotNull
     private int volume;
-
-    @NotNull
     private int loadCapacity;
-
-    @NotNull
     @ManyToOne(optional = false)
     private Company company;
-
-    @NotNull
     @Enumerated(EnumType.STRING)
     private TrailerType type;
 }

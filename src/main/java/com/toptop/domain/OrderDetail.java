@@ -24,36 +24,19 @@ public class OrderDetail implements Serializable {
     @Id
     @GeneratedValue
     private Long id;
-
-    @NonNull
     private Double transportationCost;
-
-    @NonNull
     private Double orderProfit; // TODO change to jodamoney
-
     private LocalDateTime completeDate;
-
-    @NonNull
     @OneToOne(optional = false)
     private CompanyOrder companyOrder;
-
-    @NonNull
     @ManyToOne(optional = false)
     private Company carrier;
-
-    @NonNull
     @ManyToOne(optional = false)
     private Truck truck;
-
-    @NonNull
     @ManyToOne(optional = false)
     private Trailer trailer;
-
-    @NonNull
     @ManyToOne(optional = false)
     private CompanyEmployee driver;
-
-    @NonNull
     @ManyToOne(optional = false)
     private User manager;
 }

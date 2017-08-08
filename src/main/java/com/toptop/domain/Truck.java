@@ -27,18 +27,10 @@ public class Truck implements Serializable{
     @Id
     @GeneratedValue
     private int id;
-
-    @NotNull
     private String model;
-
-    @NotNull
     private String licensePlate;
-
-    @NotNull
     @ManyToOne(optional = false)
     private Company company;
-
     private int volume;
-
     private int loadCapacity;
 }

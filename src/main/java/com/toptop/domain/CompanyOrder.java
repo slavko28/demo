@@ -8,6 +8,8 @@ import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.HashSet;
+import java.util.LinkedHashSet;
+import java.util.List;
 import java.util.Set;
 
 import static javax.persistence.EnumType.STRING;
@@ -30,42 +32,23 @@ public class CompanyOrder implements Serializable {
     @Id
     @GeneratedValue
     private Long id;
-
-    @NonNull
     @Enumerated(STRING)
     private OrderStatus orderStatus;
-
-    @NotNull
     private LocalDateTime orderDate;
-
-    @NotNull
     private Double budget; // TODO change to jodamoney
 
-    @NotNull
-    @OneToMany
-    private Set<Address> downloadingPlace = new HashSet<>();
-
-    @NotNull
+    @OneToMany(fetch = FetchType.LAZY)
+    private List<Address> downloadingPlace;
     private String downloadingType;
-
-    @NotNull
-    @OneToMany
-    private Set<Address> uploadingPlace = new HashSet<>();
-
+    @OneToMany(fetch = FetchType.LAZY)
+    private List<Address> uploadingPlace;
     private int volume;
-
-    @NotNull
     private double weight;
-
-    @NotNull
     private String description;
-
     @ManyToOne(optional = false)
     private Company company;
-
     @ManyToOne(optional = false)
     private CompanyEmployee manager;
-
     @OneToOne
     private OrderDetail orderDetail;
 }
