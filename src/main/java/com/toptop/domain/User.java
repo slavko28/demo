@@ -1,12 +1,14 @@
 package com.toptop.domain;
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.Set;
 
@@ -17,10 +19,7 @@ import java.util.Set;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-@Getter
-@Setter
-@EqualsAndHashCode
-@ToString
+@Data
 @Table(name = "user")
 public class User implements Serializable{
 
@@ -37,7 +36,6 @@ public class User implements Serializable{
     @Column(name = "password")
     @Length(min = 5, message = "*Your password must have at least 5 characters")
     @NotEmpty(message = "*Please provide your password")
-    @Transient
     private String password;
     @Column(name = "name")
     @NotEmpty(message = "*Please provide your name")
@@ -45,11 +43,10 @@ public class User implements Serializable{
     @Column(name = "last_name")
     @NotEmpty(message = "*Please provide your last name")
     private String lastName;
-    @NotEmpty
     @Column(name = "phone_number")
     private String phoneNumber;
     @Column(name = "active")
-    private int active;
+    private Boolean active;
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id"))

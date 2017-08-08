@@ -5,15 +5,18 @@ public enum UserRole {
     /**
      * System administrator.
      */
-    ADMIN,
+    ADMIN("ADMIN"),
 
     /**
      * Manager (system user).
      */
-    MANAGER,
+    MANAGER("MANAGER"),
 
     /**
      * Accountant (system user).
      */
-    ACCOUNTANT
+    ACCOUNTANT("ACCOUNTANT");
+
+    UserRole(String name) {
+    }
 }
