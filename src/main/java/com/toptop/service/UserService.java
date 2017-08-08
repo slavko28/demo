@@ -1,5 +1,7 @@
 package com.toptop.service;
 
+import com.toptop.domain.User;
+import com.toptop.domain.enums.UserRole;
 import com.toptop.service.dto.UserDTO;
 
 import java.util.List;
@@ -8,14 +10,6 @@ import java.util.List;
  * Service Interface for managing Address entities.
  */
 public interface UserService {
-
-    /**
-     * Save new User.
-     *
-     * @param userDTO the address to save
-     * @return the saved entity
-     */
-    UserDTO save(UserDTO userDTO);
 
     /**
      * Find user by Id.
@@ -31,6 +25,17 @@ public interface UserService {
      * @return the list of entities
      */
     List<UserDTO> findAll();
+
+    /**
+     * Find user by email.
+     *
+     * @param email the email
+     * @return the entity
+     */
+    User findUserByEmail(String email);
+
+
+    void saveUserWithRole(User user, UserRole role);
 
 
 }

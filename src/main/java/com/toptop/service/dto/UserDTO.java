@@ -19,7 +19,7 @@ public class UserDTO implements Serializable {
     private Long id;
 
     @NotNull
-    private String firstName;
+    private String name;
 
     @NotNull
     private String lastName;
@@ -32,6 +32,8 @@ public class UserDTO implements Serializable {
 
     @NotNull
     private String phoneNumber; // TODO: add Constants PHONE_REGEX
+
+    private Boolean active;
 
     @NotNull
     private Set<Role> authorities;
