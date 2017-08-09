@@ -1,8 +1,10 @@
 package com.toptop.service.dto;
 
-import com.toptop.domain.Company;
 import com.toptop.domain.enums.EmployeeType;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
