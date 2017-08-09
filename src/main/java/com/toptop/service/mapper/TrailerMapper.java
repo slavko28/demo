@@ -10,12 +10,10 @@ import java.util.List;
 @Mapper(componentModel = "spring", uses = CompanyMapper.class)
 public interface TrailerMapper {
 
-    @Mapping(source = "company.id", target = "companyId")
     TrailerDTO map(Trailer trailer);
 
     List<TrailerDTO> mapToTrailerDTOList(List<Trailer> trailers);
 
-    @Mapping(source = "companyId", target = "company.id")
     Trailer map(TrailerDTO trailerDTO);
 
     List<Trailer> mapToTrailerList(List<TrailerDTO> trailerDTOs);
