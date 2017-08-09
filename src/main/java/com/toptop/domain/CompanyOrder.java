@@ -1,16 +1,14 @@
 package com.toptop.domain;
 
 import com.toptop.domain.enums.OrderStatus;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.time.LocalDateTime;
-import java.util.HashSet;
-import java.util.LinkedHashSet;
-import java.util.List;
-import java.util.Set;
 
 import static javax.persistence.EnumType.STRING;
 
@@ -21,34 +19,42 @@ import static javax.persistence.EnumType.STRING;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-@Getter
-@Setter
-@EqualsAndHashCode
-@ToString
+@Data
+@Table(name = "company_order")
 public class CompanyOrder implements Serializable {
 
     private static final long serialVersionUID = 3610318214071648278L;
 
     @Id
     @GeneratedValue
+    @Column(name = "id")
     private Long id;
+
     @Enumerated(STRING)
+    @Column(name = "order_status")
     private OrderStatus orderStatus;
+
+    @Column(name = "order_date")
     private LocalDateTime orderDate;
+
+    @Column(name = "budget")
     private Double budget; // TODO change to jodamoney
 
-    @OneToMany(fetch = FetchType.LAZY)
-    private List<Address> downloadingPlace;
+    @OneToOne(optional = false)
+    private Route route;
+
+    @Column(name = "downloading_type")
     private String downloadingType;
-    @OneToMany(fetch = FetchType.LAZY)
-    private List<Address> uploadingPlace;
-    private int volume;
-    private double weight;
-    private String description;
+
+    @OneToOne(optional = false)
+    private Cargo cargo;
+
     @ManyToOne(optional = false)
     private Company company;
+
     @ManyToOne(optional = false)
     private CompanyEmployee manager;
+
     @OneToOne
     private OrderDetail orderDetail;
 }

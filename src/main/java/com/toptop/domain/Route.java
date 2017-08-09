@@ -26,14 +26,17 @@ public class Route {
     @Column(name = "id")
     private Long id;
 
-    @Column(name = "route_points", nullable = false)
-    @NotEmpty
     private LinkedList<RoutePoint> routePoints;
 
+    @Entity
     @Data
     @NoArgsConstructor
     @AllArgsConstructor
     public static class RoutePoint {
+
+        @Id
+        @GeneratedValue(strategy = GenerationType.IDENTITY)
+        private Long id;
 
         private Address address;
 
