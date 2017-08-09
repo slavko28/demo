@@ -1,7 +1,9 @@
 package com.toptop.service.dto;
 
-import com.toptop.domain.Role;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
@@ -31,6 +33,5 @@ public class UserDTO implements Serializable {
 
     private Boolean active;
 
-    @NotNull
     private Set<RoleDTO> roles;
 }

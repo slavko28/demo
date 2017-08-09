@@ -34,8 +34,13 @@ public interface UserService {
      */
     User findUserByEmail(String email);
 
-
-    void saveUserWithRole(User user, UserRole role);
+    /**
+     * Save user with role.
+     *
+     * @param user user to save
+     * @param role user role
+     */
+    void saveUserWithRole(UserDTO user, UserRole role);
 
 
 }

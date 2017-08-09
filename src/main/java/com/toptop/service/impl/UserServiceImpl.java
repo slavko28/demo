@@ -11,12 +11,14 @@ import com.toptop.service.mapper.UserMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 
 @Service
+@Transactional
 public class UserServiceImpl implements UserService {
 
     @Autowired
@@ -29,13 +31,15 @@ public class UserServiceImpl implements UserService {
     private BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @Override
+    @Transactional(readOnly = true)
     public User findUserByEmail(String email) {
         return userRepository.findByEmail(email);
     }
 
     @Override
-    public void saveUserWithRole(User user, UserRole role) {
-        user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
+    public void saveUserWithRole(UserDTO userDTO, UserRole role) {
+        User user = userMapper.map(userDTO);
+        user.setPassword(bCryptPasswordEncoder.encode(userDTO.getPassword()));
         user.setActive(true);
         Role userRole = roleRepository.findByRole(role.name());
         user.setRoles(new HashSet<Role>(Collections.singletonList(userRole)));
@@ -43,13 +47,15 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public UserDTO findOne(Long id) {
         return userMapper.map(userRepository.findOne(id));
     }
 
     @Override
+    @Transactional(readOnly = true)
     public List<UserDTO> findAll() {
-        return null;
+        return userMapper.mapToUserDTOList(userRepository.findAll());
     }
 
 }
