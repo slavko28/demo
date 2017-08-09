@@ -35,7 +35,7 @@ public class CompanyEmployeeDTO implements Serializable {
 
     private String email;
 
-    private String descriptionDetails;
+    private String additionalDetails;
 
     private String driverLicense;
 

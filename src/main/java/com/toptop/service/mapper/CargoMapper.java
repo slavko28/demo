@@ -13,7 +13,7 @@ public interface CargoMapper {
 
     CargoDTO map(Cargo cargo);
 
-    List<RoleDTO> mapToCargoDTOList(List<Cargo> Cargos);
+    List<CargoDTO> mapToCargoDTOList(List<Cargo> cargo);
 
     Cargo map(CargoDTO cargoDTO);
 
