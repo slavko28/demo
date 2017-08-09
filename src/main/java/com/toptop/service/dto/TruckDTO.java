@@ -8,10 +8,7 @@ import java.io.Serializable;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-@Getter
-@Setter
-@EqualsAndHashCode
-@ToString
+@Data
 public class TruckDTO implements Serializable {
 
     private int id;
@@ -23,7 +20,7 @@ public class TruckDTO implements Serializable {
     private String licensePlate;
 
     @NotNull
-    private Long companyId;
+    private CompanyDTO company;
 
     private int volume;
 

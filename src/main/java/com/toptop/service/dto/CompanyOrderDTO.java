@@ -1,21 +1,23 @@
 package com.toptop.service.dto;
 
-import com.toptop.domain.Address;
+import com.toptop.domain.Cargo;
+import com.toptop.domain.Company;
+import com.toptop.domain.CompanyEmployee;
+import com.toptop.domain.Route;
 import com.toptop.domain.enums.OrderStatus;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.time.LocalDateTime;
-import java.util.Set;
 
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-@Getter
-@Setter
-@EqualsAndHashCode
-@ToString
+@Data
 public class CompanyOrderDTO implements Serializable {
 
     private Long id;
@@ -29,33 +31,19 @@ public class CompanyOrderDTO implements Serializable {
     private Double budget; // TODO change to jodamoney
 
     @NotNull
-    private Set<Address> downloadingPlace;
+    private RouteDTO route;
 
     @NotNull
     private String downloadingType;
 
     @NotNull
-    private Set<Address> uploadingPlace;
-
-    private int volume;
+    private CargoDTO cargo;
 
     @NotNull
-    private double weight;
+    private CompanyDTO company;
 
     @NotNull
-    private String description;
-
-    private Long companyId;
-
-    @NotNull
-    private Long managerId;
-
-    private String managerFirstName;
-
-    private String managerLastName;
-
-    private String phoneNumber;
+    private CompanyEmployeeDTO manager;
 
     private Long orderDetailsId;
-
 }

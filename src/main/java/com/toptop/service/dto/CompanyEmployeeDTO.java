@@ -10,10 +10,7 @@ import java.io.Serializable;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-@Getter
-@Setter
-@EqualsAndHashCode
-@ToString
+@Data
 public class CompanyEmployeeDTO implements Serializable {
 
     private Long id;
@@ -32,13 +29,13 @@ public class CompanyEmployeeDTO implements Serializable {
     private String phoneNumber;
 
     @NotNull
-    private Long companyId;
+    private CompanyDTO company;
 
     private String email;
 
     private String descriptionDetails;
 
-    private String license;
+    private String driverLicense;
 
-    private String passport;
+    private String driverPassport;
 }

@@ -10,13 +10,15 @@ import java.util.Set;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-@Getter
-@Setter
-@EqualsAndHashCode
-@ToString
+@Data
 public class UserDTO implements Serializable {
 
     private Long id;
+
+    @NotNull
+    private String email; // TODO: add Constants MAIL_REGEX
+
+    private String password;
 
     @NotNull
     private String name;
@@ -25,16 +27,10 @@ public class UserDTO implements Serializable {
     private String lastName;
 
     @NotNull
-    private String email; // TODO: add Constants MAIL_REGEX
-
-    @NotNull
-    private String login; // TODO: add Constants LOGIN_REGEX
-
-    @NotNull
     private String phoneNumber; // TODO: add Constants PHONE_REGEX
 
     private Boolean active;
 
     @NotNull
-    private Set<Role> authorities;
+    private Set<RoleDTO> roles;
 }

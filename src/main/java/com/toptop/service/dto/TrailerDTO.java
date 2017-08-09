@@ -1,5 +1,6 @@
 package com.toptop.service.dto;
 
+import com.toptop.domain.Company;
 import com.toptop.domain.enums.TrailerType;
 import lombok.*;
 
@@ -9,10 +10,7 @@ import java.io.Serializable;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-@Getter
-@Setter
-@EqualsAndHashCode
-@ToString
+@Data
 public class TrailerDTO implements Serializable {
 
     private Long id;
@@ -29,7 +27,7 @@ public class TrailerDTO implements Serializable {
     private int loadCapacity;
 
     @NotNull
-    private Long companyId;
+    private CompanyDTO company;
 
     @NotNull
     private TrailerType type;

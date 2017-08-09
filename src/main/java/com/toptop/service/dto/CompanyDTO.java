@@ -8,10 +8,7 @@ import java.io.Serializable;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-@Getter
-@Setter
-@EqualsAndHashCode
-@ToString
+@Data
 public class CompanyDTO implements Serializable {
 
     private Long id;
@@ -27,7 +24,4 @@ public class CompanyDTO implements Serializable {
 
     @NotNull
     private AddressDTO address;
-
-    @NotNull
-    private String phone;
 }
