@@ -19,6 +19,7 @@
             <column name="active" type="boolean" valueBoolean="false">
                 <constraints nullable="false" />
             </column>
+            <column name="role" type="varchar(10)"/>
         </createTable>
 
         <createIndex indexName="idx_user_email"
@@ -27,53 +28,12 @@
             <column name="email" type="varchar(100)"/>
         </createIndex>
 
-        <createTable tableName="role">
-            <column name="role_id" type="int" autoIncrement="${autoIncrement}">
-                <constraints primaryKey="true" nullable="false"/>
-            </column>
-            <column name="role_name" type="varchar(50)"/>
-        </createTable>
-
-        <createTable tableName="user_role">
-            <column name="user_id" type="bigint">
-                <constraints nullable="false"/>
-            </column>
-            <column name="role_id" type="int">
-                <constraints nullable="false"/>
-            </column>
-        </createTable>
-
-        <addPrimaryKey columnNames="user_id, role_id" tableName="user_role"/>
-
-        <addForeignKeyConstraint baseColumnNames="role_id"
-                                 baseTableName="user_role"
-                                 constraintName="fk_role_name"
-                                 referencedColumnNames="role_id"
-                                 referencedTableName="role"/>
-
-        <addForeignKeyConstraint baseColumnNames="user_id"
-                                 baseTableName="user_role"
-                                 constraintName="fk_user_id"
-                                 referencedColumnNames="user_id"
-                                 referencedTableName="user"/>
-
-        <loadData encoding="UTF-8"
-                  file="data/role.csv"
-                  separator=";"
-                  tableName="role"/>
-
         <loadData encoding="UTF-8"
                   file="data/user.csv"
                   separator=";"
                   tableName="user">
             <column name="active" type="boolean"/>
         </loadData>
-
-
-        <loadData encoding="UTF-8"
-                  file="data/role_user.csv"
-                  separator=";"
-                  tableName="user_role"/>
 
     </changeSet>
 </databaseChangeLog>
