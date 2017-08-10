@@ -1,9 +1,7 @@
 package com.toptop.service.mapper;
 
 import com.toptop.domain.Cargo;
-import com.toptop.domain.Role;
 import com.toptop.service.dto.CargoDTO;
-import com.toptop.service.dto.RoleDTO;
 import org.mapstruct.Mapper;
 
 import java.util.List;

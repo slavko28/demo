@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.List;
 
 import static javax.persistence.EnumType.STRING;
 
@@ -40,8 +41,8 @@ public class CompanyOrder implements Serializable {
     @Column(name = "budget")
     private Double budget; // TODO change to jodamoney
 
-    @OneToOne(optional = false)
-    private Route route;
+    @OneToMany()
+    private List<RoutePoint> route;
 
     @Column(name = "downloading_type")
     private String downloadingType;

@@ -1,9 +1,7 @@
 package com.toptop.service.impl;
 
-import com.toptop.domain.Role;
 import com.toptop.domain.User;
 import com.toptop.domain.enums.UserRole;
-import com.toptop.repository.RoleRepository;
 import com.toptop.repository.UserRepository;
 import com.toptop.service.UserService;
 import com.toptop.service.dto.UserDTO;
@@ -13,8 +11,6 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Collections;
-import java.util.HashSet;
 import java.util.List;
 
 @Service
@@ -25,8 +21,6 @@ public class UserServiceImpl implements UserService {
     private UserRepository userRepository;
     @Autowired
     private UserMapper userMapper;
-    @Autowired
-    private RoleRepository roleRepository;
     @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
 
@@ -41,8 +35,7 @@ public class UserServiceImpl implements UserService {
         User user = userMapper.map(userDTO);
         user.setPassword(bCryptPasswordEncoder.encode(userDTO.getPassword()));
         user.setActive(true);
-        Role userRole = roleRepository.findByRole(role.name());
-        user.setRoles(new HashSet<Role>(Collections.singletonList(userRole)));
+        user.setRole(role);
         userRepository.save(user);
     }
 

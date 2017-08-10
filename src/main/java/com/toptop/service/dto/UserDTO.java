@@ -1,5 +1,6 @@
 package com.toptop.service.dto;
 
+import com.toptop.domain.enums.UserRole;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -33,5 +34,5 @@ public class UserDTO implements Serializable {
 
     private Boolean active;
 
-    private Set<RoleDTO> roles;
+    private UserRole role;
 }
