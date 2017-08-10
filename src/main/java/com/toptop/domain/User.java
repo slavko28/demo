@@ -1,5 +1,6 @@
 package com.toptop.domain;
 
+import com.toptop.domain.enums.UserRole;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -31,11 +32,9 @@ public class User implements Serializable{
     private int id;
 
     @Column(name = "email")
-    @Email(message = "*Please provide a valid Email")
     private String email;
 
     @Column(name = "password")
-    @Length(min = 5, message = "*Your password must have at least 5 characters")
     private String password;
 
     @Column(name = "name")
@@ -50,8 +49,10 @@ public class User implements Serializable{
     @Column(name = "active")
     private Boolean active;
 
-    @ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"),
-            inverseJoinColumns = @JoinColumn(name = "role_id"))
-    private Set<Role> roles;
+//    @ManyToMany(cascade = CascadeType.ALL)
+//    @JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"),
+//            inverseJoinColumns = @JoinColumn(name = "role_id"))
+    @Enumerated(EnumType.STRING)
+    @Column(name = "role")
+    private UserRole role;
 }
