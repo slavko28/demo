@@ -24,9 +24,13 @@
         <mapstruct.version>1.2.0.CR1</mapstruct.version>
         <lombok.version>1.16.18</lombok.version>
         <lombokPlugin.version>1.16.18.0</lombokPlugin.version>
+        <bootstrap.version>3.3.7</bootstrap.version>
+        <nekohtml.version>1.9.21</nekohtml.version>
+        <joda-money.version>0.12</joda-money.version>
     </properties>
 
     <dependencies>
+
 <!--spring-boot-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -81,15 +85,22 @@
         <dependency>
             <groupId>org.webjars</groupId>
             <artifactId>bootstrap</artifactId>
-            <version>3.3.7</version>
+            <version>${bootstrap.version}</version>
         </dependency>
 
+<!--nekohtml-->
         <dependency>
             <groupId>net.sourceforge.nekohtml</groupId>
             <artifactId>nekohtml</artifactId>
-            <version>1.9.21</version><!--$NO-MVN-MAN-VER$-->
+            <version>${nekohtml.version}</version>
         </dependency>
 
+<!-- joda-money -->
+        <dependency>
+            <groupId>org.joda</groupId>
+            <artifactId>joda-money</artifactId>
+            <version>${joda-money.version}</version>
+        </dependency>
 
     </dependencies>
 
