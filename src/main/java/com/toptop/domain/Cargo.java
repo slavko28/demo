@@ -19,12 +19,12 @@ import javax.persistence.*;
 public class Cargo {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id")
     private Long id;
 
     @Column(name = "volume")
-    private int volume;
+    private double volume;
 
     @Column(name = "weight")
     private double weight;

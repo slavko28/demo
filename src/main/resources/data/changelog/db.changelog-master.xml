@@ -7,5 +7,6 @@
 
     <include file="data/changelog/db.changelog-0.0.1.xml"/>
     <include file="data/changelog/db.changelog_added_entity_address.xml"/>
+    <include file="data/changelog/db.changelog_added_entity_cargo.xml"/>
 
 </databaseChangeLog>
