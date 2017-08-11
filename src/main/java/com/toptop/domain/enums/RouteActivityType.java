@@ -10,5 +10,10 @@ public enum RouteActivityType {
     /**
      * Unloading of the delivered cargo.
      */
-    CARGO_DELIVERY
-}
+    CARGO_DELIVERY,
+
+    /**
+     * In case of crossings of state borders
+     */
+    BORDER_CROSSING
+    }

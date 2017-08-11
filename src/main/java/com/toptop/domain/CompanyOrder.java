@@ -10,7 +10,6 @@ import org.joda.money.Money;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDateTime;
-import java.util.List;
 
 import static javax.persistence.EnumType.STRING;
 
@@ -42,8 +41,8 @@ public class CompanyOrder implements Serializable {
     @Column(name = "budget")
     private Money budget;
 
-    @OneToMany()
-    private List<RoutePoint> route;
+    @OneToOne(optional = false)
+    private Route route;
 
     @Column(name = "downloading_type")
     private String downloadingType;
