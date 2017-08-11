@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.joda.money.Money;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -39,7 +40,7 @@ public class CompanyOrder implements Serializable {
     private LocalDateTime orderDate;
 
     @Column(name = "budget")
-    private Double budget; // TODO change to jodamoney
+    private Money budget;
 
     @OneToMany()
     private List<RoutePoint> route;

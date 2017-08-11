@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.joda.money.Money;
 
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
@@ -22,7 +23,7 @@ public class OrderDetailDTO implements Serializable {
     private Double transportationCost;
 
     @NotNull
-    private Double orderProfit; // TODO change to jodamoney
+    private Money orderProfit;
 
     private LocalDateTime completeDate;
 

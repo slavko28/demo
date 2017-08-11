@@ -1,6 +1,7 @@
 package com.toptop.domain;
 
 import lombok.*;
+import org.joda.money.Money;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -28,7 +29,7 @@ public class OrderDetail implements Serializable {
     private Double transportationCost;
 
     @Column(name = "order_profit")
-    private Double orderProfit; // TODO change to jodamoney
+    private Money orderProfit;
 
     @Column(name = "complete_date")
     private LocalDateTime completeDate;

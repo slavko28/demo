@@ -6,6 +6,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.joda.money.Money;
 
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
@@ -26,7 +27,7 @@ public class CompanyOrderDTO implements Serializable {
     @NotNull
     private LocalDateTime orderDate;
 
-    private Double budget; // TODO change to jodamoney
+    private Money budget;
 
     @NotNull
     private List<RoutePoint> route;
