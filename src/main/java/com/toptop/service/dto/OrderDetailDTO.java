@@ -19,7 +19,7 @@ public class OrderDetailDTO implements Serializable {
     private Long id;
 
     @NotNull
-    private Double transportationCost;
+    private Money transportationCost;
 
     @NotNull
     private Money orderProfit;

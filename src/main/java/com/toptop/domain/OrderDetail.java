@@ -1,6 +1,9 @@
 package com.toptop.domain;
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.joda.money.Money;
 
 import javax.persistence.*;
@@ -26,7 +29,7 @@ public class OrderDetail implements Serializable {
     private Long id;
 
     @Column(name = "transportation_cost")
-    private Double transportationCost;
+    private Money transportationCost;
 
     @Column(name = "order_profit")
     private Money orderProfit;

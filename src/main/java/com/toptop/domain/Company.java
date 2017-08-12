@@ -38,7 +38,4 @@ public class Company implements Serializable {
 
     @OneToMany(fetch = FetchType.LAZY)
     private Set<Address> address;
-
-    @OneToMany(mappedBy = "company", fetch = FetchType.LAZY)
-    private Set<CompanyOrder> orders;
 }
