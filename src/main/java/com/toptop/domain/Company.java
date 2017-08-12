@@ -1,11 +1,12 @@
 package com.toptop.domain;
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
 import java.io.Serializable;
-import java.util.HashSet;
 import java.util.Set;
 
 /**
@@ -35,11 +36,9 @@ public class Company implements Serializable {
     @Column(name = "company_cod")
     private int companyCod;
 
-    @OneToMany
-    @Column(name = "addresses")
-    private Set<Address> addresses;
+    @OneToMany(fetch = FetchType.LAZY)
+    private Set<Address> address;
 
     @OneToMany(mappedBy = "company", fetch = FetchType.LAZY)
-    @Column(name = "orders")
     private Set<CompanyOrder> orders;
 }

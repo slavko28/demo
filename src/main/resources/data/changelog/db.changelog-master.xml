@@ -10,5 +10,6 @@
     <include file="data/changelog/db.changelog_added_entity_cargo.xml"/>
     <include file="data/changelog/db.changelog_added_entity_route_point.xml"/>
     <include file="data/changelog/db.changelog_added_entity_route.xml"/>
+    <include file="data/changelog/db.changelog_added_entity_company.xml"/>
 
 </databaseChangeLog>
