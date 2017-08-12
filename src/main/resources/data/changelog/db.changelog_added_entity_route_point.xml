@@ -13,7 +13,7 @@
             </column>
             <column name="additional_information" type="varchar(255)"/>
             <column name="address_id" type="bigint">
-                <constraints nullable="false"/>
+                <constraints nullable="false" unique="true"/>
             </column>
         </createTable>
 

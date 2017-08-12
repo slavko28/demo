@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
+
+    <changeSet id="added_entity_truck" author="irvin">
+
+        <createTable tableName="truck">
+            <column name="id" type="bigint" autoIncrement="${autoIncrement}">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="model" type="varchar(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="license_plate" type="varchar(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="company_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="volume" type="decimal(3,3)"/>
+            <column name="load_capacity" type="decimal(3,3)"/>
+        </createTable>
+
+        <addForeignKeyConstraint baseColumnNames="company_id"
+                                 baseTableName="truck"
+                                 constraintName="fk_truck_company_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="company"/>
+
+    </changeSet>
+</databaseChangeLog>
+
+
+

@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
+
+    <changeSet id="added_entity_order_detail" author="irvin">
+
+        <createTable tableName="order_detail">
+            <column name="company_order_id" type="bigint">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="transportation_cost" type="DECIMAL(5, 2)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="order_profit" type="DECIMAL(5, 2)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="complete_date" type="date"/>
+            <column name="carrier_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="truck_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="trailer_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="driver_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="manager_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <addForeignKeyConstraint baseColumnNames="company_order_id"
+                                 baseTableName="order_detail"
+                                 constraintName="fk_order_detail_company_order_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="company_order"/>
+
+        <addForeignKeyConstraint baseColumnNames="carrier_id"
+                                 baseTableName="order_detail"
+                                 constraintName="fk_order_detail_carrier_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="company"/>
+
+        <addForeignKeyConstraint baseColumnNames="truck_id"
+                                 baseTableName="order_detail"
+                                 constraintName="fk_order_detail_truck_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="truck"/>
+
+        <addForeignKeyConstraint baseColumnNames="trailer_id"
+                                 baseTableName="order_detail"
+                                 constraintName="fk_order_detail_trailer_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="trailer"/>
+
+        <addForeignKeyConstraint baseColumnNames="driver_id"
+                                 baseTableName="order_detail"
+                                 constraintName="fk_order_detail_driver_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="company_employee"/>
+
+        <addForeignKeyConstraint baseColumnNames="manager_id"
+                                 baseTableName="order_detail"
+                                 constraintName="fk_order_detail_manager_id"
+                                 referencedColumnNames="user_id"
+                                 referencedTableName="user"/>
+
+    </changeSet>
+</databaseChangeLog>
+
+
+

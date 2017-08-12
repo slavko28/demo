@@ -17,7 +17,6 @@
             <column name="address_id" type="bigint">
                 <constraints nullable="false"/>
             </column>
-            <column name="order_id" type="bigint"/>
         </createTable>
 
         <createIndex indexName="idx_company_cod"
@@ -31,12 +30,6 @@
                                  constraintName="fk_company_address_id"
                                  referencedColumnNames="id"
                                  referencedTableName="address"/>
-
-        <addForeignKeyConstraint baseColumnNames="order_id"
-                                 baseTableName="company"
-                                 constraintName="fk_company_order_id"
-                                 referencedColumnNames="id"
-                                 referencedTableName="company_order"/>
 
     </changeSet>
 </databaseChangeLog>

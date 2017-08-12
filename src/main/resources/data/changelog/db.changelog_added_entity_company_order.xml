@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
+
+    <changeSet id="added_entity_company_order" author="irvin">
+
+        <createTable tableName="company_order">
+            <column name="id" type="bigint" autoIncrement="${autoIncrement}">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="order_status" type="varchar(50)"/>
+            <column name="order_date" type="date">
+                <constraints nullable="false"/>
+            </column>
+            <column name="budget" type="DECIMAL(5, 2)"/>
+            <column name="route_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="downloading_type" type="varchar(50)"/>
+            <column name="cargo_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="company_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="manager_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <addForeignKeyConstraint baseColumnNames="route_id"
+                                 baseTableName="company_order"
+                                 constraintName="fk_company_order_route_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="route"/>
+
+        <addForeignKeyConstraint baseColumnNames="cargo_id"
+                                 baseTableName="company_order"
+                                 constraintName="fk_company_order_cargo_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="cargo"/>
+
+        <addForeignKeyConstraint baseColumnNames="company_id"
+                                 baseTableName="company_order"
+                                 constraintName="fk_company_order_company_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="company"/>
+
+        <addForeignKeyConstraint baseColumnNames="manager_id"
+                                 baseTableName="company_order"
+                                 constraintName="fk_company_order_manager_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="company_employee"/>
+
+        <!--<addForeignKeyConstraint baseColumnNames="order_detail_id"-->
+        <!--baseTableName="company_order"-->
+        <!--constraintName="fk_company_order_order_detail_id"-->
+        <!--referencedColumnNames="id"-->
+        <!--referencedTableName="order_detail"/>-->
+
+    </changeSet>
+</databaseChangeLog>
+
+
+

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
+
+    <changeSet id="added_entity_company_employee" author="irvin">
+
+        <createTable tableName="company_employee">
+            <column name="id" type="bigint" autoIncrement="${autoIncrement}">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="type" type="varchar(50)"/>
+            <column name="first_name" type="varchar(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="last_name" type="varchar(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="mid_name" type="varchar(50)"/>
+            <column name="phone_number" type="varchar(50)"/>
+            <column name="company_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="email" type="varchar(50)"/>
+            <column name="additional_details" type="varchar(255)"/>
+            <column name="driver_license" type="varchar(100)"/>
+            <column name="driver_passport" type="varchar(100)"/>
+
+        </createTable>
+
+        <addForeignKeyConstraint baseColumnNames="company_id"
+                                 baseTableName="company_employee"
+                                 constraintName="fk_company_employee_company_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="company"/>
+
+    </changeSet>
+</databaseChangeLog>
+
+
+
