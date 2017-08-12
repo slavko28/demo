@@ -23,6 +23,7 @@ public class RoutePoint {
     private Address address;
 
     @Enumerated(EnumType.STRING)
+    @Column(name = "route_point_type")
     private RouteActivityType type;
 
     @Column(name = "additional_information")

@@ -8,5 +8,6 @@
     <include file="data/changelog/db.changelog_added_entity_user.xml"/>
     <include file="data/changelog/db.changelog_added_entity_address.xml"/>
     <include file="data/changelog/db.changelog_added_entity_cargo.xml"/>
+    <include file="data/changelog/db.changelog_added_entity_route_point.xml"/>
 
 </databaseChangeLog>
