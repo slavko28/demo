@@ -49,9 +49,6 @@ public class User implements Serializable{
     @Column(name = "active")
     private Boolean active;
 
-//    @ManyToMany(cascade = CascadeType.ALL)
-//    @JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"),
-//            inverseJoinColumns = @JoinColumn(name = "role_id"))
     @Enumerated(EnumType.STRING)
     @Column(name = "role")
     private UserRole role;
