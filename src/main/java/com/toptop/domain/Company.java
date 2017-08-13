@@ -1,8 +1,7 @@
 package com.toptop.domain;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
@@ -12,20 +11,14 @@ import java.util.Set;
 /**
  * Company.
  */
+@EqualsAndHashCode(callSuper = true)
 @Entity
-@AllArgsConstructor
 @NoArgsConstructor
-@Builder
 @Data
 @Table(name = "company")
-public class Company implements Serializable {
+public class Company extends BaseObject<Company> implements Serializable {
 
     private static final long serialVersionUID = 8399254940472545214L;
-
-    @Id
-    @GeneratedValue
-    @Column(name = "id")
-    private Long id;
 
     @Column(name = "short_name")
     private String shortName;

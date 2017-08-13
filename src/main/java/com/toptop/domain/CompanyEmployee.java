@@ -1,30 +1,25 @@
 package com.toptop.domain;
 
 import com.toptop.domain.enums.EmployeeType;
-import lombok.*;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 import org.hibernate.validator.constraints.Email;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 
 /**
  * Company employee.
  */
+@EqualsAndHashCode(callSuper = true)
 @Entity
-@AllArgsConstructor
 @NoArgsConstructor
-@Builder
 @Data
 @Table(name = "company_employee")
-public class CompanyEmployee implements Serializable {
+public class CompanyEmployee extends BaseObject<CompanyEmployee> implements Serializable {
 
     private static final long serialVersionUID = -8656867795070348248L;
-
-    @Id
-    @GeneratedValue
-    @Column(name = "id")
-    private Long id;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "type")

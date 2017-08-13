@@ -1,9 +1,8 @@
 package com.toptop.domain;
 
 import com.toptop.domain.enums.TrailerType;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
@@ -12,20 +11,14 @@ import java.io.Serializable;
 /**
  * Trailer.
  */
+@EqualsAndHashCode(callSuper = true)
 @Entity
-@AllArgsConstructor
 @NoArgsConstructor
-@Builder
 @Data
 @Table(name = "trailer")
-public class Trailer implements Serializable{
+public class Trailer extends BaseObject<Trailer> implements Serializable {
 
     private static final long serialVersionUID = -6752309351231662406L;
-
-    @Id
-    @GeneratedValue
-    @Column(name = "id")
-    private Long id;
 
     @Column(name = "model")
     private String model;

@@ -1,35 +1,24 @@
 package com.toptop.domain;
 
 import com.toptop.domain.enums.UserRole;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
-import org.hibernate.validator.constraints.Email;
-import org.hibernate.validator.constraints.Length;
-import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.Set;
 
 /**
  * User.
  */
+@EqualsAndHashCode(callSuper = true)
 @Entity
-@AllArgsConstructor
 @NoArgsConstructor
-@Builder
 @Data
 @Table(name = "user")
-public class User implements Serializable{
+public class User extends BaseObject<User> implements Serializable {
 
     private static final long serialVersionUID = -2025326803520891508L;
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "user_id")
-    private Long id;
 
     @Column(name = "email")
     private String email;

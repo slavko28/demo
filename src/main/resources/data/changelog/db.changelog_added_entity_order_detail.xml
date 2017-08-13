@@ -73,7 +73,7 @@
         <addForeignKeyConstraint baseColumnNames="manager_id"
                                  baseTableName="order_detail"
                                  constraintName="fk_order_detail_manager_id"
-                                 referencedColumnNames="user_id"
+                                 referencedColumnNames="id"
                                  referencedTableName="user"/>
 
     </changeSet>

@@ -1,9 +1,8 @@
 package com.toptop.domain;
 
 import com.toptop.domain.enums.OrderStatus;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import org.joda.money.Money;
 
@@ -16,20 +15,14 @@ import static javax.persistence.EnumType.STRING;
 /**
  * Company order.
  */
+@EqualsAndHashCode(callSuper = true)
 @Entity
-@AllArgsConstructor
 @NoArgsConstructor
-@Builder
 @Data
 @Table(name = "company_order")
-public class CompanyOrder implements Serializable {
+public class CompanyOrder extends BaseObject<CompanyOrder> implements Serializable {
 
     private static final long serialVersionUID = 3610318214071648278L;
-
-    @Id
-    @GeneratedValue
-    @Column(name = "id")
-    private Long id;
 
     @Enumerated(STRING)
     @Column(name = "order_status")

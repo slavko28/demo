@@ -1,29 +1,24 @@
 package com.toptop.domain;
 
 import com.toptop.domain.enums.AddressType;
-import lombok.*;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 
 /**
  * Address.
  */
+@EqualsAndHashCode(callSuper = true)
 @Entity
-@AllArgsConstructor
 @NoArgsConstructor
-@Builder
 @Data
 @Table(name = "address")
-public class Address implements Serializable {
+public class Address extends BaseObject<Address> implements Serializable {
 
     private static final long serialVersionUID = 6153028233967159564L;
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id")
-    private Long id;
 
     @Column(name = "country")
     private String country;

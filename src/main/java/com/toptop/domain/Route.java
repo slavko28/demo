@@ -1,25 +1,22 @@
 package com.toptop.domain;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.List;
 
 /**
  * Route.
  */
+@EqualsAndHashCode(callSuper = true)
 @Entity
 @Data
 @NoArgsConstructor
-@AllArgsConstructor
 @Table(name = "route")
-public class Route {
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id")
-    private Long id;
+public class Route extends BaseObject<Route> implements Serializable {
 
     @OneToMany(fetch = FetchType.EAGER)
     private List<RoutePoint> routePoints;

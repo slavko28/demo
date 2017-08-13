@@ -1,8 +1,7 @@
 package com.toptop.domain;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import org.joda.money.Money;
 
@@ -13,20 +12,14 @@ import java.time.LocalDateTime;
 /**
  * Order detail.
  */
+@EqualsAndHashCode(callSuper = true)
 @Entity
-@AllArgsConstructor
 @NoArgsConstructor
-@Builder
 @Data
 @Table(name = "order_detail")
-public class OrderDetail implements Serializable {
+public class OrderDetail extends BaseObject<OrderDetail> implements Serializable {
 
     private static final long serialVersionUID = -6693482470482522203L;
-
-    @Id
-    @GeneratedValue
-    @Column(name = "id")
-    private Long id;
 
     @Column(name = "transportation_cost")
     private Money transportationCost;
