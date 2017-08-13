@@ -6,7 +6,7 @@
     <changeSet id="added_entity_order_detail" author="irvin">
 
         <createTable tableName="order_detail">
-            <column name="company_order_id" type="bigint">
+            <column name="id" type="bigint">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
             <column name="transportation_cost" type="DECIMAL(5, 2)">
@@ -16,6 +16,9 @@
                 <constraints nullable="false"/>
             </column>
             <column name="complete_date" type="date"/>
+            <column name="company_order_id" type="bigint">
+                <constraints unique="true" nullable="false"/>
+            </column>
             <column name="carrier_id" type="bigint">
                 <constraints nullable="false"/>
             </column>

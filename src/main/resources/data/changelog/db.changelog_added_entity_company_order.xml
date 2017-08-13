@@ -14,6 +14,9 @@
                 <constraints nullable="false"/>
             </column>
             <column name="budget" type="DECIMAL(5, 2)"/>
+            <column name="order_details_id" type="bigint">
+                <constraints unique="true" nullable="true"/>
+            </column>
             <column name="route_id" type="bigint">
                 <constraints nullable="false"/>
             </column>

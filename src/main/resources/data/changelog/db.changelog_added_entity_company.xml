@@ -14,9 +14,6 @@
             <column name="company_cod" type="int">
                 <constraints unique="true" nullable="false"/>
             </column>
-            <column name="address_id" type="bigint">
-                <constraints nullable="false"/>
-            </column>
         </createTable>
 
         <createIndex indexName="idx_company_cod"
@@ -25,11 +22,28 @@
             <column name="company_cod" type="int"/>
         </createIndex>
 
+        <createTable tableName="company_address">
+            <column name="company_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="address_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <addForeignKeyConstraint baseColumnNames="company_id"
+                                 baseTableName="company_address"
+                                 constraintName="fk_company_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="company"/>
+
         <addForeignKeyConstraint baseColumnNames="address_id"
-                                 baseTableName="company"
-                                 constraintName="fk_company_address_id"
+                                 baseTableName="company_address"
+                                 constraintName="fk_address_id"
                                  referencedColumnNames="id"
                                  referencedTableName="address"/>
+
+
 
     </changeSet>
 </databaseChangeLog>
