@@ -14,15 +14,12 @@
                 <constraints nullable="false"/>
             </column>
             <column name="budget" type="DECIMAL(5, 2)"/>
-            <column name="order_details_id" type="bigint">
-                <constraints unique="true" nullable="true"/>
-            </column>
             <column name="route_id" type="bigint">
                 <constraints nullable="false"/>
             </column>
             <column name="downloading_type" type="varchar(50)"/>
             <column name="cargo_id" type="bigint">
-                <constraints nullable="false"/>
+                <constraints nullable="false" unique="true"/>
             </column>
             <column name="company_id" type="bigint">
                 <constraints nullable="false"/>
@@ -55,12 +52,6 @@
                                  constraintName="fk_company_order_manager_id"
                                  referencedColumnNames="id"
                                  referencedTableName="company_employee"/>
-
-        <!--<addForeignKeyConstraint baseColumnNames="order_detail_id"-->
-        <!--baseTableName="company_order"-->
-        <!--constraintName="fk_company_order_order_detail_id"-->
-        <!--referencedColumnNames="id"-->
-        <!--referencedTableName="order_detail"/>-->
 
     </changeSet>
 </databaseChangeLog>

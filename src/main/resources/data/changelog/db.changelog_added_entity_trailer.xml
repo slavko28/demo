@@ -14,7 +14,7 @@
                 <constraints nullable="false"/>
             </column>
             <column name="license_plate" type="varchar(50)">
-                <constraints nullable="false"/>
+                <constraints nullable="false" unique="true"/>
             </column>
             <column name="company_id" type="bigint">
                 <constraints nullable="false"/>

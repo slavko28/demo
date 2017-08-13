@@ -43,10 +43,5 @@
                                  referencedColumnNames="id"
                                  referencedTableName="address"/>
 
-
-
     </changeSet>
 </databaseChangeLog>
-
-
-

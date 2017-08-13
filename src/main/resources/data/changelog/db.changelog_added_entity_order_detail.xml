@@ -36,6 +36,10 @@
             </column>
         </createTable>
 
+        <addUniqueConstraint tableName="order_detail"
+                             columnNames="company_order_id, truck_id, trailer_id, driver_id"
+                             constraintName="uq_order_detail"/>
+
         <addForeignKeyConstraint baseColumnNames="company_order_id"
                                  baseTableName="order_detail"
                                  constraintName="fk_order_detail_company_order_id"
