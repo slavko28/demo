@@ -12,4 +12,7 @@ public class BaseObject {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id")
     private Long id;
+
+    @Column(name = "enabled")
+    private Boolean enabled = true;
 }
