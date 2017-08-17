@@ -1,21 +1,10 @@
 package com.toptop.service.mapper;
 
 import com.toptop.domain.CompanyOrder;
-import com.toptop.domain.RoutePoint;
 import com.toptop.service.dto.CompanyOrderDTO;
 import org.mapstruct.Mapper;
-import org.mapstruct.Mapping;
-
-import java.util.List;
 
 @Mapper(componentModel = "spring", uses = {RoutePointMapper.class, CargoMapper.class, CompanyMapper.class, CompanyEmployeeMapper.class})
-public interface CompanyOrderMapper {
+public interface CompanyOrderMapper extends BaseMapper<CompanyOrder, CompanyOrderDTO> {
 
-    CompanyOrderDTO map(CompanyOrder order);
-
-    List<CompanyOrderDTO> mapToDTOList(List<CompanyOrder> orders);
-
-    CompanyOrder map(CompanyOrderDTO orderDTO);
-
-    List<CompanyOrder> mapToList(List<CompanyOrderDTO> orderDTOS);
 }

@@ -5,17 +5,10 @@ import com.toptop.service.dto.UserDTO;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
-import java.util.List;
-
 @Mapper(componentModel = "spring")
-public interface UserMapper {
+public interface UserMapper extends BaseMapper<User, UserDTO> {
 
-    UserDTO map(User user);
-
-    List<UserDTO> mapToUserDTOList(List<User> users);
-
+    @Override
     @Mapping(target = "password", ignore = true)
     User map(UserDTO userDTO);
-
-    List<User> mapToUserList(List<UserDTO> userDTOS);
 }
