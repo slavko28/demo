@@ -16,7 +16,7 @@ import java.io.Serializable;
 @NoArgsConstructor
 @Data
 @Table(name = "address")
-public class Address extends BaseObject<Address> implements Serializable {
+public class Address extends BaseObject implements Serializable {
 
     private static final long serialVersionUID = 6153028233967159564L;
 

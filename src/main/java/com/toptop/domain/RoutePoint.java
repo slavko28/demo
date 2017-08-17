@@ -13,7 +13,7 @@ import java.io.Serializable;
 @Data
 @NoArgsConstructor
 @Table(name = "route_point")
-public class RoutePoint extends BaseObject<RoutePoint> implements Serializable {
+public class RoutePoint extends BaseObject implements Serializable {
 
     private static final long serialVersionUID = 1961569891607287672L;
 

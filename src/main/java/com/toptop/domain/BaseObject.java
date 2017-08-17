@@ -6,7 +6,7 @@ import javax.persistence.*;
 
 @MappedSuperclass
 @Data
-public class BaseObject<T extends BaseObject> {
+public class BaseObject {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

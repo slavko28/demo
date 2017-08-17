@@ -16,7 +16,7 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 @Table(name = "route")
-public class Route extends BaseObject<Route> implements Serializable {
+public class Route extends BaseObject implements Serializable {
 
     @OneToMany(fetch = FetchType.EAGER)
     private List<RoutePoint> routePoints;

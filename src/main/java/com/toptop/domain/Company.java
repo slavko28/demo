@@ -16,7 +16,7 @@ import java.util.Set;
 @NoArgsConstructor
 @Data
 @Table(name = "company")
-public class Company extends BaseObject<Company> implements Serializable {
+public class Company extends BaseObject implements Serializable {
 
     private static final long serialVersionUID = 8399254940472545214L;
 

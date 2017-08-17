@@ -20,7 +20,7 @@ import static javax.persistence.EnumType.STRING;
 @NoArgsConstructor
 @Data
 @Table(name = "company_order")
-public class CompanyOrder extends BaseObject<CompanyOrder> implements Serializable {
+public class CompanyOrder extends BaseObject implements Serializable {
 
     private static final long serialVersionUID = 3610318214071648278L;
 

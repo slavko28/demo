@@ -17,7 +17,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @Data
 @Table(name = "order_detail")
-public class OrderDetail extends BaseObject<OrderDetail> implements Serializable {
+public class OrderDetail extends BaseObject implements Serializable {
 
     private static final long serialVersionUID = -6693482470482522203L;
 
