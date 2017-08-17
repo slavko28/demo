@@ -7,15 +7,14 @@ import com.toptop.service.UserService;
 import com.toptop.service.dto.UserDTO;
 import com.toptop.service.mapper.UserMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
-
 @Service
 @Transactional
-public class UserServiceImpl implements UserService {
+public class UserServiceImpl extends TransactionService<User, Long, UserMapper, UserDTO> implements UserService {
 
     @Autowired
     private UserRepository userRepository;
@@ -36,19 +35,16 @@ public class UserServiceImpl implements UserService {
         user.setPassword(bCryptPasswordEncoder.encode(userDTO.getPassword()));
         user.setActive(true);
         user.setRole(role);
-        userRepository.save(user);
+        save(user);
     }
 
     @Override
-    @Transactional(readOnly = true)
-    public UserDTO findOne(Long id) {
-        return userMapper.map(userRepository.findOne(id));
+    protected JpaRepository<User, Long> getRepository() {
+        return userRepository;
     }
 
     @Override
-    @Transactional(readOnly = true)
-    public List<UserDTO> findAll() {
-        return userMapper.mapToUserDTOList(userRepository.findAll());
+    protected UserMapper getMapper() {
+        return userMapper;
     }
-
 }
