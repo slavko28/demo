@@ -7,8 +7,11 @@ import com.toptop.service.dto.AddressDTO;
 import com.toptop.service.mapper.AddressMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.transaction.annotation.Transactional;
 
-public class AddressServiceImpl extends TransactionService<Address, Long, AddressMapper, AddressDTO> implements AddressService {
+@Transactional
+public class AddressServiceImpl extends TransactionService<Address, Long, AddressMapper, AddressDTO>
+        implements AddressService {
 
     @Autowired
     private AddressRepository addressRepository;

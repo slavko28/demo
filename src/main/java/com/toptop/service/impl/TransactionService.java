@@ -9,11 +9,11 @@ import org.springframework.transaction.annotation.Transactional;
 import java.io.Serializable;
 import java.util.List;
 
+@Transactional
 public abstract class TransactionService<T extends BaseObject, ID extends Serializable,
         M extends BaseMapper<T, DTO>, DTO extends Object> implements AbstractService<T, ID, DTO> {
 
     @Override
-    @Transactional
     public DTO save(T entity) {
         return getMapper().mapToDTO(getRepository().save(entity));
     }
