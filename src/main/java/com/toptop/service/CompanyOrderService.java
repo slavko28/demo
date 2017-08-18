@@ -20,6 +20,14 @@ public interface CompanyOrderService extends AbstractService<CompanyOrder, Long,
     List<CompanyOrderDTO> findAllByCompanyEmployeeId(Long id);
 
     /**
+     * Find all orders by Company (customer) id.
+     *
+     * @param id the Company id
+     * @return the list af entities
+     */
+    List<CompanyOrderDTO> findAllByCompanyId(Long id);
+
+    /**
      * Find all orders by Order status.
      *
      * @param orderStatus order status

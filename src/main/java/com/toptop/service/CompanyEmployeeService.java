@@ -16,4 +16,5 @@ public interface CompanyEmployeeService extends AbstractService<CompanyEmployee,
      * @return the list af entities
      */
     List<CompanyEmployeeDTO> findAllByCompanyId(Long id);
+
 }

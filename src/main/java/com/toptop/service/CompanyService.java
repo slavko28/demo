@@ -8,4 +8,12 @@ import com.toptop.service.dto.CompanyDTO;
  */
 public interface CompanyService extends AbstractService<Company, Long, CompanyDTO> {
 
+    /**
+     * Find entity by Company cod.
+     *
+     * @param companyCod the Company cod
+     * @return the entity
+     */
+    CompanyDTO findByOneByCompanyCod(int companyCod);
+
 }

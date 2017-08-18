@@ -11,9 +11,17 @@ import java.util.List;
 public interface OrderDetailService extends AbstractService<OrderDetail, Long, OrderDetailDTO> {
 
     /**
-     * Find all orders by Company employee (carrier's driver) id.
+     * Find all entities by Company employee (carrier's driver) id.
      *
      * @return the list af entities
      */
     List<OrderDetailDTO> findAllByDriverId(Long id);
+
+    /**
+     * Find all entities by Manager (responsible for the execution) id.
+     *
+     * @param id the Manager id
+     * @return the list af entities
+     */
+    List<OrderDetailDTO> findAllByManagerId(Long id);
 }
