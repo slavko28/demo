@@ -10,16 +10,25 @@
                 <constraints primaryKey="true" nullable="false"/>
             </column>
             <column name="email" type="varchar(100)">
-                <constraints unique="true" nullable="true"/>
+                <constraints unique="true" nullable="false"/>
             </column>
-            <column name="password" type="varchar(100)"/>
-            <column name="name" type="varchar(50)"/>
+            <column name="password" type="varchar(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="name" type="varchar(50)">
+                <constraints nullable="false" />
+            </column>
             <column name="last_name" type="varchar(50)"/>
             <column name="phone_number" type="varchar(30)"/>
+            <column name="role" type="varchar(10)">
+                <constraints nullable="false" />
+            </column>
             <column name="active" type="boolean" valueBoolean="false">
                 <constraints nullable="false" />
             </column>
-            <column name="role" type="varchar(10)"/>
+            <column name="enabled" type="tinyint(1)" defaultValue="1">
+                <constraints nullable="false"/>
+            </column>
         </createTable>
 
         <createIndex indexName="idx_user_email"
@@ -28,8 +37,7 @@
             <column name="email" type="varchar(100)"/>
         </createIndex>
 
-        <loadData encoding="UTF-8"
-                  file="data/user.csv"
+        <loadData file="data/user.csv"
                   separator=";"
                   tableName="user">
             <column name="active" type="boolean"/>

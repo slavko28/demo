@@ -15,6 +15,9 @@
             <column name="address_id" type="bigint">
                 <constraints nullable="false" unique="true"/>
             </column>
+            <column name="enabled" type="tinyint(1)" defaultValue="1">
+                <constraints nullable="false"/>
+            </column>
         </createTable>
 
         <addForeignKeyConstraint baseColumnNames="address_id"

@@ -25,6 +25,9 @@
             <column name="load_capacity" type="decimal(3,3)">
                 <constraints nullable="false"/>
             </column>
+            <column name="enabled" type="tinyint(1)" defaultValue="1">
+                <constraints nullable="false"/>
+            </column>
         </createTable>
 
         <addForeignKeyConstraint baseColumnNames="company_id"

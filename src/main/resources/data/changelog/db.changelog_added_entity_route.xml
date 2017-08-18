@@ -12,6 +12,9 @@
             <column name="route_point_id" type="bigint">
                 <constraints nullable="false"/>
             </column>
+            <column name="enabled" type="tinyint(1)" defaultValue="1">
+                <constraints nullable="false"/>
+            </column>
         </createTable>
 
         <addForeignKeyConstraint baseColumnNames="route_point_id"

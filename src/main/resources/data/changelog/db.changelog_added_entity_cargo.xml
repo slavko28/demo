@@ -16,6 +16,9 @@
                 <constraints nullable="false"/>
             </column>
             <column name="description" type="varchar(255)"/>
+            <column name="enabled" type="tinyint(1)" defaultValue="1">
+                <constraints nullable="false"/>
+            </column>
         </createTable>
 
     </changeSet>

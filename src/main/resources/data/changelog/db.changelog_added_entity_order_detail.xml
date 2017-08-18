@@ -34,6 +34,9 @@
             <column name="manager_id" type="bigint">
                 <constraints nullable="false"/>
             </column>
+            <column name="enabled" type="tinyint(1)" defaultValue="1">
+                <constraints nullable="false"/>
+            </column>
         </createTable>
 
         <addUniqueConstraint tableName="order_detail"
