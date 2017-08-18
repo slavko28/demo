@@ -1,34 +1,11 @@
 package com.toptop.service;
 
+import com.toptop.domain.Company;
 import com.toptop.service.dto.CompanyDTO;
-
-import java.util.List;
 
 /**
  * Service Interface for managing Company entities.
  */
-public interface CompanyService {
+public interface CompanyService extends AbstractService<Company, Long, CompanyDTO> {
 
-    /**
-     * Save new entity.
-     *
-     * @param companyDTO the entity to save
-     * @return the saved entity
-     */
-    CompanyDTO save(CompanyDTO companyDTO);
-
-    /**
-     * Find Company by Id.
-     *
-     * @param id the Company Id
-     * @return the entity
-     */
-    CompanyDTO findOne(Long id);
-
-    /**
-     * Find all Companies.
-     *
-     * @return the list af entities
-     */
-    List<CompanyDTO> findAll();
 }
