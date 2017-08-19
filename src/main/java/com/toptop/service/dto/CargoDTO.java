@@ -10,9 +10,10 @@ import lombok.NoArgsConstructor;
 @Builder
 @Data
 public class CargoDTO {
+
     private Long id;
 
-    private int volume;
+    private double volume;
 
     private double weight;
 
