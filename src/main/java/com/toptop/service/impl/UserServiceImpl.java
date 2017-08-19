@@ -31,7 +31,7 @@ public class UserServiceImpl extends TransactionService<User, Long, UserMapper, 
 
     @Override
     public void saveUserWithRole(UserDTO userDTO, UserRole role) {
-        User user = userMapper.map(userDTO);
+        User user = getMapper().map(userDTO);
         user.setPassword(bCryptPasswordEncoder.encode(userDTO.getPassword()));
         user.setActive(true);
         user.setRole(role);
