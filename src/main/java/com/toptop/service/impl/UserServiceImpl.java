@@ -6,6 +6,8 @@ import com.toptop.repository.UserRepository;
 import com.toptop.service.UserService;
 import com.toptop.service.dto.UserDTO;
 import com.toptop.service.mapper.UserMapper;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -15,6 +17,8 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 @Transactional
 public class UserServiceImpl extends TransactionService<User, Long, UserMapper, UserDTO> implements UserService {
+
+    private static final Logger log = LoggerFactory.getLogger(UserServiceImpl.class);
 
     @Autowired
     private UserRepository userRepository;
@@ -26,6 +30,7 @@ public class UserServiceImpl extends TransactionService<User, Long, UserMapper, 
     @Override
     @Transactional(readOnly = true)
     public User findUserByEmail(String email) {
+        log.debug("Searching user by email: {}", email);
         return userRepository.findByEmail(email);
     }
 
@@ -35,6 +40,7 @@ public class UserServiceImpl extends TransactionService<User, Long, UserMapper, 
         user.setPassword(bCryptPasswordEncoder.encode(userDTO.getPassword()));
         user.setActive(true);
         user.setRole(role);
+        log.debug("Save user with name: {}", user.getName());
         save(user);
     }
 
