@@ -26,7 +26,7 @@ public class CompanyOrder extends BaseObject implements Serializable {
 
     @Enumerated(STRING)
     @Column(name = "order_status")
-    private OrderStatus orderStatus;
+    private OrderStatus status;
 
     @Column(name = "order_date")
     private LocalDateTime orderDate;
