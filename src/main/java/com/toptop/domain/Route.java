@@ -15,12 +15,10 @@ import java.util.List;
 @Entity
 @Data
 @NoArgsConstructor
-@Table(name = "route")
 public class Route extends BaseObject implements Serializable {
 
     @OneToMany(fetch = FetchType.EAGER)
     private List<RoutePoint> routePoints;
 
-    @Column(name = "additional_information")
     private String additionalInformation;
 }

@@ -16,18 +16,12 @@ import java.time.LocalDateTime;
 @Entity
 @NoArgsConstructor
 @Data
-@Table(name = "order_detail")
 public class OrderDetail extends BaseObject implements Serializable {
 
     private static final long serialVersionUID = -6693482470482522203L;
 
-    @Column(name = "transportation_cost")
     private Money transportationCost;
-
-    @Column(name = "order_profit")
     private Money orderProfit;
-
-    @Column(name = "complete_date")
     private LocalDateTime completeDate;
 
     @OneToOne(optional = false)

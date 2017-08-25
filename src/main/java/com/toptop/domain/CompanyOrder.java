@@ -10,8 +10,6 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
-import static javax.persistence.EnumType.STRING;
-
 /**
  * Company order.
  */
@@ -19,25 +17,19 @@ import static javax.persistence.EnumType.STRING;
 @Entity
 @NoArgsConstructor
 @Data
-@Table(name = "company_order")
 public class CompanyOrder extends BaseObject implements Serializable {
 
     private static final long serialVersionUID = 3610318214071648278L;
 
-    @Enumerated(STRING)
-    @Column(name = "order_status")
+    @Enumerated(EnumType.STRING)
     private OrderStatus status;
 
-    @Column(name = "order_date")
     private LocalDateTime orderDate;
-
-    @Column(name = "budget")
     private Money budget;
 
     @OneToOne(optional = false)
     private Route route;
 
-    @Column(name = "downloading_type")
     private String downloadingType;
 
     @OneToOne(optional = false)

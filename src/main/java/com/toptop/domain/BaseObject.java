@@ -8,11 +8,8 @@ import javax.persistence.*;
 @Data
 public class BaseObject {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id")
+    @Id @GeneratedValue
     private Long id;
 
-    @Column(name = "enabled")
     private Boolean enabled = true;
 }

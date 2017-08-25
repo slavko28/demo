@@ -12,7 +12,6 @@ import java.io.Serializable;
 @Entity
 @Data
 @NoArgsConstructor
-@Table(name = "route_point")
 public class RoutePoint extends BaseObject implements Serializable {
 
     private static final long serialVersionUID = 1961569891607287672L;
@@ -21,9 +20,7 @@ public class RoutePoint extends BaseObject implements Serializable {
     private Address address;
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "route_point_type")
     private RouteActivityType type;
 
-    @Column(name = "additional_information")
     private String additionalInformation;
 }
