@@ -41,6 +41,11 @@ public class OrderDetailServiceImpl extends TransactionService<OrderDetail, Long
     }
 
     @Override
+    public boolean isExist(OrderDetailDTO orderDetailDTO) {
+        return getRepository().exists(orderDetailDTO.getId());
+    }
+
+    @Override
     protected JpaRepository<OrderDetail, Long> getRepository() {
         return orderDetailsRepository;
     }

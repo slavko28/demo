@@ -34,6 +34,11 @@ public class CompanyEmployeeServiceImpl extends TransactionService<CompanyEmploy
     }
 
     @Override
+    public boolean isExist(CompanyEmployeeDTO employeeDTO) {
+        return getRepository().exists(employeeDTO.getId());
+    }
+
+    @Override
     protected JpaRepository<CompanyEmployee, Long> getRepository() {
         return employeeRepository;
     }

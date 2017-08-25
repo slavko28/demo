@@ -20,7 +20,7 @@ import java.util.List;
 public class AddressServiceImpl extends TransactionService<Address, Long, AddressMapper, AddressDTO>
         implements AddressService {
 
-    private static final Logger log = LoggerFactory.getLogger(UserServiceImpl.class);
+    private static final Logger log = LoggerFactory.getLogger(AddressServiceImpl.class);
 
     @Autowired
     private AddressRepository addressRepository;
@@ -44,6 +44,11 @@ public class AddressServiceImpl extends TransactionService<Address, Long, Addres
     public List<AddressDTO> findAllByType(AddressType type) {
         log.debug("Find all addresses by address type: {}", type);
         return getMapper().mapToDTOs(addressRepository.findAllByAddressType(type));
+    }
+
+    @Override
+    public boolean isExist(AddressDTO addressDTO) {
+        return getRepository().exists(addressDTO.getId());
     }
 
     @Override

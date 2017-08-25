@@ -21,6 +21,11 @@ public class RoutePointServiceImpl extends TransactionService<RoutePoint, Long, 
     private RoutePointMapper routePointMapper;
 
     @Override
+    public boolean isExist(RoutePointDTO routePointDTO) {
+        return getRepository().exists(routePointDTO.getId());
+    }
+
+    @Override
     protected JpaRepository<RoutePoint, Long> getRepository() {
         return routePointRepository;
     }

@@ -35,6 +35,11 @@ public class TruckServiceImpl extends TransactionService<Truck, Long, TruckMappe
     }
 
     @Override
+    public boolean isExist(TruckDTO truckDTO) {
+        return getRepository().exists(truckDTO.getId());
+    }
+
+    @Override
     protected JpaRepository<Truck, Long> getRepository() {
         return truckRepository;
     }

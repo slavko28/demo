@@ -49,6 +49,11 @@ public class CompanyOrderServiceImpl extends TransactionService<CompanyOrder, Lo
     }
 
     @Override
+    public boolean isExist(CompanyOrderDTO companyOrderDTO) {
+        return getRepository().exists(companyOrderDTO.getId());
+    }
+
+    @Override
     protected JpaRepository<CompanyOrder, Long> getRepository() {
         return orderRepository;
     }

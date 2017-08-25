@@ -44,6 +44,11 @@ public class UserServiceImpl extends TransactionService<User, Long, UserMapper, 
     }
 
     @Override
+    public boolean isExist(UserDTO userDTO) {
+        return getRepository().exists(userDTO.getId());
+    }
+
+    @Override
     protected JpaRepository<User, Long> getRepository() {
         return userRepository;
     }

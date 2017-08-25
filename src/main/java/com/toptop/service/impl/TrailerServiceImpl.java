@@ -43,6 +43,11 @@ public class TrailerServiceImpl extends TransactionService<Trailer, Long, Traile
     }
 
     @Override
+    public boolean isExist(TrailerDTO trailerDTO) {
+        return getRepository().exists(trailerDTO.getId());
+    }
+
+    @Override
     protected JpaRepository<Trailer, Long> getRepository() {
         return trailerRepository;
     }

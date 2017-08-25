@@ -17,6 +17,11 @@ public class RouteServiceImpl extends TransactionService<Route, Long, RouteMappe
     private RouteMapper routeMapper;
 
     @Override
+    public boolean isExist(RouteDTO routeDTO) {
+        return getRepository().exists(routeDTO.getId());
+    }
+
+    @Override
     protected JpaRepository<Route, Long> getRepository() {
         return routeRepository;
     }

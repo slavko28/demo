@@ -33,6 +33,11 @@ public class CompanyServiceImpl extends TransactionService<Company, Long, Compan
     }
 
     @Override
+    public boolean isExist(CompanyDTO companyDTO) {
+        return getRepository().exists(companyDTO.getId());
+    }
+
+    @Override
     protected JpaRepository<Company, Long> getRepository() {
         return companyRepository;
     }
