@@ -1,6 +1,9 @@
 package com.toptop.service.dto;
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
@@ -11,7 +14,7 @@ import java.io.Serializable;
 @Data
 public class TruckDTO implements Serializable {
 
-    private int id;
+    private Long id;
 
     @NotNull
     private String model;
