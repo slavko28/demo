@@ -1,6 +1,7 @@
 package com.toptop.service;
 
 import com.toptop.domain.Address;
+import com.toptop.domain.enums.AddressType;
 import com.toptop.service.dto.AddressDTO;
 
 import java.util.List;
@@ -17,4 +18,20 @@ public interface AddressService extends AbstractService<Address, Long, AddressDT
      * @return list of entities
      */
     List<AddressDTO> findAllByCompanyId(Long id);
+
+    /**
+     * Find all addresses by company id and address type.
+     *
+     * @param id the company id
+     * @param type the address type
+     * @return list of entities
+     */
+    List<AddressDTO> findAllByCompanyIdAndType(Long id, AddressType type);
+
+    /**
+     * Find all by address type.
+     * @param type the address type
+     * @return list of entities
+     */
+    List<AddressDTO> findAllByType(AddressType type);
 }

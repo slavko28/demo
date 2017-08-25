@@ -1,6 +1,7 @@
 package com.toptop.service.impl;
 
 import com.toptop.domain.Address;
+import com.toptop.domain.enums.AddressType;
 import com.toptop.repository.AddressRepository;
 import com.toptop.service.AddressService;
 import com.toptop.service.dto.AddressDTO;
@@ -31,6 +32,18 @@ public class AddressServiceImpl extends TransactionService<Address, Long, Addres
     public List<AddressDTO> findAllByCompanyId(Long id) {
         log.debug("Find all addresses by Company id: {}", id);
         return getMapper().mapToDTOs(addressRepository.findAllByCompanyId(id));
+    }
+
+    @Override
+    public List<AddressDTO> findAllByCompanyIdAndType(Long id, AddressType type) {
+        log.debug("Find all addresses by Company id: {} and type: {}", id, type);
+        return getMapper().mapToDTOs(addressRepository.findAllByCompanyIdAndType(id, type));
+    }
+
+    @Override
+    public List<AddressDTO> findAllByType(AddressType type) {
+        log.debug("Find all addresses by address type: {}", type);
+        return getMapper().mapToDTOs(addressRepository.findAllByAddressType(type));
     }
 
     @Override
