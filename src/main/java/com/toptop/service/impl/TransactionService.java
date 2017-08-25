@@ -14,7 +14,8 @@ public abstract class TransactionService<T extends BaseObject, ID extends Serial
         M extends BaseMapper<T, DTO>, DTO extends Object> implements AbstractService<T, ID, DTO> {
 
     @Override
-    public DTO save(T entity) {
+    public DTO save(DTO dto) {
+        T entity = getMapper().map(dto);
         return getMapper().mapToDTO(getRepository().save(entity));
     }
 
