@@ -10,10 +10,10 @@ public interface AbstractService<T extends BaseObject, ID extends Serializable, 
     /**
      * Save new entity.
      *
-     * @param entity the entity to save
+     * @param dto the entity to save
      * @return the saved entity
      */
-    DTO save(T entity);
+    DTO save(DTO dto);
 
     /**
      * Find entity by Id.
