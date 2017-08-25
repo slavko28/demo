@@ -35,5 +35,10 @@
             </column>
         </createTable>
 
+        <loadData file="data/address.csv"
+                  separator=";"
+                  tableName="address">
+        </loadData>
+
     </changeSet>
 </databaseChangeLog>

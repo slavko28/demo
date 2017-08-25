@@ -46,5 +46,15 @@
                                  referencedColumnNames="id"
                                  referencedTableName="address"/>
 
+        <loadData file="data/company.csv"
+                  separator=";"
+                  tableName="company">
+        </loadData>
+
+        <loadData file="data/company_address.csv"
+                  separator=";"
+                  tableName="company_address">
+        </loadData>
+
     </changeSet>
 </databaseChangeLog>

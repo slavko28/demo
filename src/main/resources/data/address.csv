@@ -1,0 +1,11 @@
+id;country;zip_code;region;locality;street;number;address_type
+1;Dominican Republic;05120;Ontario;Township of Minden Hills;Ornare Rd.;35;STORAGE
+2;Estonia;63089;Maule;Longaví;P.O. Box 819,Orci, Ave;42;MAILING
+3;Ethiopia;6675;MA;Warszawa;Ac, Rd.;21;MAILING
+4;Sao Tome and Principe;987586;Connacht;Galway;Pellentesque. Rd.;91;MAILING
+5;Poland;75536;F;Tranås;Justo. Rd.;53;PRODUCTION
+6;Cuba;96087-874;MT;Billings;Suspendisse St.;43;STORAGE
+7;Mayotte;335464;Luik;Vieuxville;Pulvinar Rd.;56;STORAGE
+8;United Arab Emirates;58125;Westmorland;Ambleside;Aliquam Av.;50;STORAGE
+9;Christmas Island;89338;Extremadura;Badajoz;Elit, Rd.;79;STORAGE
+10;Aruba;4157;San José;Purral;Elit Street;82;STORAGE
