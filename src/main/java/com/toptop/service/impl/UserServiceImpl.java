@@ -36,12 +36,11 @@ public class UserServiceImpl extends TransactionService<User, Long, UserMapper, 
 
     @Override
     public void saveUserWithRole(UserDTO userDTO, UserRole role) {
-        User user = getMapper().map(userDTO);
-        user.setPassword(bCryptPasswordEncoder.encode(userDTO.getPassword()));
-        user.setActive(true);
-        user.setRole(role);
-        log.debug("Save user with name: {}", user.getName());
-        save(user);
+        userDTO.setPassword(bCryptPasswordEncoder.encode(userDTO.getPassword()));
+        userDTO.setActive(true);
+        userDTO.setRole(role);
+        log.debug("Save user with name: {}", userDTO.getName());
+        save(userDTO);
     }
 
     @Override
