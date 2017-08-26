@@ -46,12 +46,12 @@ public class CompanyController {
         if (companyDTO != null) {
             return ResponseEntity.ok(companyDTO);
         }
-        return new ResponseEntity<CompanyDTO>(HttpStatus.NOT_FOUND);
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
     @RequestMapping(value = "/all", method = RequestMethod.GET)
-    public List<CompanyDTO> getAll() {
+    public ResponseEntity<?> getAll() {
         log.debug("REST request to get all Companies");
-        return companyService.findAll();
+        return ResponseEntity.ok(companyService.findAll());
     }
 }

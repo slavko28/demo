@@ -41,18 +41,23 @@ public class AddressController {
     }
 
     @RequestMapping(value = "/all", method = RequestMethod.GET)
-    public List<AddressDTO> getAll() {
+    public ResponseEntity<?> getAll() {
         log.debug("REST request to get all Addresses");
-        return addressService.findAll();
+        List<AddressDTO> list = addressService.findAll();
+        return new ResponseEntity<>(list, HttpStatus.OK);
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-    public AddressDTO getById(@PathVariable("id") Long id) {
+    public ResponseEntity<AddressDTO> getById(@PathVariable("id") Long id) {
         log.debug("REST request to get Address by id :{}", id);
-        return addressService.findOne(id);
+        AddressDTO addressDTO = addressService.findOne(id);
+        if (addressDTO != null) {
+            return ResponseEntity.ok(addressDTO);
+        }
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
-    @RequestMapping(value = "/{type}", method = RequestMethod.GET)
+    @RequestMapping(value = "/type/{type}", method = RequestMethod.GET)
     public List<AddressDTO> getAllByAddressType(@PathVariable("type")AddressType type) {
         log.debug("REST request to get all Addresses by type: {}", type);
         return addressService.findAllByType(type);
