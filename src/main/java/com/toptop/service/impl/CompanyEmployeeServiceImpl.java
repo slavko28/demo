@@ -1,6 +1,7 @@
 package com.toptop.service.impl;
 
 import com.toptop.domain.CompanyEmployee;
+import com.toptop.domain.enums.EmployeeType;
 import com.toptop.repository.CompanyEmployeeRepository;
 import com.toptop.service.CompanyEmployeeService;
 import com.toptop.service.dto.CompanyEmployeeDTO;
@@ -31,6 +32,18 @@ public class CompanyEmployeeServiceImpl extends TransactionService<CompanyEmploy
     public List<CompanyEmployeeDTO> findAllByCompanyId(Long id) {
         log.debug("Find all company employee by company id: {}", id);
         return getMapper().mapToDTOs(employeeRepository.findAllByCompanyId(id));
+    }
+
+    @Override
+    public List<CompanyEmployeeDTO> findAllByType(EmployeeType type) {
+        log.debug("Find all employees by type: {}", type);
+        return getMapper().mapToDTOs(employeeRepository.findAllByType(type));
+    }
+
+    @Override
+    public List<CompanyEmployeeDTO> findAllByCompanyIdAndEmployeeType(Long companyId, EmployeeType employeeType) {
+        log.debug("Find all employee by company id: {}, and employee type: {}", companyId, employeeType);
+        return getMapper().mapToDTOs(employeeRepository.findAllByCompanyIdAndType(companyId, employeeType));
     }
 
     @Override
