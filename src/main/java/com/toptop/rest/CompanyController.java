@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/company")
 public class CompanyController {
 
     private final Logger log = LoggerFactory.getLogger(CompanyController.class);
@@ -21,7 +21,7 @@ public class CompanyController {
     @Autowired
     private CompanyService companyService;
 
-    @RequestMapping(value = "/company", method = RequestMethod.POST)
+    @RequestMapping(method = RequestMethod.POST)
     public ResponseEntity<CompanyDTO> create(@Validated @RequestBody CompanyDTO companyDTO) {
         log.debug("REST request to create new Company : {}", companyDTO);
         if (companyDTO.getId() == null) {
@@ -30,7 +30,7 @@ public class CompanyController {
         return new ResponseEntity<>(HttpStatus.CONFLICT);
     }
 
-    @RequestMapping(value = "/company", method = RequestMethod.PUT)
+    @RequestMapping(method = RequestMethod.PUT)
     public ResponseEntity<CompanyDTO> update(@Validated @RequestBody CompanyDTO companyDTO) {
         log.debug("REST request to update Company : {}", companyDTO);
         if (companyService.isExist(companyDTO)) {
@@ -39,15 +39,19 @@ public class CompanyController {
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
-    @RequestMapping(value = "/company", method = RequestMethod.GET)
+    @RequestMapping(value = "/{id}")
+    public ResponseEntity<CompanyDTO> getById(@PathVariable("id") Long id) {
+        log.debug("Request to get Company by id: {}", id);
+        CompanyDTO companyDTO = companyService.findOne(id);
+        if (companyDTO != null) {
+            return ResponseEntity.ok(companyDTO);
+        }
+        return new ResponseEntity<CompanyDTO>(HttpStatus.NOT_FOUND);
+    }
+
+    @RequestMapping(value = "/all", method = RequestMethod.GET)
     public List<CompanyDTO> getAll() {
         log.debug("REST request to get all Companies");
         return companyService.findAll();
-    }
-
-    @RequestMapping(value = "/company/{id}")
-    public CompanyDTO getById(@PathVariable("id") Long id) {
-        log.debug("Request to get Company by id: {}", id);
-        return companyService.findOne(id);
     }
 }

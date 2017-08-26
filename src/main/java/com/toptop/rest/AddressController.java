@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/address")
 public class AddressController {
 
     private final Logger log = LoggerFactory.getLogger(AddressController.class);
@@ -22,7 +22,7 @@ public class AddressController {
     @Autowired
     private AddressService addressService;
 
-    @RequestMapping(value = "/address", method = RequestMethod.POST)
+    @RequestMapping(method = RequestMethod.POST)
     public ResponseEntity<AddressDTO> create(@Validated @RequestBody AddressDTO addressDTO) {
         log.debug("REST request to save Address : {}", addressDTO);
         if (addressDTO.getId() == null) {
@@ -31,7 +31,7 @@ public class AddressController {
         return new ResponseEntity<>(HttpStatus.CONFLICT);
     }
 
-    @RequestMapping(value = "/address", method = RequestMethod.PUT)
+    @RequestMapping(method = RequestMethod.PUT)
     public ResponseEntity<AddressDTO> update(@Validated @RequestBody AddressDTO addressDTO) {
         log.debug("REST request to update Address : {}", addressDTO);
         if (addressService.isExist(addressDTO)) {
@@ -40,31 +40,31 @@ public class AddressController {
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
-    @RequestMapping(value = "/addresses", method = RequestMethod.GET)
+    @RequestMapping(value = "/all", method = RequestMethod.GET)
     public List<AddressDTO> getAll() {
         log.debug("REST request to get all Addresses");
         return addressService.findAll();
     }
 
-    @RequestMapping(value = "/address/{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public AddressDTO getById(@PathVariable("id") Long id) {
         log.debug("REST request to get Address by id :{}", id);
         return addressService.findOne(id);
     }
 
-    @RequestMapping(value = "/addresses/{type}", method = RequestMethod.GET)
+    @RequestMapping(value = "/{type}", method = RequestMethod.GET)
     public List<AddressDTO> getAllByAddressType(@PathVariable("type")AddressType type) {
         log.debug("REST request to get all Addresses by type: {}", type);
         return addressService.findAllByType(type);
     }
 
-    @RequestMapping(value = "/address/company/{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "/company/{id}", method = RequestMethod.GET)
     public List<AddressDTO> getAllByCompanyId(@PathVariable("id") Long id) {
         log.debug("REST request to get all Addresses by Company id :{}", id);
         return addressService.findAllByCompanyId(id);
     }
 
-    @RequestMapping(value = "/address/company/{id}/{type}", method = RequestMethod.GET)
+    @RequestMapping(value = "/company/{id}/type/{type}", method = RequestMethod.GET)
     public List<AddressDTO> getAllByCompanyIdAndAddressType(@PathVariable("id") Long id,
                                               @PathVariable("type")AddressType type) {
         log.debug("REST request to get all Addresses by Company id: {} and type: {}", id, type);
