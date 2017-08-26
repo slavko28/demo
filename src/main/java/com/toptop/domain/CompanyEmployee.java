@@ -22,6 +22,7 @@ public class CompanyEmployee extends BaseObject implements Serializable {
 
     @Enumerated(EnumType.STRING)
     private EmployeeType type;
+
     private String firstName;
     private String lastName;
     private String midName;
