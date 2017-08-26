@@ -9,10 +9,10 @@
             <column name="id" type="bigint">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
-            <column name="transportation_cost" type="DECIMAL(5, 2)">
+            <column name="transportation_cost" type="DECIMAL(7, 2)">
                 <constraints nullable="false"/>
             </column>
-            <column name="order_profit" type="DECIMAL(5, 2)">
+            <column name="order_profit" type="DECIMAL(7, 2)">
                 <constraints nullable="false"/>
             </column>
             <column name="complete_date" type="date"/>

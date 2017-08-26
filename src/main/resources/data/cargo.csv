@@ -1,0 +1,101 @@
+id;volume;weight;description
+1;5.3;10.7;Duis mi enim, condimentum eget, volutpat
+2;2.0;19.0;accumsan laoreet ipsum. Curabitur consequat, lectus sit amet
+3;2.0;5.3;velit eu sem. Pellentesque ut
+4;5.3;5.3;purus. Nullam scelerisque neque
+5;2.1;20.5;nulla. Integer urna. Vivamus molestie dapibus ligula.
+6;5.3;22.0;eu, ligula. Aenean euismod mauris
+7;16.5;2.1;euismod et, commodo at, libero. Morbi accumsan laoreet ipsum. Curabitur
+8;15.3;5.3;neque sed sem egestas blandit. Nam nulla magna, malesuada
+9;20.5;2.0;vel arcu eu odio tristique
+10;2.1;5.3;Phasellus dapibus quam quis diam.
+11;16.5;15.3;ullamcorper. Duis cursus, diam at pretium
+12;22.0;15.3;sagittis felis. Donec tempor, est ac mattis semper, dui
+13;5.3;2.0;fermentum vel, mauris. Integer sem elit,
+14;2.0;5.3;odio sagittis semper. Nam tempor diam
+15;10.7;15.3;lacus. Aliquam rutrum lorem ac risus. Morbi metus.
+16;16.5;16.5;mauris sit amet lorem semper
+17;20.5;5.3;mauris sit amet lorem semper auctor. Mauris vel turpis. Aliquam
+18;2.1;10.7;posuere at, velit. Cras
+19;19.0;2.0;aliquam, enim nec tempus scelerisque,
+20;10.7;16.5;dui lectus rutrum urna, nec luctus
+21;19.0;20.5;faucibus. Morbi vehicula. Pellentesque tincidunt tempus risus. Donec egestas. Duis
+22;15.3;16.5;tincidunt nibh. Phasellus nulla. Integer vulputate, risus a
+23;22.0;10.7;Quisque tincidunt pede ac urna. Ut tincidunt vehicula risus.
+24;16.5;15.3;vulputate, nisi sem semper erat, in consectetuer ipsum nunc id
+25;20.5;10.7;ultricies ligula. Nullam enim. Sed
+26;2.1;20.5;velit in aliquet lobortis, nisi
+27;22.0;20.5;orci lacus vestibulum lorem, sit amet
+28;2.0;15.3;elit elit fermentum risus, at fringilla purus mauris a nunc.
+29;22.0;16.5;vitae diam. Proin dolor. Nulla semper tellus id nunc interdum
+30;5.3;19.0;et libero. Proin mi. Aliquam gravida
+31;2.1;19.0;Aenean sed pede nec ante blandit viverra. Donec
+32;19.0;20.5;Morbi neque tellus, imperdiet non,
+33;5.3;15.3;quis, pede. Praesent eu dui. Cum sociis
+34;20.5;2.1;posuere vulputate, lacus. Cras interdum. Nunc
+35;20.5;19.0;a ultricies adipiscing, enim mi tempor lorem, eget mollis
+36;19.0;15.3;dictum magna. Ut tincidunt orci quis lectus. Nullam
+37;5.3;16.5;ipsum nunc id enim. Curabitur massa.
+38;10.7;19.0;semper auctor. Mauris vel turpis. Aliquam adipiscing lobortis risus. In
+39;19.0;16.5;magnis dis parturient montes, nascetur ridiculus mus. Proin vel arcu
+40;16.5;10.7;quam. Curabitur vel lectus. Cum sociis
+41;20.5;10.7;risus. Quisque libero lacus,
+42;10.7;20.5;fringilla est. Mauris eu turpis. Nulla aliquet.
+43;2.0;5.3;convallis est, vitae sodales nisi magna sed dui. Fusce aliquam,
+44;16.5;20.5;eu turpis. Nulla aliquet.
+45;22.0;5.3;Maecenas malesuada fringilla est. Mauris eu turpis. Nulla aliquet. Proin
+46;20.5;16.5;sed pede. Cum sociis natoque penatibus et magnis dis parturient
+47;19.0;15.3;gravida. Aliquam tincidunt, nunc ac mattis ornare, lectus
+48;15.3;2.0;In mi pede, nonummy ut,
+49;22.0;2.0;est, vitae sodales nisi magna
+50;22.0;19.0;pede, malesuada vel, venenatis vel, faucibus id, libero. Donec consectetuer
+51;10.7;19.0;risus. Donec egestas. Duis ac arcu. Nunc mauris. Morbi
+52;16.5;16.5;ridiculus mus. Proin vel nisl. Quisque fringilla euismod enim.
+53;16.5;2.0;nec, leo. Morbi neque tellus, imperdiet non, vestibulum
+54;5.3;2.1;fermentum fermentum arcu. Vestibulum ante ipsum primis in faucibus orci
+55;10.7;5.3;ligula. Nullam enim. Sed nulla ante, iaculis
+56;15.3;10.7;adipiscing ligula. Aenean gravida nunc sed pede. Cum sociis
+57;19.0;2.0;ullamcorper eu, euismod ac, fermentum vel, mauris. Integer sem elit,
+58;20.5;20.5;magna. Phasellus dolor elit, pellentesque a, facilisis non, bibendum
+59;2.1;2.1;semper tellus id nunc interdum
+60;2.0;16.5;Aenean eget magna. Suspendisse tristique
+61;20.5;10.7;auctor ullamcorper, nisl arcu iaculis
+62;20.5;15.3;vulputate, risus a ultricies
+63;16.5;19.0;iaculis, lacus pede sagittis
+64;2.0;10.7;Sed nulla ante, iaculis nec, eleifend
+65;10.7;15.3;dolor. Nulla semper tellus
+66;2.0;10.7;luctus ut, pellentesque eget, dictum
+67;2.1;16.5;est. Mauris eu turpis. Nulla aliquet. Proin velit. Sed
+68;15.3;15.3;metus vitae velit egestas lacinia. Sed congue,
+69;10.7;2.1;egestas blandit. Nam nulla magna, malesuada vel, convallis in, cursus
+70;5.3;22.0;facilisis, magna tellus faucibus leo, in lobortis tellus justo sit
+71;22.0;2.0;penatibus et magnis dis parturient montes, nascetur
+72;2.1;10.7;ipsum porta elit, a
+73;15.3;2.0;vitae, erat. Vivamus nisi. Mauris
+74;20.5;2.1;Aliquam ornare, libero at auctor ullamcorper, nisl arcu iaculis enim,
+75;16.5;22.0;elit sed consequat auctor,
+76;10.7;16.5;Mauris magna. Duis dignissim tempor arcu. Vestibulum
+77;2.1;10.7;tempor bibendum. Donec felis orci, adipiscing non, luctus sit amet,
+78;5.3;16.5;pede, nonummy ut, molestie in, tempus eu, ligula.
+79;2.0;20.5;Mauris vestibulum, neque sed dictum
+80;16.5;22.0;tristique pharetra. Quisque ac libero nec ligula consectetuer rhoncus.
+81;22.0;20.5;Integer eu lacus. Quisque imperdiet,
+82;20.5;22.0;cursus et, eros. Proin ultrices. Duis
+83;10.7;15.3;risus. Quisque libero lacus, varius et, euismod et, commodo
+84;19.0;16.5;torquent per conubia nostra, per inceptos hymenaeos. Mauris ut quam
+85;16.5;2.1;lectus. Cum sociis natoque penatibus et magnis
+86;19.0;20.5;magnis dis parturient montes, nascetur ridiculus mus.
+87;20.5;20.5;"luctus et ultrices posuere cubilia Curae; Phasellus ornare."
+88;5.3;2.1;semper pretium neque. Morbi quis urna.
+89;19.0;2.0;ornare, lectus ante dictum mi, ac mattis velit
+90;2.1;22.0;"posuere cubilia Curae; Phasellus ornare. Fusce mollis. Duis sit amet"
+91;2.0;19.0;erat eget ipsum. Suspendisse sagittis. Nullam vitae
+92;22.0;10.7;Mauris molestie pharetra nibh.
+93;2.0;15.3;Aliquam rutrum lorem ac risus.
+94;22.0;2.1;sem elit, pharetra ut, pharetra sed,
+95;19.0;15.3;auctor, velit eget laoreet posuere, enim
+96;20.5;22.0;commodo auctor velit. Aliquam nisl.
+97;15.3;10.7;faucibus lectus, a sollicitudin orci sem eget massa.
+98;19.0;2.0;elit, pretium et, rutrum non, hendrerit id, ante. Nunc
+99;19.0;5.3;dictum eu, placerat eget, venenatis a, magna.
+100;16.5;5.3;aliquet. Proin velit. Sed malesuada

@@ -9,10 +9,10 @@
             <column name="id" type="bigint" autoIncrement="${autoIncrement}">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
-            <column name="volume" type="decimal(3,3)">
+            <column name="volume" type="decimal(5,2)">
                 <constraints nullable="false"/>
             </column>
-            <column name="weight" type="decimal(3,3)">
+            <column name="weight" type="decimal(4,2)">
                 <constraints nullable="false"/>
             </column>
             <column name="description" type="varchar(255)"/>
@@ -21,5 +21,10 @@
             </column>
         </createTable>
 
+        <loadData file="data/cargo.csv"
+                  separator=";"
+                  tableName="cargo">
+
+        </loadData>
     </changeSet>
 </databaseChangeLog>

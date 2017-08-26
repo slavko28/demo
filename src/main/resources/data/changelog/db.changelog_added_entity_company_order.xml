@@ -13,7 +13,7 @@
             <column name="order_date" type="date">
                 <constraints nullable="false"/>
             </column>
-            <column name="budget" type="DECIMAL(5, 2)"/>
+            <column name="budget" type="DECIMAL(7, 2)"/>
             <column name="route_id" type="bigint">
                 <constraints nullable="false"/>
             </column>

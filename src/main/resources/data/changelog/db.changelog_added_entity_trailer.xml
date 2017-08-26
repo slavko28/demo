@@ -19,10 +19,10 @@
             <column name="company_id" type="bigint">
                 <constraints nullable="false"/>
             </column>
-            <column name="volume" type="decimal(3,3)">
+            <column name="volume" type="decimal(5,2)">
                 <constraints nullable="false"/>
             </column>
-            <column name="load_capacity" type="decimal(3,3)">
+            <column name="load_capacity" type="decimal(4,2)">
                 <constraints nullable="false"/>
             </column>
             <column name="enabled" type="tinyint(1)" defaultValue="1">
@@ -35,6 +35,11 @@
                                  constraintName="fk_trailer_company_id"
                                  referencedColumnNames="id"
                                  referencedTableName="company"/>
+        <loadData
+                file="data/trailer.csv"
+                separator=";"
+                tableName="trailer">
+        </loadData>
 
     </changeSet>
 </databaseChangeLog>
