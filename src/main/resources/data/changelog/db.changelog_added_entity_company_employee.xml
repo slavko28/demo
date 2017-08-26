@@ -10,18 +10,18 @@
                 <constraints primaryKey="true" nullable="false"/>
             </column>
             <column name="type" type="varchar(50)"/>
-            <column name="first_name" type="varchar(50)">
+            <column name="first_name" type="varchar(100)">
                 <constraints nullable="false"/>
             </column>
-            <column name="last_name" type="varchar(50)">
+            <column name="last_name" type="varchar(100)">
                 <constraints nullable="false"/>
             </column>
-            <column name="mid_name" type="varchar(50)"/>
+            <column name="mid_name" type="varchar(100)"/>
             <column name="phone_number" type="varchar(50)"/>
             <column name="company_id" type="bigint">
                 <constraints nullable="false"/>
             </column>
-            <column name="email" type="varchar(50)"/>
+            <column name="email" type="varchar(100)"/>
             <column name="additional_details" type="varchar(255)"/>
             <column name="driver_license" type="varchar(100)"/>
             <column name="driver_passport" type="varchar(100)"/>
@@ -36,6 +36,10 @@
                                  referencedColumnNames="id"
                                  referencedTableName="company"/>
 
+        <loadData file="data/company_employee.csv"
+                  separator=";"
+                  tableName="company_employee">
+        </loadData>
     </changeSet>
 </databaseChangeLog>
 
