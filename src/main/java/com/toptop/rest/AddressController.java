@@ -6,10 +6,12 @@ import com.toptop.service.dto.AddressDTO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.util.UriComponentsBuilder;
 
 import java.util.List;
 
@@ -23,12 +25,14 @@ public class AddressController {
     private AddressService addressService;
 
     @RequestMapping(method = RequestMethod.POST)
-    public ResponseEntity<AddressDTO> create(@Validated @RequestBody AddressDTO addressDTO) {
-        log.debug("REST request to save Address : {}", addressDTO);
+    public ResponseEntity create(@Validated @RequestBody AddressDTO addressDTO, UriComponentsBuilder builder) {
+        log.debug("request to save Address : {}", addressDTO);
         if (addressDTO.getId() == null) {
-            return ResponseEntity.ok(addressService.save(addressDTO));
+            HttpHeaders headers = new HttpHeaders();
+            headers.setLocation(builder.path("/api/address/all").build().toUri());
+            return new ResponseEntity<>(headers, HttpStatus.CREATED);
         }
-        return new ResponseEntity<>(HttpStatus.CONFLICT);
+        return new ResponseEntity<>("Address with ID:" + addressDTO.getId() + " is already exists.", HttpStatus.CONFLICT);
     }
 
     @RequestMapping(method = RequestMethod.PUT)
@@ -58,22 +62,22 @@ public class AddressController {
     }
 
     @RequestMapping(value = "/type/{type}", method = RequestMethod.GET)
-    public List<AddressDTO> getAllByAddressType(@PathVariable("type")AddressType type) {
+    public ResponseEntity getAllByAddressType(@PathVariable("type") AddressType type) {
         log.debug("REST request to get all Addresses by type: {}", type);
-        return addressService.findAllByType(type);
+        return ResponseEntity.ok(addressService.findAllByType(type));
     }
 
     @RequestMapping(value = "/company/{id}", method = RequestMethod.GET)
-    public List<AddressDTO> getAllByCompanyId(@PathVariable("id") Long id) {
+    public ResponseEntity getAllByCompanyId(@PathVariable("id") Long id) {
         log.debug("REST request to get all Addresses by Company id :{}", id);
-        return addressService.findAllByCompanyId(id);
+        return ResponseEntity.ok(addressService.findAllByCompanyId(id));
     }
 
     @RequestMapping(value = "/company/{id}/type/{type}", method = RequestMethod.GET)
-    public List<AddressDTO> getAllByCompanyIdAndAddressType(@PathVariable("id") Long id,
-                                              @PathVariable("type")AddressType type) {
+    public ResponseEntity getAllByCompanyIdAndAddressType(@PathVariable("id") Long id,
+                                                          @PathVariable("type")AddressType type) {
         log.debug("REST request to get all Addresses by Company id: {} and type: {}", id, type);
-        return addressService.findAllByCompanyIdAndType(id, type);
+        return ResponseEntity.ok(addressService.findAllByCompanyIdAndType(id, type));
     }
 
 }
