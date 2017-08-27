@@ -11,7 +11,7 @@
             </column>
             <column name="short_name" type="varchar(50)"/>
             <column name="full_name" type="varchar(150)"/>
-            <column name="company_cod" type="int">
+            <column name="company_cod" type="bigint">
                 <constraints unique="true" nullable="false"/>
             </column>
             <column name="enabled" type="tinyint(1)" defaultValue="1">
