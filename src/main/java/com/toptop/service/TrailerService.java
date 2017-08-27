@@ -26,4 +26,13 @@ public interface TrailerService extends AbstractService<Trailer, Long, TrailerDT
      * @return the list of entities
      */
     List<TrailerDTO> findAllByCompanyId(Long id);
+
+    /**
+     * Find all entities by Company id trailer type.
+     *
+     * @param companyId the Company id
+     * @param type the trailer type
+     * @return the list of entities
+     */
+    List<TrailerDTO> findAllByCompanyIdAndType(Long companyId, TrailerType type);
 }
