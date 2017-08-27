@@ -21,7 +21,7 @@ public class Company extends BaseObject implements Serializable {
 
     private String shortName;
     private String fullName;
-    private int companyCod;
+    private Long companyCod;
 
     @OneToMany(fetch = FetchType.LAZY)
     private Set<Address> address;

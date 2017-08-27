@@ -24,7 +24,7 @@ public class CompanyDTO implements Serializable {
     private String fullName;
 
     @NotNull
-    private int companyCod; // TODO: must be validation of allowed number of numeric characters
+    private Long companyCod; // TODO: must be validation of allowed number of numeric characters
 
     @NotNull
     private Set<AddressDTO> address;
