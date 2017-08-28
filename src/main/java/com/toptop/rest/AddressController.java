@@ -22,8 +22,12 @@ public class AddressController {
 
     private final Logger log = LoggerFactory.getLogger(AddressController.class);
 
+    private final AddressService addressService;
+
     @Autowired
-    private AddressService addressService;
+    public AddressController(AddressService addressService) {
+        this.addressService = addressService;
+    }
 
     /**
      * POST / : Create new Address.
@@ -34,7 +38,7 @@ public class AddressController {
      * or with status 409 ("Conflict") if the address has already an ID
      * @throws URISyntaxException if the Location URI syntax is incorrect
      */
-    @RequestMapping(method = RequestMethod.POST)
+    @RequestMapping(value = "/", method = RequestMethod.POST)
     public ResponseEntity create(@Valid @RequestBody AddressDTO addressDTO) throws URISyntaxException {
         log.debug("request to save Address : {}", addressDTO);
         if (addressDTO.getId() == null) {
@@ -49,13 +53,13 @@ public class AddressController {
     /**
      * PUT / : Updates an existing Address.
      *
-     * @param addressDTO the address DTO to update
+     * @param addressDTO the AddressDTO to update
      * @return the ResponseEntity with status 200 (Ok) and with body the updated addressDTO,
      * or with status 400 (Bad Request) if the addressDTO is not valid,
      * or with status 404 (Not Found) if the address couldn't be found
      * @throws IllegalArgumentException in case the given AddressDTO's ID is {@literal null}.
      */
-    @RequestMapping(method = RequestMethod.PUT)
+    @RequestMapping(value = "/", method = RequestMethod.PUT)
     public ResponseEntity update(@Valid @RequestBody AddressDTO addressDTO) {
         log.debug("REST request to update Address : {}", addressDTO);
         if (addressService.isExist(addressDTO)) {
@@ -66,7 +70,7 @@ public class AddressController {
     }
 
     /**
-     * GET /all : get all addresses.
+     * GET /all : Get all addresses.
      *
      * @return the ResponseEntity with status 200 (Ok) and with body the list of AddressDTO,
      */
@@ -78,7 +82,7 @@ public class AddressController {
     }
 
     /**
-     * GET /:id : get address by ID.
+     * GET /:id : Get address by ID.
      *
      * @param id the address ID
      * @return the ResponseEntity with status 200 (Ok) and with body the addressDTO,
@@ -95,7 +99,7 @@ public class AddressController {
         return new ResponseEntity<>("address with ID: " + id + " - does not found.", HttpStatus.NOT_FOUND);    }
 
     /**
-     * GET /type/:type : get all addresses by type.
+     * GET /type/:type : Get all addresses by type.
      *
      * @param type the requested Address type
      * @return the ResponseEntity with status 200 (Ok) and with body the list of AddressDTO,
@@ -107,7 +111,7 @@ public class AddressController {
     }
 
     /**
-     * GET /company/:id : get all addresses by company ID.
+     * GET /company/:id : Get all addresses by company ID.
      *
      * @param id the Company ID
      * @return the ResponseEntity with status 200 (Ok) and with body the list of AddressDTO,
@@ -119,7 +123,7 @@ public class AddressController {
     }
 
     /**
-     * GET /company/:id/type/:type : get all addresses by company ID and address type.
+     * GET /company/:id/type/:type : Get all addresses by company ID and address type.
      *
      * @param id the Company ID
      * @param type the Address type
