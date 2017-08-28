@@ -52,6 +52,7 @@ public class AddressController {
      * @return the ResponseEntity with status 200 (Ok) and with body the updated addressDTO,
      * or with status 400 (Bad Request) if the addressDTO is not valid,
      * or with status 404 (Not Found) if the address couldn't be found
+     * @throws IllegalArgumentException in case the given addressDTO is {@literal null}.
      */
     @RequestMapping(method = RequestMethod.PUT)
     public ResponseEntity update(@Valid @RequestBody AddressDTO addressDTO) {
