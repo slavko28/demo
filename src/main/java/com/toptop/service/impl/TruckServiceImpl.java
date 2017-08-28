@@ -35,7 +35,9 @@ public class TruckServiceImpl extends TransactionService<Truck, Long, TruckMappe
     }
 
     @Override
-    public boolean isExist(TruckDTO truckDTO) {
+    @Transactional(readOnly = true)
+    public boolean isExist(TruckDTO truckDTO) throws IllegalArgumentException{
+        log.debug("Check if trailer is exits: {}", truckDTO);
         return getRepository().exists(truckDTO.getId());
     }
 

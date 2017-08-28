@@ -41,7 +41,9 @@ public class OrderDetailServiceImpl extends TransactionService<OrderDetail, Long
     }
 
     @Override
-    public boolean isExist(OrderDetailDTO orderDetailDTO) {
+    @Transactional(readOnly = true)
+    public boolean isExist(OrderDetailDTO orderDetailDTO) throws IllegalArgumentException {
+        log.debug("Check if order details is exits: {}", orderDetailDTO);
         return getRepository().exists(orderDetailDTO.getId());
     }
 

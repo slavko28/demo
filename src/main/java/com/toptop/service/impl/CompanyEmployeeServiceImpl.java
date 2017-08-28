@@ -35,19 +35,23 @@ public class CompanyEmployeeServiceImpl extends TransactionService<CompanyEmploy
     }
 
     @Override
+    @Transactional(readOnly = true)
     public List<CompanyEmployeeDTO> findAllByType(EmployeeType type) {
         log.debug("Find all employees by type: {}", type);
         return getMapper().mapToDTOs(employeeRepository.findAllByType(type));
     }
 
     @Override
+    @Transactional(readOnly = true)
     public List<CompanyEmployeeDTO> findAllByCompanyIdAndEmployeeType(Long companyId, EmployeeType employeeType) {
         log.debug("Find all employee by company id: {}, and employee type: {}", companyId, employeeType);
         return getMapper().mapToDTOs(employeeRepository.findAllByCompanyIdAndType(companyId, employeeType));
     }
 
     @Override
-    public boolean isExist(CompanyEmployeeDTO employeeDTO) {
+    @Transactional(readOnly = true)
+    public boolean isExist(CompanyEmployeeDTO employeeDTO) throws IllegalArgumentException {
+        log.debug("Check if company employee is exits: {}", employeeDTO);
         return getRepository().exists(employeeDTO.getId());
     }
 

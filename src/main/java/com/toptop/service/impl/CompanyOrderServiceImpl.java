@@ -49,7 +49,9 @@ public class CompanyOrderServiceImpl extends TransactionService<CompanyOrder, Lo
     }
 
     @Override
-    public boolean isExist(CompanyOrderDTO companyOrderDTO) {
+    @Transactional(readOnly = true)
+    public boolean isExist(CompanyOrderDTO companyOrderDTO) throws IllegalArgumentException{
+        log.debug("Check if company order is exits: {}", companyOrderDTO);
         return getRepository().exists(companyOrderDTO.getId());
     }
 

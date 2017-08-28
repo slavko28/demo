@@ -43,6 +43,7 @@ public interface AbstractService<T extends BaseObject, ID extends Serializable, 
      *
      * @param dto the entity to check
      * @return true if entity exists, and false - if not
+     * @throws IllegalArgumentException in case the given entity has ID as {@literal null}.
      */
     boolean isExist(DTO dto);
 }

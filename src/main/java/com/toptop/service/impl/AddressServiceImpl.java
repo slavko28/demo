@@ -49,7 +49,7 @@ public class AddressServiceImpl extends TransactionService<Address, Long, Addres
     }
 
     @Override
-    public boolean isExist(AddressDTO addressDTO) {
+    public boolean isExist(AddressDTO addressDTO) throws IllegalArgumentException {
         log.debug("Check if address is exits: {}", addressDTO);
         return getRepository().exists(addressDTO.getId());
 }

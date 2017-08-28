@@ -43,7 +43,16 @@ public class TrailerServiceImpl extends TransactionService<Trailer, Long, Traile
     }
 
     @Override
-    public boolean isExist(TrailerDTO trailerDTO) {
+    @Transactional(readOnly = true)
+    public List<TrailerDTO> findAllByCompanyIdAndType(Long companyId, TrailerType type) {
+        log.debug("Find all trailers by company ID: {} and type: {}", companyId, type);
+        return getMapper().mapToDTOs(trailerRepository.findAllByCompanyIdAndType(companyId, type));
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public boolean isExist(TrailerDTO trailerDTO) throws IllegalArgumentException{
+        log.debug("Check if trailer is exits: {}", trailerDTO);
         return getRepository().exists(trailerDTO.getId());
     }
 
