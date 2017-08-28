@@ -26,7 +26,7 @@ public class AddressController {
     private AddressService addressService;
 
     /**
-     * POST / : Create new Address
+     * POST / : Create new Address.
      *
      * @param addressDTO the Address to create
      * @return the ResponseEntity with status 201 ("Created") and redirect to "/api/address/all",
@@ -42,17 +42,18 @@ public class AddressController {
             headers.setLocation(new URI("/api/address/all"));
             return new ResponseEntity<>(headers, HttpStatus.CREATED);
         }
+        log.error("address with ID: {} is already exists.", addressDTO.getId());
         return new ResponseEntity<>("Address with ID:" + addressDTO.getId() + " is already exists.", HttpStatus.CONFLICT);
     }
 
     /**
-     * PUT / : Updates an existing address
+     * PUT / : Updates an existing Address.
      *
      * @param addressDTO the address DTO to update
      * @return the ResponseEntity with status 200 (Ok) and with body the updated addressDTO,
      * or with status 400 (Bad Request) if the addressDTO is not valid,
      * or with status 404 (Not Found) if the address couldn't be found
-     * @throws IllegalArgumentException in case the given addressDTO is {@literal null}.
+     * @throws IllegalArgumentException in case the given AddressDTO's ID is {@literal null}.
      */
     @RequestMapping(method = RequestMethod.PUT)
     public ResponseEntity update(@Valid @RequestBody AddressDTO addressDTO) {
@@ -60,7 +61,7 @@ public class AddressController {
         if (addressService.isExist(addressDTO)) {
             return ResponseEntity.ok(addressService.save(addressDTO));
         }
-        log.debug("address: {} does not found.", addressDTO);
+        log.error("address: {} does not found.", addressDTO);
         return new ResponseEntity<>("address: " + addressDTO + " - does not found.", HttpStatus.NOT_FOUND);
     }
 
@@ -90,7 +91,7 @@ public class AddressController {
         if (addressDTO != null) {
             return ResponseEntity.ok(addressDTO);
         }
-        log.debug("address with ID: {} does not found.", id);
+        log.error("address with ID: {} does not found.", id);
         return new ResponseEntity<>("address with ID: " + id + " - does not found.", HttpStatus.NOT_FOUND);    }
 
     /**
