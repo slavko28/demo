@@ -6,7 +6,7 @@ import com.toptop.service.dto.OrderDetailDTO;
 import java.util.List;
 
 /**
- * Service Interface for managing OrderDetail entities.
+ * Service Interface for managing Order detail entities.
  */
 public interface OrderDetailService extends AbstractService<OrderDetail, Long, OrderDetailDTO> {
 

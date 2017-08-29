@@ -5,7 +5,7 @@ import com.toptop.domain.enums.UserRole;
 import com.toptop.service.dto.UserDTO;
 
 /**
- * Service Interface for managing Address entities.
+ * Service Interface for managing User entities.
  */
 public interface UserService extends AbstractService<User, Long, UserDTO> {
 
