@@ -115,7 +115,7 @@ public class TrailerController {
      * @param type the Trailer type
      * @return the ResponseEntity with status 200 (Ok) and with body the list of TrailerDTO
      */
-    @RequestMapping(value = "type/{type}/", method = RequestMethod.GET)
+    @RequestMapping(value = "type/{type}", method = RequestMethod.GET)
     public ResponseEntity getAllByType(@PathVariable TrailerType type) {
         log.debug("request to get all trailers by trailer type {}", type);
         return ResponseEntity.ok(trailerService.findAllByType(type));
@@ -128,8 +128,9 @@ public class TrailerController {
      * @param type the Trailer type
      * @return the ResponseEntity with status 200 (Ok) and with body the list of TrailerDTO
      */
-    @RequestMapping(value = "company/{id}/type/{type}/", method = RequestMethod.GET)
-    public ResponseEntity getAllByCompanyIdAndType(@PathVariable Long id, TrailerType type) {
+    @RequestMapping(value = "company/{id}/type/{type}", method = RequestMethod.GET)
+    public ResponseEntity getAllByCompanyIdAndType(@PathVariable Long id,
+                                                   @PathVariable TrailerType type) {
         log.debug("request to get all trailers by company id {}, trailer type {}", id, type);
         return ResponseEntity.ok(trailerService.findAllByCompanyIdAndType(id, type));
     }

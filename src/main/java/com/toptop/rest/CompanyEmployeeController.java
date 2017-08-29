@@ -127,7 +127,8 @@ public class CompanyEmployeeController {
      * @return the ResponseEntity with status 200 (Ok) and with body the list of CompanyEmployeeDTO
      */
     @RequestMapping(value = "/company/{id}/type/{type}", method = RequestMethod.GET)
-    public ResponseEntity getAllByCompanyIdAndEmployeeType(@PathVariable Long id, EmployeeType type) {
+    public ResponseEntity getAllByCompanyIdAndEmployeeType(@PathVariable Long id,
+                                                           @PathVariable EmployeeType type) {
         log.debug("request to get all employee by company id: {} and employee type {}", id, type);
         return ResponseEntity.ok(companyEmployeeService.findAllByCompanyIdAndEmployeeType(id, type));
     }

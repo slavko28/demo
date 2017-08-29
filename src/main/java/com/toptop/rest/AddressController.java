@@ -102,7 +102,7 @@ public class AddressController {
      * GET /type/:type : Get all addresses by type.
      *
      * @param type the requested Address type
-     * @return the ResponseEntity with status 200 (Ok) and with body the list of AddressDTO,
+     * @return the ResponseEntity with status 200 (Ok) and with body the list of AddressDTO
      */
     @RequestMapping(value = "/type/{type}", method = RequestMethod.GET)
     public ResponseEntity getAllByAddressType(@PathVariable("type") AddressType type) {
