@@ -12,38 +12,70 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import java.net.URI;
+import java.net.URISyntaxException;
+
 @RestController
 @RequestMapping("/api/truck")
 public class TruckController {
 
     private final Logger log = LoggerFactory.getLogger(TruckController.class);
 
-    @Autowired
-    private TruckService truckService;
+    private final TruckService truckService;
 
+    @Autowired
+    public TruckController(TruckService truckService) {
+        this.truckService = truckService;
+    }
+
+    /**
+     * POST / : Create new Truck.
+     *
+     * @param truckDTO the TruckDTO to create
+     * @return the ResponseEntity with status 201 ("Created") and redirect to "/api/truck/all",
+     * or with status 400 ("Bad Request") if the TruckDTO is not valid,
+     * or with status 409 ("Conflict") if the TruckDTO has already an ID
+     * @throws URISyntaxException if the Location URI syntax is incorrect
+     */
     @RequestMapping(method = RequestMethod.POST)
-    public ResponseEntity create(@Validated @RequestBody TruckDTO truckDTO, UriComponentsBuilder builder) {
+    public ResponseEntity create(@Validated @RequestBody TruckDTO truckDTO) throws URISyntaxException {
         log.debug("request to create new truck: {}", truckDTO);
         if (truckDTO.getId() == null) {
             truckService.save(truckDTO);
             HttpHeaders headers = new HttpHeaders();
-            headers.setLocation(builder.path("/api/truck/all").build().toUri());
+            headers.setLocation(new URI("/api/truck/all"));
             return new ResponseEntity<>(headers, HttpStatus.CREATED);
         }
-        log.debug("truck with ID: {} is already exists.", truckDTO.getId());
+        log.error("truck with ID: {} is already exists.", truckDTO.getId());
         return new ResponseEntity<>("truck with ID: " + truckDTO.getId() + " is already exists.", HttpStatus.CONFLICT);
     }
 
+    /**
+     * PUT / : Updates an existing Truck.
+     *
+     * @param truckDTO the TruckDTO to update
+     * @return the ResponseEntity with status 200 (Ok) and with body the updated TruckDTO,
+     * or with status 400 (Bad Request) if the TruckDTO is not valid,
+     * or with status 404 (Not Found) if the truck couldn't be found
+     * @throws IllegalArgumentException in case the given TruckDTO's ID is {@literal null}.
+     */
     @RequestMapping(method = RequestMethod.PUT)
     public ResponseEntity update(@Validated @RequestBody TruckDTO truckDTO) {
         log.debug("request to update truck: {}", truckDTO);
         if (truckService.isExist(truckDTO)) {
             return ResponseEntity.ok(truckService.save(truckDTO));
         }
-        log.debug("truck with ID: {} does not found.", truckDTO.getId());
+        log.error("truck with ID: {} does not found.", truckDTO.getId());
         return new ResponseEntity<>("truck with ID: " + truckDTO.getId() + " does not found.", HttpStatus.NOT_FOUND);
     }
 
+    /**
+     * GET /:id : Get Truck by ID.
+     *
+     * @param id the Truck ID
+     * @return the ResponseEntity with status 200 (Ok) and with body the TruckDTO,
+     * or with status 404 (Not Found) if the truck couldn't be found
+     */
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public ResponseEntity getById(@PathVariable Long id) {
         log.debug("request to get truck by id: {}", id);
@@ -51,16 +83,26 @@ public class TruckController {
         if (truck != null) {
             return ResponseEntity.ok(truck);
         }
-        log.debug("truck with ID: {} does not found.", id);
+        log.error("truck with ID: {} does not found.", id);
         return new ResponseEntity<>("truck with ID: " + id + " does not found.", HttpStatus.NOT_FOUND);
     }
 
+    /**
+     * GET /all : Get all Trucks.
+     *
+     * @return the ResponseEntity with status 200 (Ok) and with body the list of TruckDTO
+     */
     @RequestMapping(value = "/all", method = RequestMethod.GET)
     public ResponseEntity getAll() {
         log.debug("request to get all trucks");
         return ResponseEntity.ok(truckService.findAll());
     }
 
+    /**
+     * GET /company/:id : Get all Trucks by company ID.
+     *
+     * @return the ResponseEntity with status 200 (Ok) and with body the list of TruckDTO
+     */
     @RequestMapping(value = "company/{id}", method = RequestMethod.GET)
     public ResponseEntity getAllByCompanyId(@PathVariable Long id) {
         log.debug("request to get all trucks by company id {}", id);

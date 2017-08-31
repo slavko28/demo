@@ -16,7 +16,7 @@ import java.net.URI;
 import java.net.URISyntaxException;
 
 @RestController
-@RequestMapping(value = "api/trailer")
+@RequestMapping(value = "/api/trailer")
 public class TrailerController {
 
     private final Logger log = LoggerFactory.getLogger(TrailerController.class);
@@ -54,7 +54,7 @@ public class TrailerController {
      * PUT / : Updates an existing Trailer.
      *
      * @param trailerDTO the TrailerDTO to update
-     * @return the ResponseEntity with status 200 (Ok) and with body the updated CompanyEmployeeDTO,
+     * @return the ResponseEntity with status 200 (Ok) and with body the updated TrailerDTO,
      * or with status 400 (Bad Request) if the TrailerDTO is not valid,
      * or with status 404 (Not Found) if the trailer couldn't be found
      * @throws IllegalArgumentException in case the given TrailerDTO's ID is {@literal null}.
@@ -103,7 +103,7 @@ public class TrailerController {
      *
      * @return the ResponseEntity with status 200 (Ok) and with body the list of TrailerDTO
      */
-    @RequestMapping(value = "company/{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "/company/{id}", method = RequestMethod.GET)
     public ResponseEntity getAllByCompanyId(@PathVariable Long id) {
         log.debug("request to get all trailers by company id {}", id);
         return ResponseEntity.ok(trailerService.findAllByCompanyId(id));
@@ -115,7 +115,7 @@ public class TrailerController {
      * @param type the Trailer type
      * @return the ResponseEntity with status 200 (Ok) and with body the list of TrailerDTO
      */
-    @RequestMapping(value = "type/{type}", method = RequestMethod.GET)
+    @RequestMapping(value = "/type/{type}", method = RequestMethod.GET)
     public ResponseEntity getAllByType(@PathVariable TrailerType type) {
         log.debug("request to get all trailers by trailer type {}", type);
         return ResponseEntity.ok(trailerService.findAllByType(type));
@@ -128,7 +128,7 @@ public class TrailerController {
      * @param type the Trailer type
      * @return the ResponseEntity with status 200 (Ok) and with body the list of TrailerDTO
      */
-    @RequestMapping(value = "company/{id}/type/{type}", method = RequestMethod.GET)
+    @RequestMapping(value = "/company/{id}/type/{type}", method = RequestMethod.GET)
     public ResponseEntity getAllByCompanyIdAndType(@PathVariable Long id,
                                                    @PathVariable TrailerType type) {
         log.debug("request to get all trailers by company id {}, trailer type {}", id, type);

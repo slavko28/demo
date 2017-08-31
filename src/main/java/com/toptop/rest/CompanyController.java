@@ -40,6 +40,7 @@ public class CompanyController {
     public ResponseEntity create(@Valid @RequestBody CompanyDTO companyDTO) throws URISyntaxException {
         log.debug("request to create new company : {}", companyDTO);
         if (companyDTO.getId() == null) {
+            companyService.save(companyDTO);
             HttpHeaders headers = new HttpHeaders();
             headers.setLocation(new URI("/api/company/all"));
             return new ResponseEntity<>(headers, HttpStatus.CREATED);
