@@ -1,5 +1,6 @@
 package com.toptop.service.dto;
 
+import com.toptop.domain.enums.LoadingType;
 import com.toptop.domain.enums.OrderStatus;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -9,6 +10,7 @@ import org.joda.money.Money;
 
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 @AllArgsConstructor
@@ -25,13 +27,13 @@ public class CompanyOrderDTO implements Serializable {
     @NotNull
     private LocalDateTime orderDate;
 
-    private Money budget;
+    private BigDecimal budget;
 
     @NotNull
     private RouteDTO route;
 
     @NotNull
-    private String downloadingType;
+    private LoadingType loadingType;
 
     @NotNull
     private CargoDTO cargo;

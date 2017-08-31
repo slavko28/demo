@@ -16,7 +16,7 @@ public class RouteDTO implements Serializable {
 
     private Long id;
 
-    private List<RoutePointDTO> routePoints;
+    private List<RoutePointDTO> routePoint;
 
     private String additionalInformation;
 }
