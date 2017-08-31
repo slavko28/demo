@@ -1,0 +1,31 @@
+id;address_id;type;additional_information
+1;3;CARGO_DELIVERY;sit amet, consectetuer adipiscing elit. Curabitur sed tortor.
+2;8;CARGO_DELIVERY;tellus. Suspendisse sed dolor.
+3;7;CARGO_RECEIVING;neque et nunc. Quisque
+4;10;CARGO_DELIVERY;lacus. Cras interdum. Nunc
+5;5;CARGO_DELIVERY;tincidunt aliquam arcu. Aliquam
+6;6;BORDER_CROSSING;a, scelerisque sed, sapien.
+7;10;CARGO_RECEIVING;posuere vulputate, lacus. Cras interdum. Nunc sollicitudin commodo ipsum.
+8;5;CARGO_RECEIVING;Donec vitae erat vel
+9;5;CARGO_RECEIVING;aliquet. Proin velit. Sed malesuada
+10;4;CARGO_DELIVERY;ut, molestie in, tempus eu,
+11;9;BORDER_CROSSING;interdum. Sed auctor odio
+12;6;CARGO_DELIVERY;sem ut cursus luctus, ipsum leo elementum
+13;5;CARGO_DELIVERY;libero at auctor ullamcorper, nisl arcu iaculis enim, sit amet
+14;6;CARGO_RECEIVING;sit amet nulla. Donec non justo. Proin non
+15;1;CARGO_DELIVERY;Donec at arcu. Vestibulum ante ipsum primis in faucibus orci
+16;5;CARGO_DELIVERY;rutrum, justo. Praesent luctus. Curabitur egestas nunc sed libero.
+17;3;BORDER_CROSSING;mollis non, cursus non, egestas a, dui. Cras
+18;7;BORDER_CROSSING;vitae nibh. Donec est
+19;5;CARGO_RECEIVING;odio semper cursus. Integer mollis. Integer tincidunt aliquam arcu.
+20;2;BORDER_CROSSING;amet ante. Vivamus non lorem vitae odio sagittis
+21;9;CARGO_DELIVERY;sem elit, pharetra ut, pharetra sed, hendrerit
+22;5;CARGO_RECEIVING;nonummy ac, feugiat non, lobortis
+23;10;BORDER_CROSSING;tristique senectus et netus et malesuada fames ac turpis egestas.
+24;6;BORDER_CROSSING;sed dictum eleifend, nunc risus varius orci, in consequat enim
+25;5;CARGO_RECEIVING;molestie tellus. Aenean egestas hendrerit neque. In ornare sagittis felis.
+26;9;BORDER_CROSSING;Morbi non sapien molestie orci tincidunt adipiscing.
+27;5;CARGO_DELIVERY;"ultrices posuere cubilia Curae;"
+28;1;BORDER_CROSSING;Proin vel nisl. Quisque fringilla euismod enim. Etiam gravida molestie
+29;3;BORDER_CROSSING;sem magna nec quam. Curabitur vel lectus. Cum
+30;8;CARGO_RECEIVING;non, bibendum sed, est. Nunc laoreet lectus quis massa.

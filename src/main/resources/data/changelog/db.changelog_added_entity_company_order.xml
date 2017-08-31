@@ -9,17 +9,17 @@
             <column name="id" type="bigint" autoIncrement="${autoIncrement}">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
-            <column name="order_status" type="varchar(50)"/>
-            <column name="order_date" type="date">
+            <column name="status" type="varchar(50)" defaultValue="INCOMING"/>
+            <column name="order_date" type="timestamp">
                 <constraints nullable="false"/>
             </column>
             <column name="budget" type="DECIMAL(7, 2)"/>
             <column name="route_id" type="bigint">
                 <constraints nullable="false"/>
             </column>
-            <column name="downloading_type" type="varchar(50)"/>
+            <column name="loading_type" type="varchar(100)"/>
             <column name="cargo_id" type="bigint">
-                <constraints nullable="false" unique="true"/>
+                <constraints nullable="false"/>
             </column>
             <column name="company_id" type="bigint">
                 <constraints nullable="false"/>
@@ -55,6 +55,10 @@
                                  constraintName="fk_company_order_manager_id"
                                  referencedColumnNames="id"
                                  referencedTableName="company_employee"/>
+
+        <loadData file="data/company_order.csv"
+                  separator=";"
+                  tableName="company_order"/>
 
     </changeSet>
 </databaseChangeLog>

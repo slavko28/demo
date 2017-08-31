@@ -9,19 +9,39 @@
                 <constraints primaryKey="true" nullable="false"/>
             </column>
             <column name="additional_information" type="varchar(255)"/>
-            <column name="route_point_id" type="bigint">
-                <constraints nullable="false"/>
-            </column>
             <column name="enabled" type="tinyint(1)" defaultValue="1">
                 <constraints nullable="false"/>
             </column>
         </createTable>
 
+        <createTable tableName="route_route_point">
+            <column name="route_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="route_point_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
         <addForeignKeyConstraint baseColumnNames="route_point_id"
-                                 baseTableName="route"
-                                 constraintName="fk_route_point_id"
+                                 baseTableName="route_route_point"
+                                 constraintName="fk1_route_route_point_id"
                                  referencedColumnNames="id"
                                  referencedTableName="route_point"/>
+
+        <addForeignKeyConstraint baseColumnNames="route_id"
+                                 baseTableName="route_route_point"
+                                 constraintName="fk2_route_route_point_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="route"/>
+
+        <loadData file="data/route.csv"
+                  separator=";"
+                  tableName="route"/>
+
+        <loadData file="data/route_route_point.csv"
+                  separator=";"
+                  tableName="route_route_point"/>
 
     </changeSet>
 </databaseChangeLog>

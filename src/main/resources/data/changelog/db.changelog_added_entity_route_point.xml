@@ -8,12 +8,12 @@
             <column name="id" type="bigint" autoIncrement="${autoIncrement}">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
-            <column name="route_point_type" type="varchar(20)">
+            <column name="type" type="varchar(20)">
                 <constraints nullable="false"/>
             </column>
             <column name="additional_information" type="varchar(255)"/>
             <column name="address_id" type="bigint">
-                <constraints nullable="false" unique="true"/>
+                <constraints nullable="false"/>
             </column>
             <column name="enabled" type="tinyint(1)" defaultValue="1">
                 <constraints nullable="false"/>
@@ -26,5 +26,8 @@
                                  referencedColumnNames="id"
                                  referencedTableName="address"/>
 
+        <loadData file="data/route_point.csv"
+                  separator=";"
+                  tableName="route_point"/>
     </changeSet>
 </databaseChangeLog>
