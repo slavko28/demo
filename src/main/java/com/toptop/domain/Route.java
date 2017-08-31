@@ -17,8 +17,10 @@ import java.util.List;
 @NoArgsConstructor
 public class Route extends BaseObject implements Serializable {
 
-    @OneToMany(fetch = FetchType.EAGER)
-    private List<RoutePoint> routePoints;
+    private static final long serialVersionUID = -4162256215462372752L;
+
+    @OneToMany
+    private List<RoutePoint> routePoint;
 
     private String additionalInformation;
 }

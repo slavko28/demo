@@ -1,5 +1,6 @@
 package com.toptop.domain;
 
+import com.toptop.domain.enums.LoadingType;
 import com.toptop.domain.enums.OrderStatus;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -8,6 +9,7 @@ import org.joda.money.Money;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 /**
@@ -19,18 +21,19 @@ import java.time.LocalDateTime;
 @Data
 public class CompanyOrder extends BaseObject implements Serializable {
 
-    private static final long serialVersionUID = 3610318214071648278L;
+    private static final long serialVersionUID = -5439458620107939326L;
 
     @Enumerated(EnumType.STRING)
     private OrderStatus status;
 
     private LocalDateTime orderDate;
-    private Money budget;
+    private BigDecimal budget;
 
     @OneToOne(optional = false)
     private Route route;
 
-    private String downloadingType;
+    @Enumerated(EnumType.STRING)
+    private LoadingType loadingType;
 
     @OneToOne(optional = false)
     private Cargo cargo;
