@@ -3,10 +3,12 @@ package com.toptop.domain;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
-import org.joda.money.Money;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 /**
@@ -20,8 +22,8 @@ public class OrderDetail extends BaseObject implements Serializable {
 
     private static final long serialVersionUID = -6693482470482522203L;
 
-    private Money transportationCost;
-    private Money orderProfit;
+    private BigDecimal transportationCost;
+    private BigDecimal orderProfit;
     private LocalDateTime completeDate;
 
     @OneToOne(optional = false)

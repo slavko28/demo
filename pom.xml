@@ -105,15 +105,6 @@
             <version>${nekohtml.version}</version>
         </dependency>
 
-<!-- joda-money -->
-        <dependency>
-            <groupId>org.joda</groupId>
-            <artifactId>joda-money</artifactId>
-            <version>${joda-money.version}</version>
-        </dependency>
-
-
-
     </dependencies>
 
     <build>
