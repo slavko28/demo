@@ -4,10 +4,10 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.joda.money.Money;
 
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 @AllArgsConstructor
@@ -19,10 +19,10 @@ public class OrderDetailDTO implements Serializable {
     private Long id;
 
     @NotNull
-    private Money transportationCost;
+    private BigDecimal transportationCost;
 
     @NotNull
-    private Money orderProfit;
+    private BigDecimal orderProfit;
 
     private LocalDateTime completeDate;
 

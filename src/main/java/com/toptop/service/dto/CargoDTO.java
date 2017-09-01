@@ -15,9 +15,12 @@ public class CargoDTO  implements Serializable{
 
     private Long id;
 
+    private CompanyDTO company;
+
     private double volume;
 
     private double weight;
 
     private String description;
+
 }

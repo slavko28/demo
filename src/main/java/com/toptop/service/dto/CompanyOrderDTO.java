@@ -6,7 +6,6 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.joda.money.Money;
 
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
@@ -22,7 +21,7 @@ public class CompanyOrderDTO implements Serializable {
     private Long id;
 
     @NotNull
-    private OrderStatus orderStatus;
+    private OrderStatus status;
 
     @NotNull
     private LocalDateTime orderDate;
