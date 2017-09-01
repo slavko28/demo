@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.util.Assert;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -56,11 +57,12 @@ public class CompanyController {
      * @return the ResponseEntity with status 200 (Ok) and with body the updated companyDTO,
      * or with status 400 (Bad Request) if the companyDTO is not valid,
      * or with status 404 (Not Found) if the company couldn't be found
-     * @throws IllegalArgumentException in case the given CompanyDTO's ID is {@literal null}.
+     * @throws IllegalArgumentException in case the given CompanyDTO's ID is null.
      */
     @RequestMapping(value = "/", method = RequestMethod.PUT)
     public ResponseEntity update(@Valid @RequestBody CompanyDTO companyDTO) {
         log.debug("request to update company : {}", companyDTO);
+        Assert.notNull(companyDTO.getId(), "ID can not be null");
         if (companyService.isExist(companyDTO)) {
             return ResponseEntity.ok(companyService.save(companyDTO));
         }
@@ -74,10 +76,13 @@ public class CompanyController {
      * @param id the Company ID
      * @return the ResponseEntity with status 200 (Ok) and with body the CompanyDTO,
      * or with status 404 (Not Found) if the company couldn't be found
+     * @throws IllegalArgumentException in case the given ID is null.
+
      */
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public ResponseEntity getById(@PathVariable("id") Long id) {
         log.debug("request to get company by id: {}", id);
+        Assert.notNull(id, "ID can not be null");
         CompanyDTO companyDTO = companyService.findOne(id);
         if (companyDTO != null) {
             return ResponseEntity.ok(companyDTO);
@@ -92,10 +97,12 @@ public class CompanyController {
      * @param companyCod the company cod
      * @return the ResponseEntity with status 200 (Ok) and with body the CompanyDTO,
      * or with status 404 (Not Found) if the company couldn't be found
+     * @throws IllegalArgumentException in case the given companyCod is null.
      */
     @RequestMapping(value = "/cod/{companyCod}", method = RequestMethod.GET)
     public ResponseEntity getByCompanyCod(@PathVariable("companyCod") Long companyCod) {
         log.debug("Request to get company by company cod: {}", companyCod);
+        Assert.notNull(companyCod, "ID can not be null");
         CompanyDTO companyDTO = companyService.findByOneByCompanyCod(companyCod);
         if (companyDTO != null) {
             return ResponseEntity.ok(companyDTO);

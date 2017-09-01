@@ -8,10 +8,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.util.Assert;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
 
@@ -38,7 +40,7 @@ public class TruckController {
      * @throws URISyntaxException if the Location URI syntax is incorrect
      */
     @RequestMapping(method = RequestMethod.POST)
-    public ResponseEntity create(@Validated @RequestBody TruckDTO truckDTO) throws URISyntaxException {
+    public ResponseEntity create(@Valid @RequestBody TruckDTO truckDTO) throws URISyntaxException {
         log.debug("request to create new truck: {}", truckDTO);
         if (truckDTO.getId() == null) {
             truckService.save(truckDTO);
@@ -60,7 +62,7 @@ public class TruckController {
      * @throws IllegalArgumentException in case the given TruckDTO's ID is {@literal null}.
      */
     @RequestMapping(method = RequestMethod.PUT)
-    public ResponseEntity update(@Validated @RequestBody TruckDTO truckDTO) {
+    public ResponseEntity update(@Valid @RequestBody TruckDTO truckDTO) {
         log.debug("request to update truck: {}", truckDTO);
         if (truckService.isExist(truckDTO)) {
             return ResponseEntity.ok(truckService.save(truckDTO));
@@ -75,10 +77,12 @@ public class TruckController {
      * @param id the Truck ID
      * @return the ResponseEntity with status 200 (Ok) and with body the TruckDTO,
      * or with status 404 (Not Found) if the truck couldn't be found
+     * @throws IllegalArgumentException in case the given ID is null.
      */
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public ResponseEntity getById(@PathVariable Long id) {
         log.debug("request to get truck by id: {}", id);
+        Assert.notNull(id, "ID can not be null.");
         TruckDTO truck = truckService.findOne(id);
         if (truck != null) {
             return ResponseEntity.ok(truck);
@@ -102,10 +106,12 @@ public class TruckController {
      * GET /company/:id : Get all Trucks by company ID.
      *
      * @return the ResponseEntity with status 200 (Ok) and with body the list of TruckDTO
+     * @throws IllegalArgumentException in case the given ID is null.
      */
     @RequestMapping(value = "company/{id}", method = RequestMethod.GET)
     public ResponseEntity getAllByCompanyId(@PathVariable Long id) {
         log.debug("request to get all trucks by company id {}", id);
+        Assert.notNull(id, "ID can not be null.");
         return ResponseEntity.ok(truckService.findAllByCompanyId(id));
     }
 }

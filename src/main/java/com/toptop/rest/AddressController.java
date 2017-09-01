@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.util.Assert;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -57,11 +58,12 @@ public class AddressController {
      * @return the ResponseEntity with status 200 (Ok) and with body the updated addressDTO,
      * or with status 400 (Bad Request) if the addressDTO is not valid,
      * or with status 404 (Not Found) if the address couldn't be found
-     * @throws IllegalArgumentException in case the given AddressDTO's ID is {@literal null}.
+     * @throws IllegalArgumentException in case the given AddressDTO's ID is null.
      */
     @RequestMapping(value = "/", method = RequestMethod.PUT)
     public ResponseEntity update(@Valid @RequestBody AddressDTO addressDTO) {
         log.debug("REST request to update Address : {}", addressDTO);
+        Assert.notNull(addressDTO.getId(), "ID can not be null");
         if (addressService.isExist(addressDTO)) {
             return ResponseEntity.ok(addressService.save(addressDTO));
         }
@@ -75,7 +77,7 @@ public class AddressController {
      * @return the ResponseEntity with status 200 (Ok) and with body the list of AddressDTO,
      */
     @RequestMapping(value = "/all", method = RequestMethod.GET)
-    public ResponseEntity<?> getAll() {
+    public ResponseEntity getAll() {
         log.debug("request to get all Addresses");
         List<AddressDTO> list = addressService.findAll();
         return new ResponseEntity<>(list, HttpStatus.OK);
@@ -87,10 +89,12 @@ public class AddressController {
      * @param id the address ID
      * @return the ResponseEntity with status 200 (Ok) and with body the addressDTO,
      * or with status 404 (Not Found) if the address couldn't be found
+     * @throws IllegalArgumentException in case the given ID is null.
      */
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public ResponseEntity getById(@PathVariable("id") Long id) {
         log.debug("request to get Address by id :{}", id);
+        Assert.notNull(id, "ID can not be null");
         AddressDTO addressDTO = addressService.findOne(id);
         if (addressDTO != null) {
             return ResponseEntity.ok(addressDTO);
@@ -103,10 +107,12 @@ public class AddressController {
      *
      * @param type the requested Address type
      * @return the ResponseEntity with status 200 (Ok) and with body the list of AddressDTO
+     * @throws IllegalArgumentException in case the given ID is null.
      */
     @RequestMapping(value = "/type/{type}", method = RequestMethod.GET)
     public ResponseEntity getAllByAddressType(@PathVariable("type") AddressType type) {
         log.debug("request to get all Addresses by type: {}", type);
+        Assert.notNull(type, "Type can not be null");
         return ResponseEntity.ok(addressService.findAllByType(type));
     }
 
@@ -114,11 +120,13 @@ public class AddressController {
      * GET /company/:id : Get all addresses by company ID.
      *
      * @param id the Company ID
-     * @return the ResponseEntity with status 200 (Ok) and with body the list of AddressDTO,
+     * @return the ResponseEntity with status 200 (Ok) and with body the list of AddressDTO
+     * @throws IllegalArgumentException in case the given Type is null.
      */
     @RequestMapping(value = "/company/{id}", method = RequestMethod.GET)
     public ResponseEntity getAllByCompanyId(@PathVariable("id") Long id) {
         log.debug("request to get all Addresses by Company id :{}", id);
+        Assert.notNull(id, "ID can not be null");
         return ResponseEntity.ok(addressService.findAllByCompanyId(id));
     }
 
@@ -127,12 +135,15 @@ public class AddressController {
      *
      * @param id the Company ID
      * @param type the Address type
-     * @return the ResponseEntity with status 200 (Ok) and with body the list of AddressDTO,
+     * @return the ResponseEntity with status 200 (Ok) and with body the list of AddressDTO
+     * @throws IllegalArgumentException in case the given ID or Type is null.
      */
     @RequestMapping(value = "/company/{id}/type/{type}", method = RequestMethod.GET)
     public ResponseEntity getAllByCompanyIdAndAddressType(@PathVariable("id") Long id,
                                                           @PathVariable("type")AddressType type) {
         log.debug("request to get all Addresses by Company id: {} and type: {}", id, type);
+        Assert.notNull(id, "ID can not be null");
+        Assert.notNull(type, "Type can not be null");
         return ResponseEntity.ok(addressService.findAllByCompanyIdAndType(id, type));
     }
 

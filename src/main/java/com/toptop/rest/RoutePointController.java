@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.util.Assert;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -74,10 +75,12 @@ public class RoutePointController {
      * @param id the Route point ID
      * @return the ResponseEntity with status 200 (Ok) and with body the RoutePointDTO,
      * or with status 404 (Not Found) if the route point couldn't be found
+     * @throws IllegalArgumentException in case the given ID is null.
      */
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public ResponseEntity getById(@PathVariable("id") Long id) {
         log.debug("request to get route point by id: {}", id);
+        Assert.notNull(id, "ID can not be null.");
         RoutePointDTO pointDTO = routePointService.findOne(id);
         if (pointDTO != null) {
             return ResponseEntity.ok(pointDTO);

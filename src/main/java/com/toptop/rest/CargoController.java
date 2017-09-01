@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.util.Assert;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -56,11 +57,12 @@ public class CargoController {
      * @return the ResponseEntity with status 200 (Ok) and with body the updated cargoDTO,
      * or with status 400 (Bad Request) if the cargoDTO is not valid,
      * or with status 404 (Not Found) if the cargo couldn't be found
-     * @throws IllegalArgumentException in case the given Cargo's ID is {@literal null}.
+     * @throws IllegalArgumentException in case the given Cargo's ID is null.
      **/
     @RequestMapping(value = "/", method = RequestMethod.PUT)
     public ResponseEntity update(@Valid @RequestBody CargoDTO cargoDTO) {
         log.debug("request to update Cargo : {}", cargoDTO);
+        Assert.notNull(cargoDTO.getId(), "ID can not be null");
         if (cargoService.isExist(cargoDTO)) {
             return ResponseEntity.ok(cargoService.save(cargoDTO));
         }
@@ -74,10 +76,12 @@ public class CargoController {
      * @param id the cargo ID
      * @return the ResponseEntity with status 200 (Ok) and with body the CargoDTO,
      * or with status 404 (Not Found) if the cargo couldn't be found
+     * @throws IllegalArgumentException in case the given ID is null.
      */
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public ResponseEntity getById(@PathVariable Long id) {
         log.debug("request to get Cargo by ID: {}", id);
+        Assert.notNull(id, "ID can not be null");
         CargoDTO cargoDTO = cargoService.findOne(id);
         if (cargoDTO != null) {
             return ResponseEntity.ok(cargoDTO);
@@ -102,10 +106,12 @@ public class CargoController {
      *
      * @param id the Company ID
      * @return the ResponseEntity with status 200 (ok) and with body the list of Cargo entities.
+     * @throws IllegalArgumentException in case the given Company's ID is null.
      */
     @RequestMapping(value = "/company/{id}", method = RequestMethod.GET)
     public ResponseEntity getAllByCompanyId(@PathVariable Long id) {
         log.debug("request to get all Cargo entities by company ID: {}", id);
+        Assert.notNull(id, "ID can not be null");
         return ResponseEntity.ok(cargoService.findAllByCompanyId(id));
     }
 

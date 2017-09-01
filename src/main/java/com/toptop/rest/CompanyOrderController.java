@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.util.Assert;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -39,7 +40,7 @@ public class CompanyOrderController {
      * @throws URISyntaxException if the Location URI syntax is incorrect
      */
     @RequestMapping(value = "/", method = RequestMethod.POST)
-    public ResponseEntity create(@Valid @PathVariable CompanyOrderDTO orderDTO) throws URISyntaxException {
+    public ResponseEntity create(@Valid @RequestBody CompanyOrderDTO orderDTO) throws URISyntaxException {
         log.debug("request to create new order: {}", orderDTO);
         if (orderDTO.getId() == null) {
             orderService.save(orderDTO);
@@ -58,11 +59,12 @@ public class CompanyOrderController {
      * @return the ResponseEntity with status 200 (Ok) and with body the updated CompanyOrderDTO,
      * or with status 400 (Bad Request) if the CompanyOrderDTO is not valid,
      * or with status 404 (Not Found) if the order couldn't be found
-     * @throws IllegalArgumentException in case the given CompanyOrderDTO's ID is {@literal null}.
+     * @throws IllegalArgumentException in case the given CompanyOrderDTO's ID is null.
      */
     @RequestMapping(value = "/", method = RequestMethod.PUT)
     public ResponseEntity update(@Valid @RequestBody CompanyOrderDTO orderDTO) {
         log.debug("request to update Order : {}", orderDTO);
+        Assert.notNull(orderDTO.getId(), "ID can not be null");
         if (orderService.isExist(orderDTO)) {
             return ResponseEntity.ok(orderService.save(orderDTO));
         }
@@ -88,10 +90,12 @@ public class CompanyOrderController {
      * @param id the Company order ID
      * @return the ResponseEntity with status 200 (Ok) and with body the CompanyOrderDTO,
      * or with status 404 (Not Found) if the order couldn't be found
+     * @throws IllegalArgumentException in case the given ID is null.
      */
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public ResponseEntity getById(@PathVariable("id") Long id) {
         log.debug("request to get Company order by id :{}", id);
+        Assert.notNull(id, "ID can not be null");
         CompanyOrderDTO orderDTO = orderService.findOne(id);
         if (orderDTO != null) {
             return ResponseEntity.ok(orderDTO);
@@ -105,10 +109,12 @@ public class CompanyOrderController {
      *
      * @param id the Company employee ID
      * @return the ResponseEntity with status 200 (ok) and with body the list of CompanyOrderDTO.
+     * @throws IllegalArgumentException in case the given Company employee's ID is null.
      */
     @RequestMapping(value = "/manager/{id}", method = RequestMethod.GET)
-    public ResponseEntity getAllByCompanyEmployeeId(@PathVariable Long id) {
+    public ResponseEntity getAllByCompanyEmployeeId(@PathVariable("id") Long id) {
         log.debug("request to get all orders by Company employee ID: {}", id);
+        Assert.notNull(id, "ID can not be null");
         return ResponseEntity.ok(orderService.findAllByCompanyEmployeeId(id));
     }
 
@@ -117,10 +123,12 @@ public class CompanyOrderController {
      *
      * @param id the Company ID
      * @return the ResponseEntity with status 200 (ok) and with body the list of CompanyOrderDTO.
+     * @throws IllegalArgumentException in case the given Company's ID is null.
      */
     @RequestMapping(value = "/company/{id}", method = RequestMethod.GET)
-    public ResponseEntity getAllByCompanyId(@PathVariable Long id) {
+    public ResponseEntity getAllByCompanyId(@PathVariable("id") Long id) {
         log.debug("request to get all CompanyOrder entities by company ID: {}", id);
+        Assert.notNull(id, "ID can not be null");
         return ResponseEntity.ok(orderService.findAllByCompanyId(id));
     }
 
@@ -129,10 +137,12 @@ public class CompanyOrderController {
      *
      * @param status the Order status
      * @return the ResponseEntity with status 200 (ok) and with body the list of CompanyOrderDTO.
+     * @throws IllegalArgumentException in case the given Order's status type is null.
      */
     @RequestMapping(value = "/status/{status}", method = RequestMethod.GET)
-    public ResponseEntity getAllByOrderStatus(@PathVariable OrderStatus status) {
+    public ResponseEntity getAllByOrderStatus(@PathVariable("status") OrderStatus status) {
         log.debug("request to get all CompanyOrder entities by Order status: {}", status);
+        Assert.notNull(status, "Status can not be null");
         return ResponseEntity.ok(orderService.findAllByStatus(status));
     }
 }

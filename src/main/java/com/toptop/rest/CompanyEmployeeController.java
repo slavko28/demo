@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.util.Assert;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -56,11 +57,12 @@ public class CompanyEmployeeController {
      * @return the ResponseEntity with status 200 (Ok) and with body the updated CompanyEmployeeDTO,
      * or with status 400 (Bad Request) if the CompanyEmployeeDTO is not valid,
      * or with status 404 (Not Found) if the company employee couldn't be found
-     * @throws IllegalArgumentException in case the given CompanyEmployeeDTO's ID is {@literal null}.
+     * @throws IllegalArgumentException in case the given CompanyEmployeeDTO's ID is null.
      */
     @RequestMapping(value = "/", method = RequestMethod.PUT)
     public ResponseEntity update(@Valid @RequestBody CompanyEmployeeDTO employeeDTO) {
         log.debug("request to update company employee {}", employeeDTO);
+        Assert.notNull(employeeDTO.getId(), "ID can not be null");
         if (companyEmployeeService.isExist(employeeDTO)) {
             return ResponseEntity.ok(companyEmployeeService.save(employeeDTO));
         }
@@ -74,10 +76,12 @@ public class CompanyEmployeeController {
      * @param id the Company employee ID
      * @return the ResponseEntity with status 200 (Ok) and with body the CompanyEmployeeDTO,
      * or with status 404 (Not Found) if the company employee couldn't be found
+     * @throws IllegalArgumentException in case the given ID is null.
      */
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public ResponseEntity getById(@PathVariable Long id) {
         log.debug("request to get company employee by id: {}", id);
+        Assert.notNull(id, "ID can not be null");
         CompanyEmployeeDTO employeeDTO = companyEmployeeService.findOne(id);
         if (employeeDTO != null) {
             return ResponseEntity.ok(employeeDTO);
@@ -101,10 +105,12 @@ public class CompanyEmployeeController {
      * GET /company/:id : Get all Company employees by company ID.
      *
      * @return the ResponseEntity with status 200 (Ok) and with body the list of CompanyEmployeeDTO
+     * @throws IllegalArgumentException in case the given Company's ID is null.
      */
     @RequestMapping(value = "/company/{id}", method = RequestMethod.GET)
-    public ResponseEntity getAllByCompanyId(@PathVariable Long id) {
+    public ResponseEntity getAllByCompanyId(@PathVariable("id") Long id) {
         log.debug("request to get all employee by company id: {}", id);
+        Assert.notNull(id, "ID can not be null");
         return ResponseEntity.ok(companyEmployeeService.findAllByCompanyId(id));
     }
 
@@ -112,10 +118,13 @@ public class CompanyEmployeeController {
      * GET /type/:type : Get all Company employees by employee type.
      *
      * @return the ResponseEntity with status 200 (Ok) and with body the list of CompanyEmployeeDTO
+     * @throws IllegalArgumentException in case the given Employee's type is null.
+
      */
     @RequestMapping(value = "/type/{type}", method = RequestMethod.GET)
-    public ResponseEntity getAllByType(@PathVariable EmployeeType type) {
+    public ResponseEntity getAllByType(@PathVariable("type") EmployeeType type) {
         log.debug("request to get all employees by type {}", type);
+        Assert.notNull(type, "Type can not be null");
         return ResponseEntity.ok(companyEmployeeService.findAllByType(type));
     }
 
@@ -125,11 +134,14 @@ public class CompanyEmployeeController {
      * @param id   the company ID
      * @param type the Employee type
      * @return the ResponseEntity with status 200 (Ok) and with body the list of CompanyEmployeeDTO
+     * @throws IllegalArgumentException in case the given Company's ID or Employee's type is null.
      */
     @RequestMapping(value = "/company/{id}/type/{type}", method = RequestMethod.GET)
-    public ResponseEntity getAllByCompanyIdAndEmployeeType(@PathVariable Long id,
-                                                           @PathVariable EmployeeType type) {
+    public ResponseEntity getAllByCompanyIdAndEmployeeType(@PathVariable("id") Long id,
+                                                           @PathVariable("type") EmployeeType type) {
         log.debug("request to get all employee by company id: {} and employee type {}", id, type);
+        Assert.notNull(id, "ID can not be null");
+        Assert.notNull(type, "Type can not be null");
         return ResponseEntity.ok(companyEmployeeService.findAllByCompanyIdAndEmployeeType(id, type));
     }
 }

@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.util.Assert;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -56,11 +57,12 @@ public class RouteController {
      * @return the ResponseEntity with status 200 (Ok) and with body the updated RouteDTO,
      * or with status 400 (Bad Request) if the RouteDTO is not valid,
      * or with status 404 (Not Found) if the route couldn't be found
-     * @throws IllegalArgumentException in case the given RouteDTO's ID is {@literal null}.
+     * @throws IllegalArgumentException in case the given RouteDTO's ID is null.
      */
     @RequestMapping(value = "/", method = RequestMethod.PUT)
     public ResponseEntity update(@Valid @RequestBody RouteDTO routeDTO) {
-        log.debug("request to update route : {}", routeDTO);
+        log.debug("request to update route: {}", routeDTO);
+        Assert.notNull(routeDTO.getId(), "ID can not be null.");
         if (routeService.isExist(routeDTO)) {
             return ResponseEntity.ok(routeService.save(routeDTO));
         }
@@ -74,10 +76,12 @@ public class RouteController {
      * @param id the Route ID
      * @return the ResponseEntity with status 200 (Ok) and with body the RouteDTO,
      * or with status 404 (Not Found) if the route couldn't be found
+     * @throws IllegalArgumentException in case the given ID is null.
      */
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public ResponseEntity getById(@PathVariable("id") Long id) {
         log.debug("request to get route by id: {}", id);
+        Assert.notNull(id, "ID can not be null.");
         RouteDTO routeDTO = routeService.findOne(id);
         if (routeDTO != null) {
             return ResponseEntity.ok(routeDTO);
