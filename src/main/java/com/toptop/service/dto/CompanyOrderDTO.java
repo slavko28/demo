@@ -43,5 +43,4 @@ public class CompanyOrderDTO implements Serializable {
     @NotNull
     private CompanyEmployeeDTO manager;
 
-    private OrderDetailDTO orderDetails;
 }
