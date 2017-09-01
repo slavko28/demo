@@ -79,6 +79,10 @@
                                  referencedColumnNames="id"
                                  referencedTableName="user"/>
 
+        <loadData file="data/order_detail.csv"
+                  separator=";"
+                  tableName="order_detail"/>
+
     </changeSet>
 </databaseChangeLog>
 
