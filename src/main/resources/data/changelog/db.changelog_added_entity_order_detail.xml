@@ -6,7 +6,7 @@
     <changeSet id="added_entity_order_detail" author="irvin">
 
         <createTable tableName="order_detail">
-            <column name="id" type="bigint">
+            <column name="id" type="bigint" autoIncrement="true">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
             <column name="transportation_cost" type="DECIMAL(7, 2)">
@@ -16,9 +16,9 @@
                 <constraints nullable="false"/>
             </column>
             <column name="complete_date" type="date"/>
-            <column name="company_order_id" type="bigint">
-                <constraints unique="true" nullable="false"/>
-            </column>
+            <!--<column name="company_order_id" type="bigint">-->
+                <!--<constraints unique="true" nullable="false"/>-->
+            <!--</column>-->
             <column name="carrier_id" type="bigint">
                 <constraints nullable="false"/>
             </column>
@@ -39,15 +39,15 @@
             </column>
         </createTable>
 
-        <addUniqueConstraint tableName="order_detail"
-                             columnNames="company_order_id, truck_id, trailer_id, driver_id"
-                             constraintName="uq_order_detail"/>
+        <!--<addUniqueConstraint tableName="order_detail"-->
+                             <!--columnNames="company_order_id, truck_id, trailer_id, driver_id"-->
+                             <!--constraintName="uq_order_detail"/>-->
 
-        <addForeignKeyConstraint baseColumnNames="company_order_id"
-                                 baseTableName="order_detail"
-                                 constraintName="fk_order_detail_company_order_id"
-                                 referencedColumnNames="id"
-                                 referencedTableName="company_order"/>
+        <!--<addForeignKeyConstraint baseColumnNames="company_order_id"-->
+                                 <!--baseTableName="order_detail"-->
+                                 <!--constraintName="fk_order_detail_company_order_id"-->
+                                 <!--referencedColumnNames="id"-->
+                                 <!--referencedTableName="company_order"/>-->
 
         <addForeignKeyConstraint baseColumnNames="carrier_id"
                                  baseTableName="order_detail"

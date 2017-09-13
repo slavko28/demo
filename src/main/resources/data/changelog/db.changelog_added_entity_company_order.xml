@@ -56,9 +56,36 @@
                                  referencedColumnNames="id"
                                  referencedTableName="company_employee"/>
 
+
+        <createTable tableName="company_order_order_detail">
+            <column name="company_order_id" type="bigint">
+                <constraints nullable="false" unique="true"/>
+            </column>
+            <column name="order_detail_id" type="bigint">
+                <constraints nullable="false" unique="true"/>
+            </column>
+        </createTable>
+
+        <addForeignKeyConstraint baseColumnNames="company_order_id"
+                                 baseTableName="company_order_order_detail"
+                                 constraintName="fk1_company_order_order_detail"
+                                 referencedColumnNames="id"
+                                 referencedTableName="company_order"/>
+
+        <addForeignKeyConstraint baseColumnNames="order_detail_id"
+                                 baseTableName="company_order_order_detail"
+                                 constraintName="fk2_company_order_order_detail"
+                                 referencedColumnNames="id"
+                                 referencedTableName="order_detail"/>
+
+
         <loadData file="data/company_order.csv"
                   separator=";"
                   tableName="company_order"/>
+
+        <loadData file="data/order_order_detail.csv"
+                  separator=";"
+                  tableName="company_order_order_detail"/>
 
     </changeSet>
 </databaseChangeLog>
