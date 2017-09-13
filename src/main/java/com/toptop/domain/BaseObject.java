@@ -8,7 +8,7 @@ import javax.persistence.*;
 @Data
 public class BaseObject {
 
-    @Id @GeneratedValue
+    @Id @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     private Boolean enabled = true;

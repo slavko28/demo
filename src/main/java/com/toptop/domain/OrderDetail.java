@@ -26,8 +26,8 @@ public class OrderDetail extends BaseObject implements Serializable {
     private BigDecimal orderProfit;
     private LocalDateTime completeDate;
 
-    @OneToOne(optional = false)
-    private CompanyOrder companyOrder;
+//    @OneToOne(optional = false)
+//    private CompanyOrder companyOrder;
 
     @ManyToOne(optional = false)
     private Company carrier;
