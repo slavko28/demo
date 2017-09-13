@@ -20,7 +20,7 @@
         </thead>
         <tbody>
         <#list companies as company>
-        <tr onclick='window.location.href="#"'>
+        <tr onclick='window.location.href="/company/${company.id}"'>
             <td></td>
             <td>${company.fullName}</td>
             <td>${company.shortName}</td>

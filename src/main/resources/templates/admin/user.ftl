@@ -144,15 +144,5 @@
     </div>
 </div>
 
-<#--<section class="container">-->
-    <#--<div class="col-md-pull-12">-->
-        <#--<br/>-->
-        <#--<form class="form-horizontal" role="form" method="post" action="/user/update">-->
-            <#---->
-
-
-        <#--</form>-->
-    <#--</div><!-- /.col-lg-12 &ndash;&gt;-->
-<#--</section>-->
 
 <@h.footer></@h.footer>
