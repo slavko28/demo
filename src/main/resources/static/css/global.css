@@ -1,0 +1,7 @@
+body {
+    background: #eee !important;
+}
+
+.num {
+    mso-number-format: General;
+}
