@@ -5,8 +5,11 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 import java.io.Serializable;
 
 @AllArgsConstructor
@@ -18,9 +21,14 @@ public class UserDTO implements Serializable {
     private Long id;
 
     @NotNull
-    private String email; // TODO: add Constants MAIL_REGEX
+    @Email
+    private String email;
 
-    private String password;
+    @NotEmpty
+    private String password = "";
+
+    @NotEmpty
+    private String passwordRepeated = "";
 
     @NotNull
     private String name;
@@ -29,9 +37,10 @@ public class UserDTO implements Serializable {
     private String lastName;
 
     @NotNull
-    private String phoneNumber; // TODO: add Constants PHONE_REGEX
+    private String phoneNumber;
 
     private Boolean active;
 
+    @NotNull
     private UserRole role;
 }
