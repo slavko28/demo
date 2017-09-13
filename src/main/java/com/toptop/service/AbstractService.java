@@ -4,6 +4,7 @@ import com.toptop.domain.BaseObject;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.Optional;
 
 public interface AbstractService<T extends BaseObject, ID extends Serializable, DTO extends Object> {
 

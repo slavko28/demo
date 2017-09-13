@@ -4,6 +4,8 @@ import com.toptop.domain.User;
 import com.toptop.domain.enums.UserRole;
 import com.toptop.service.dto.UserDTO;
 
+import java.util.Optional;
+
 /**
  * Service Interface for managing User entities.
  */
@@ -15,15 +17,15 @@ public interface UserService extends AbstractService<User, Long, UserDTO> {
      * @param email the email
      * @return the entity
      */
-    User findUserByEmail(String email);
+    User getUserByEmail(String email);
 
     /**
-     * Save user with role.
+     * Save user.
      *
      * @param user user to save
-     * @param role user role
      */
-    void saveUserWithRole(UserDTO user, UserRole role);
+    void saveUser(UserDTO user);
 
+    void update(UserDTO userDTO);
 
 }
