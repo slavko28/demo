@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.Optional;
 
 @Transactional
 public abstract class TransactionService<T extends BaseObject, ID extends Serializable,

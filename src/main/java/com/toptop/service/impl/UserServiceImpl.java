@@ -1,7 +1,6 @@
 package com.toptop.service.impl;
 
 import com.toptop.domain.User;
-import com.toptop.domain.enums.UserRole;
 import com.toptop.repository.UserRepository;
 import com.toptop.service.UserService;
 import com.toptop.service.dto.UserDTO;
@@ -29,18 +28,28 @@ public class UserServiceImpl extends TransactionService<User, Long, UserMapper, 
 
     @Override
     @Transactional(readOnly = true)
-    public User findUserByEmail(String email) {
+    public User getUserByEmail(String email) {
         log.debug("Searching user by email: {}", email);
-        return userRepository.findByEmail(email);
+        return userRepository.findOneByEmail(email);
     }
 
     @Override
-    public void saveUserWithRole(UserDTO userDTO, UserRole role) {
+    public void saveUser(UserDTO userDTO) {
         userDTO.setPassword(bCryptPasswordEncoder.encode(userDTO.getPassword()));
-        userDTO.setActive(true);
-        userDTO.setRole(role);
+        userDTO.setActive(false);
         log.debug("Save user with name: {}", userDTO.getName());
         save(userDTO);
+    }
+
+    @Override
+    public void update(UserDTO userDTO) {
+        User userFromBase = getRepository().getOne(userDTO.getId());
+        userFromBase.setName(userDTO.getName());
+        userFromBase.setLastName(userDTO.getLastName());
+        userFromBase.setPhoneNumber(userDTO.getPhoneNumber());
+        userFromBase.setRole(userDTO.getRole());
+        userFromBase.setActive(userDTO.getActive());
+        getRepository().save(userFromBase);
     }
 
     @Override

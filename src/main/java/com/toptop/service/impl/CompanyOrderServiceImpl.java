@@ -4,12 +4,15 @@ import com.toptop.domain.CompanyOrder;
 import com.toptop.domain.enums.OrderStatus;
 import com.toptop.repository.CompanyOrderRepository;
 import com.toptop.service.CompanyOrderService;
+import com.toptop.service.CurrentUserService;
 import com.toptop.service.dto.CompanyOrderDTO;
 import com.toptop.service.mapper.CompanyOrderMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -20,6 +23,9 @@ import java.util.List;
 public class CompanyOrderServiceImpl extends TransactionService<CompanyOrder, Long, CompanyOrderMapper, CompanyOrderDTO> implements CompanyOrderService {
 
     private static final Logger log = LoggerFactory.getLogger(UserServiceImpl.class);
+
+    @Autowired
+    private CurrentUserService currentUserService;
 
     @Autowired
     private CompanyOrderRepository orderRepository;
@@ -46,6 +52,13 @@ public class CompanyOrderServiceImpl extends TransactionService<CompanyOrder, Lo
     public List<CompanyOrderDTO> findAllByStatus(OrderStatus orderStatus) {
         log.debug("Find all orders by status: {}", orderStatus);
         return getMapper().mapToDTOs(orderRepository.findAllByStatus(orderStatus));
+    }
+
+    @Override
+    public List<CompanyOrderDTO> getCompanyOrderByCurrentUser() {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        log.debug("Find all orders by current user: {}", auth.getName());
+        return getMapper().mapToDTOs(orderRepository.findAllByUserId(currentUserService.getCurrentUser().getId()));
     }
 
     @Override

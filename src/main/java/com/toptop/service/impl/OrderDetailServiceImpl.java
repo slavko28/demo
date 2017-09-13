@@ -1,7 +1,9 @@
 package com.toptop.service.impl;
 
 import com.toptop.domain.OrderDetail;
+import com.toptop.domain.User;
 import com.toptop.repository.OrderDetailsRepository;
+import com.toptop.service.CurrentUserService;
 import com.toptop.service.OrderDetailService;
 import com.toptop.service.dto.OrderDetailDTO;
 import com.toptop.service.mapper.OrderDetailMapper;
@@ -9,6 +11,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -24,7 +28,11 @@ public class OrderDetailServiceImpl extends TransactionService<OrderDetail, Long
     private OrderDetailsRepository orderDetailsRepository;
 
     @Autowired
+    private CurrentUserService currentUserService;
+
+    @Autowired
     private OrderDetailMapper orderDetailMapper;
+
 
     @Override
     @Transactional(readOnly = true)
@@ -38,6 +46,13 @@ public class OrderDetailServiceImpl extends TransactionService<OrderDetail, Long
     public List<OrderDetailDTO> findAllByManagerId(Long id) {
         log.debug("Find all order details by manager id: {}", id);
         return getMapper().mapToDTOs(orderDetailsRepository.findAllByManagerId(id));
+    }
+
+    @Override
+    public List<OrderDetailDTO> getOrderDetailByCurrentUser() {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        log.debug("Find all order details by current manager: {}", auth.getName());
+        return findAllByManagerId(currentUserService.getCurrentUser().getId());
     }
 
     @Override
