@@ -26,4 +26,6 @@ public interface OrderDetailService extends AbstractService<OrderDetail, Long, O
     List<OrderDetailDTO> findAllByManagerId(Long id);
 
     List<OrderDetailDTO> getOrderDetailByCurrentUser();
+
+    OrderDetailDTO findOneById(Long id);
 }

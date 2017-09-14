@@ -49,10 +49,18 @@ public class OrderDetailServiceImpl extends TransactionService<OrderDetail, Long
     }
 
     @Override
+    @Transactional(readOnly = true)
     public List<OrderDetailDTO> getOrderDetailByCurrentUser() {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         log.debug("Find all order details by current manager: {}", auth.getName());
         return findAllByManagerId(currentUserService.getCurrentUser().getId());
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public OrderDetailDTO findOneById(Long id) {
+        log.debug("Find order detail by company order id: {}", id);
+        return getMapper().mapToDTO(orderDetailsRepository.findOne(id));
     }
 
     @Override
