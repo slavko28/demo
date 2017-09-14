@@ -6,18 +6,22 @@
     <changeSet id="added_entity_company_order" author="irvin">
 
         <createTable tableName="company_order">
-            <column name="id" type="bigint" autoIncrement="${autoIncrement}">
+            <column name="id" type="bigint" autoIncrement="true">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
-            <column name="status" type="varchar(50)" defaultValue="INCOMING"/>
-            <column name="order_date" type="timestamp">
+            <column name="status" type="varchar(50)" defaultValue="INCOMING">
+                <constraints nullable="false"/>
+            </column>
+            <column name="order_date" type="date">
                 <constraints nullable="false"/>
             </column>
             <column name="budget" type="DECIMAL(7, 2)"/>
             <column name="route_id" type="bigint">
                 <constraints nullable="false"/>
             </column>
-            <column name="loading_type" type="varchar(100)"/>
+            <column name="loading_type" type="varchar(100)">
+                <constraints nullable="false"/>
+            </column>
             <column name="cargo_id" type="bigint">
                 <constraints nullable="false"/>
             </column>
@@ -30,7 +34,16 @@
             <column name="enabled" type="tinyint(1)" defaultValue="1">
                 <constraints nullable="false"/>
             </column>
+            <column name="order_detail_id" type="bigint">
+                <constraints unique="true"/>
+            </column>
         </createTable>
+
+        <addForeignKeyConstraint baseColumnNames="order_detail_id"
+                                 baseTableName="company_order"
+                                 constraintName="fk2_company_order_order_detail"
+                                 referencedColumnNames="id"
+                                 referencedTableName="order_detail"/>
 
         <addForeignKeyConstraint baseColumnNames="route_id"
                                  baseTableName="company_order"
@@ -57,35 +70,35 @@
                                  referencedTableName="company_employee"/>
 
 
-        <createTable tableName="company_order_order_detail">
-            <column name="company_order_id" type="bigint">
-                <constraints nullable="false" unique="true"/>
-            </column>
-            <column name="order_detail_id" type="bigint">
-                <constraints nullable="false" unique="true"/>
-            </column>
-        </createTable>
+        <!--<createTable tableName="company_order_order_detail">-->
+            <!--<column name="company_order_id" type="bigint">-->
+                <!--<constraints nullable="false" unique="true"/>-->
+            <!--</column>-->
+            <!--<column name="order_detail_id" type="bigint">-->
+                <!--<constraints nullable="false" unique="true"/>-->
+            <!--</column>-->
+        <!--</createTable>-->
 
-        <addForeignKeyConstraint baseColumnNames="company_order_id"
-                                 baseTableName="company_order_order_detail"
-                                 constraintName="fk1_company_order_order_detail"
-                                 referencedColumnNames="id"
-                                 referencedTableName="company_order"/>
+        <!--<addForeignKeyConstraint baseColumnNames="company_order_id"-->
+                                 <!--baseTableName="company_order_order_detail"-->
+                                 <!--constraintName="fk1_company_order_order_detail"-->
+                                 <!--referencedColumnNames="id"-->
+                                 <!--referencedTableName="company_order"/>-->
 
-        <addForeignKeyConstraint baseColumnNames="order_detail_id"
-                                 baseTableName="company_order_order_detail"
-                                 constraintName="fk2_company_order_order_detail"
-                                 referencedColumnNames="id"
-                                 referencedTableName="order_detail"/>
+        <!--<addForeignKeyConstraint baseColumnNames="order_detail_id"-->
+                                 <!--baseTableName="company_order_order_detail"-->
+                                 <!--constraintName="fk2_company_order_order_detail"-->
+                                 <!--referencedColumnNames="id"-->
+                                 <!--referencedTableName="order_detail"/>-->
 
 
         <loadData file="data/company_order.csv"
                   separator=";"
                   tableName="company_order"/>
 
-        <loadData file="data/order_order_detail.csv"
-                  separator=";"
-                  tableName="company_order_order_detail"/>
+        <!--<loadData file="data/order_order_detail.csv"-->
+                  <!--separator=";"-->
+                  <!--tableName="company_order_order_detail"/>-->
 
     </changeSet>
 </databaseChangeLog>

@@ -5,7 +5,7 @@
 
     <changeSet id="added_entity_route" author="irvin">
         <createTable tableName="route">
-            <column name="id" type="bigint" autoIncrement="${autoIncrement}">
+            <column name="id" type="bigint" autoIncrement="true">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
             <column name="additional_information" type="varchar(255)"/>

@@ -6,7 +6,7 @@
     <changeSet id="added_entity_company_employee" author="irvin">
 
         <createTable tableName="company_employee">
-            <column name="id" type="bigint" autoIncrement="${autoIncrement}">
+            <column name="id" type="bigint" autoIncrement="true">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
             <column name="type" type="varchar(50)"/>
