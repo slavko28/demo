@@ -12,7 +12,7 @@
             <column name="status" type="varchar(50)" defaultValue="INCOMING">
                 <constraints nullable="false"/>
             </column>
-            <column name="order_date" type="date">
+            <column name="order_date" type="timestamp">
                 <constraints nullable="false"/>
             </column>
             <column name="budget" type="DECIMAL(7, 2)"/>
@@ -34,16 +34,11 @@
             <column name="enabled" type="tinyint(1)" defaultValue="1">
                 <constraints nullable="false"/>
             </column>
-            <column name="order_detail_id" type="bigint">
-                <constraints unique="true"/>
+            <column name="order_detail_id" type="bigint" defaultValue="null">
+                <constraints nullable="true" unique="true"/>
             </column>
         </createTable>
 
-        <addForeignKeyConstraint baseColumnNames="order_detail_id"
-                                 baseTableName="company_order"
-                                 constraintName="fk2_company_order_order_detail"
-                                 referencedColumnNames="id"
-                                 referencedTableName="order_detail"/>
 
         <addForeignKeyConstraint baseColumnNames="route_id"
                                  baseTableName="company_order"
@@ -69,36 +64,15 @@
                                  referencedColumnNames="id"
                                  referencedTableName="company_employee"/>
 
-
-        <!--<createTable tableName="company_order_order_detail">-->
-            <!--<column name="company_order_id" type="bigint">-->
-                <!--<constraints nullable="false" unique="true"/>-->
-            <!--</column>-->
-            <!--<column name="order_detail_id" type="bigint">-->
-                <!--<constraints nullable="false" unique="true"/>-->
-            <!--</column>-->
-        <!--</createTable>-->
-
-        <!--<addForeignKeyConstraint baseColumnNames="company_order_id"-->
-                                 <!--baseTableName="company_order_order_detail"-->
-                                 <!--constraintName="fk1_company_order_order_detail"-->
-                                 <!--referencedColumnNames="id"-->
-                                 <!--referencedTableName="company_order"/>-->
-
-        <!--<addForeignKeyConstraint baseColumnNames="order_detail_id"-->
-                                 <!--baseTableName="company_order_order_detail"-->
-                                 <!--constraintName="fk2_company_order_order_detail"-->
-                                 <!--referencedColumnNames="id"-->
-                                 <!--referencedTableName="order_detail"/>-->
-
+        <addForeignKeyConstraint baseColumnNames="order_detail_id"
+                                 baseTableName="company_order"
+                                 constraintName="fk2_company_order_order_detail"
+                                 referencedColumnNames="id"
+                                 referencedTableName="order_detail"/>
 
         <loadData file="data/company_order.csv"
                   separator=";"
                   tableName="company_order"/>
-
-        <!--<loadData file="data/order_order_detail.csv"-->
-                  <!--separator=";"-->
-                  <!--tableName="company_order_order_detail"/>-->
 
     </changeSet>
 </databaseChangeLog>

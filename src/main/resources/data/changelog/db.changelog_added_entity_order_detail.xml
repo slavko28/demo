@@ -15,10 +15,7 @@
             <column name="order_profit" type="DECIMAL(7, 2)">
                 <constraints nullable="false"/>
             </column>
-            <column name="complete_date" type="date"/>
-            <!--<column name="company_order_id" type="bigint">-->
-                <!--<constraints unique="true" nullable="false"/>-->
-            <!--</column>-->
+            <column name="complete_date" type="timestamp"/>
             <column name="carrier_id" type="bigint">
                 <constraints nullable="false"/>
             </column>
@@ -38,16 +35,6 @@
                 <constraints nullable="false"/>
             </column>
         </createTable>
-
-        <!--<addUniqueConstraint tableName="order_detail"-->
-                             <!--columnNames="company_order_id, truck_id, trailer_id, driver_id"-->
-                             <!--constraintName="uq_order_detail"/>-->
-
-        <!--<addForeignKeyConstraint baseColumnNames="company_order_id"-->
-                                 <!--baseTableName="order_detail"-->
-                                 <!--constraintName="fk_order_detail_company_order_id"-->
-                                 <!--referencedColumnNames="id"-->
-                                 <!--referencedTableName="company_order"/>-->
 
         <addForeignKeyConstraint baseColumnNames="carrier_id"
                                  baseTableName="order_detail"
