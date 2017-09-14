@@ -26,8 +26,8 @@ public class OrderDetailDTO implements Serializable {
 
     private LocalDateTime completeDate;
 
-    @NotNull
-    private CompanyOrderDTO companyOrder;
+//    @NotNull
+//    private CompanyOrderDTO companyOrder;
 
     @NotNull
     private CompanyDTO carrier;
