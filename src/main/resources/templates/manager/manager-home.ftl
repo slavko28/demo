@@ -14,15 +14,16 @@
     <table id="data" class="display" cellspacing="0" width="100%">
         <thead>
         <tr>
+            <th></th>
             <th>Order date</th>
             <th>Company</th>
             <th>Status</th>
-
         </tr>
         </thead>
         <tbody>
         <#list orders as order>
-        <tr onclick='window.location.href="#"'>
+        <tr onclick='window.location.href="/detail/${order.orderDetail.id}"'>
+            <td></td>
             <td>${order.orderDate}</td>
             <td>${order.company.shortName}</td>
             <td>${order.status}</td>
