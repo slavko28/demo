@@ -55,6 +55,7 @@ public class CompanyOrderServiceImpl extends TransactionService<CompanyOrder, Lo
     }
 
     @Override
+    @Transactional(readOnly = true)
     public List<CompanyOrderDTO> getCompanyOrderByCurrentUser() {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         log.debug("Find all orders by current user: {}", auth.getName());
