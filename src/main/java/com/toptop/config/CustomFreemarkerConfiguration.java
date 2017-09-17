@@ -86,8 +86,9 @@ public class CustomFreemarkerConfiguration extends WebMvcConfigurerAdapter {
     private static FreeMarkerConfigurer configFreeMarkerConfigurer(ServletContext servletContext) throws IOException,
             TemplateException {
         FreeMarkerConfigurer freemarkerConfig = new FreeMarkerConfigurer();
+        ClassTemplateLoader templateLoader = new ClassTemplateLoader(CustomFreemarkerConfiguration.class, "/templates/");
         freemarkerConfig
-                .setPreTemplateLoaders(new ClassTemplateLoader(CustomFreemarkerConfiguration.class, "/templates/"));
+                .setPreTemplateLoaders(new ClassTemplateLoader[]{templateLoader});
         ServletContext servletContextProxy = (ServletContext) Proxy.newProxyInstance(
                 ServletContextResourceHandler.class.getClassLoader(),
                 new Class<?>[] { ServletContext.class },
