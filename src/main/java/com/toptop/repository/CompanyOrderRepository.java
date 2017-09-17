@@ -16,7 +16,7 @@ public interface CompanyOrderRepository extends JpaRepository<CompanyOrder, Long
 
     List<CompanyOrder> findAllByStatus(OrderStatus orderStatus);
 
-    @Query("select orders from CompanyOrder orders left join orders.orderDetail details where orders.enabled = true " +
-            "and details.manager.id = :userId")
+    @Query("select orders from CompanyOrder orders left join orders.orderDetail details" +
+            " where orders.enabled = true and details.manager.id = :userId")
     List<CompanyOrder> findAllByUserId(@Param("userId") Long id);
 }
