@@ -20,7 +20,6 @@ public class CompanyOrderDTO implements Serializable {
 
     private Long id;
 
-    @NotNull
     private OrderStatus status;
 
     @NotNull
