@@ -6,11 +6,8 @@
 <!-- Page Content -->
 <div class="container text-center">
     <div class="mt-5 center-block">
-        <h4>Manager Home page</h4>
-        <h4>${user.name} ${user.lastName}</h4>
-        <h4>List of your current orders</h4>
+        <h4>List of incoming orders</h4>
     </div>
-
     <table id="data" class="display" cellspacing="0" width="100%">
         <thead>
         <tr>
@@ -22,7 +19,7 @@
         </thead>
         <tbody>
         <#list orders as order>
-        <tr onclick='window.location.href="/detail/${order.orderDetail.id}"'>
+        <tr onclick='window.location.href="/order/${order.id}"'>
             <td></td>
             <td>${order.orderDate}</td>
             <td>${order.company.shortName}</td>
@@ -32,9 +29,14 @@
         </tbody>
     </table>
 
-    <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
-    <script src="/static/js/data.js"></script>
+    <div class="col-sm-12 text-center">
+
+        <button type="button" class="btn btn-outline-secondary col-5" onclick="window.location.href='/order'"><i class="fa fa-file-text"></i> Create new order
+        </button>
+    </div>
 
 </div>
 
+<script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+<script src="/static/js/data.js"></script>
 <@h.footer></@h.footer>
