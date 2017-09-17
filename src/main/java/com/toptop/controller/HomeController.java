@@ -1,5 +1,6 @@
 package com.toptop.controller;
 
+import com.toptop.domain.enums.OrderStatus;
 import com.toptop.service.CompanyOrderService;
 import com.toptop.service.CurrentUserService;
 import com.toptop.service.dto.CompanyOrderDTO;
@@ -53,7 +54,7 @@ public class HomeController {
     @RequestMapping("/manager")
     public ModelAndView getHomePageForAManager() {
         LOG.debug("Getting Manager'shome page");
-        List<CompanyOrderDTO> orderDTO = companyOrderService.getCompanyOrderByCurrentUser();
+        List<CompanyOrderDTO> orderDTO = companyOrderService.findAllByStatus(OrderStatus.INCOMING);
         ModelAndView modelAndView = new ModelAndView("manager/manager-home", "orders", orderDTO);
         modelAndView.addObject("user", currentUserService.getCurrentUser());
         return modelAndView;
