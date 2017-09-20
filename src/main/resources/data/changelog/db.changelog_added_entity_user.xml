@@ -5,7 +5,7 @@
 
     <changeSet id="create-user-table" author="irvin">
 
-        <createTable tableName="user" >
+        <createTable tableName="tt-user" >
             <column name="id" type="bigint" autoIncrement="true" >
                 <constraints primaryKey="true" nullable="false"/>
             </column>
@@ -32,14 +32,14 @@
         </createTable>
 
         <createIndex indexName="idx_user_email"
-                     tableName="user"
+                     tableName="tt-user"
                      unique="true">
             <column name="email" type="varchar(100)"/>
         </createIndex>
 
         <loadData file="data/user.csv"
                   separator=";"
-                  tableName="user">
+                  tableName="tt-user">
             <column name="active" type="boolean"/>
         </loadData>
 
