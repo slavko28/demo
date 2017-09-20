@@ -26,7 +26,6 @@
         <lombokPlugin.version>1.16.18.0</lombokPlugin.version>
         <bootstrap.version>3.3.7</bootstrap.version>
         <nekohtml.version>1.9.21</nekohtml.version>
-        <joda-money.version>0.12</joda-money.version>
     </properties>
 
     <dependencies>
@@ -121,7 +120,6 @@
         <dependency>
             <groupId>org.postgresql</groupId>
             <artifactId>postgresql</artifactId>
-            <version>9.4.1211</version>
         </dependency>
 
 
