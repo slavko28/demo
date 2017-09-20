@@ -23,6 +23,9 @@
             <column name="role" type="varchar(10)">
                 <constraints nullable="false" />
             </column>
+            <column name="active" type="boolean" valueBoolean="false">
+                <constraints nullable="false" />
+            </column>
             <column name="enabled" type="boolean" defaultValue="1">
                 <constraints nullable="false"/>
             </column>
