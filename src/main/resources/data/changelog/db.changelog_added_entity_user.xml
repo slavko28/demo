@@ -32,7 +32,7 @@
         </createTable>
 
         <createIndex indexName="idx_user_email"
-                     tableName="tt-user"
+                     tableName="tt_user"
                      unique="true">
             <column name="email" type="varchar(100)"/>
         </createIndex>
