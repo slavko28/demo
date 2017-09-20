@@ -14,7 +14,7 @@
             <column name="company_cod" type="bigint">
                 <constraints unique="true" nullable="false"/>
             </column>
-            <column name="enabled" type="tinyint(1)" defaultValue="1">
+            <column name="enabled" type="boolean" defaultValue="1">
                 <constraints nullable="false"/>
             </column>
         </createTable>

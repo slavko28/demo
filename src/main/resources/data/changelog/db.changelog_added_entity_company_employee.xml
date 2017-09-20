@@ -25,7 +25,7 @@
             <column name="additional_details" type="varchar(255)"/>
             <column name="driver_license" type="varchar(100)"/>
             <column name="driver_passport" type="varchar(100)"/>
-            <column name="enabled" type="tinyint(1)" defaultValue="1">
+            <column name="enabled" type="boolean" defaultValue="1">
                 <constraints nullable="false"/>
             </column>
         </createTable>
