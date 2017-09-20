@@ -5,7 +5,7 @@
 
     <changeSet id="create-user-table" author="irvin">
 
-        <createTable tableName="tt-user" >
+        <createTable tableName="tt_user" >
             <column name="id" type="bigint" autoIncrement="true" >
                 <constraints primaryKey="true" nullable="false"/>
             </column>
@@ -39,7 +39,7 @@
 
         <loadData file="data/user.csv"
                   separator=";"
-                  tableName="tt-user">
+                  tableName="tt_user">
             <column name="active" type="boolean"/>
         </loadData>
 

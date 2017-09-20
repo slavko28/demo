@@ -15,7 +15,7 @@ import java.io.Serializable;
 @Entity
 @NoArgsConstructor
 @Data
-@Table(name = "tt-user")
+@Table(name = "tt_user")
 public class User extends BaseObject implements Serializable {
 
     private static final long serialVersionUID = -2025326803520891508L;

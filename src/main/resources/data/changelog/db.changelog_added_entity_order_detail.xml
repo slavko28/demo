@@ -64,7 +64,7 @@
                                  baseTableName="order_detail"
                                  constraintName="fk_order_detail_manager_id"
                                  referencedColumnNames="id"
-                                 referencedTableName="tt-user"/>
+                                 referencedTableName="tt_user"/>
 
         <loadData file="data/order_detail.csv"
                   separator=";"
