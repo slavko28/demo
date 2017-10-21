@@ -13,6 +13,8 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Optional;
+
 @Service
 @Transactional
 public class UserServiceImpl extends TransactionService<User, Long, UserMapper, UserDTO> implements UserService {
@@ -28,7 +30,7 @@ public class UserServiceImpl extends TransactionService<User, Long, UserMapper, 
 
     @Override
     @Transactional(readOnly = true)
-    public User getUserByEmail(String email) {
+    public Optional<User> getUserByEmail(String email) {
         log.debug("Searching user by email: {}", email);
         return userRepository.findOneByEmail(email);
     }

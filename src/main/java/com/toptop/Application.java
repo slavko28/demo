@@ -10,7 +10,6 @@ import org.springframework.boot.autoconfigure.freemarker.FreeMarkerAutoConfigura
  */
 
 @SpringBootApplication
-@EnableAutoConfiguration(exclude = {FreeMarkerAutoConfiguration.class})
 public class Application {
 
     public static void main(String[] args) {

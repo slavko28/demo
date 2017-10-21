@@ -59,7 +59,7 @@ public class CompanyOrderServiceImpl extends TransactionService<CompanyOrder, Lo
     public List<CompanyOrderDTO> getCompanyOrderByCurrentUser() {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         log.debug("Find all orders by current user: {}", auth.getName());
-        return getMapper().mapToDTOs(orderRepository.findAllByUserId(currentUserService.getCurrentUser().getId()));
+        return getMapper().mapToDTOs(orderRepository.findAllByUserId(currentUserService.getCurrentUser().get().getId()));
     }
 
     @Override

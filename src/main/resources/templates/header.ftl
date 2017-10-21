@@ -1,5 +1,6 @@
 <#macro header pagetitle="TTTrans-Logictic" >
-<#--<#assign security=JspTaglibs["http://www.springframework.org/security/tags"] />-->
+<#-- @ftlvariable name="_csrf" type="org.springframework.security.web.csrf.CsrfToken" -->
+<#-- @ftlvariable name="currentUser" type="com.toptop.domain.CurrentUser" -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -45,15 +46,13 @@
                         <a class="dropdown-item" href="/detail/all">Order details</a>
                     </div>
                 </li>
+
                 <li class="nav-item">
-                <#--<@sec.authorize access="! isAuthenticated()">-->
-                    <a class="nav-link" href="/login">Login</a>
-                <#--</@sec.authorize>-->
-                </li>
-                <li class="nav-item">
-                <#--<@sec.authorize access="isAuthenticated()">-->
                     <a class="nav-link" href="/logout">Logout</a>
-                <#--</@sec.authorize>-->
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="/login">Login</a>
                 </li>
             </ul>
         </div>
@@ -68,7 +67,7 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js"
         integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1"
         crossorigin="anonymous"></script>
-
+<span>${currentUser.id}</span>
 </#macro>
 
 

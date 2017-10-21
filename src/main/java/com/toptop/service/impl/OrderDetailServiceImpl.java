@@ -17,6 +17,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @Transactional
@@ -53,7 +54,7 @@ public class OrderDetailServiceImpl extends TransactionService<OrderDetail, Long
     public List<OrderDetailDTO> getOrderDetailByCurrentUser() {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         log.debug("Find all order details by current manager: {}", auth.getName());
-        return findAllByManagerId(currentUserService.getCurrentUser().getId());
+        return findAllByManagerId(currentUserService.getCurrentUser().get().getId());
     }
 
     @Override

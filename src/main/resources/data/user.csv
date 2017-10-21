@@ -1,3 +1,3 @@
 "id";"active";"email";"last_name";"name";"password";"phone_number";"role"
-1;"1";"admin@admin";"admin";"admin";"$2a$10$BQXCmDmp3WiNwHjmLCz5R.5eDBmYCbpt8En5pANBQq1mzyxaEbfcK";"123123123";"ADMIN"
-2;"1";"manager@manager";"manager";"manager";"$2a$10$mtholzvhz4BIG.rglftWkusZP6wAgBB9OFvaadIqbyfF2z6b2T9f.";"121213123";"MANAGER"
+1;"1";"admin@localhost";"admin";"admin";"$2a$10$ebyC4Z5WtCXXc.HGDc1Yoe6CLFzcntFmfse6/pTj7CeDY5I05w16C";"123123123";"ADMIN"
+2;"1";"manager@localhost";"manager";"manager";"$2a$10$ebyC4Z5WtCXXc.HGDc1Yoe6CLFzcntFmfse6/pTj7CeDY5I05w16C";"121213123";"MANAGER"

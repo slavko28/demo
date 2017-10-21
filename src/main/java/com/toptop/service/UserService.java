@@ -17,7 +17,7 @@ public interface UserService extends AbstractService<User, Long, UserDTO> {
      * @param email the email
      * @return the entity
      */
-    User getUserByEmail(String email);
+    Optional<User> getUserByEmail(String email);
 
     /**
      * Save user.
