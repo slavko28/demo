@@ -12,17 +12,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.util.Assert;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @Transactional
 public class AddressServiceImpl extends TransactionService<Address, Long, AddressMapper, AddressDTO>
         implements AddressService {
 
-    private static final Logger log = LoggerFactory.getLogger(AddressServiceImpl.class);
+    private static final Logger LOG = LoggerFactory.getLogger(AddressServiceImpl.class);
 
     @Autowired
     private AddressRepository addressRepository;
@@ -32,25 +30,25 @@ public class AddressServiceImpl extends TransactionService<Address, Long, Addres
 
     @Override
     public List<AddressDTO> findAllByCompanyId(Long id) {
-        log.debug("Find all addresses by Company id: {}", id);
+        LOG.debug("Find all addresses by Company id: {}", id);
         return getMapper().mapToDTOs(addressRepository.findAllByCompanyId(id));
     }
 
     @Override
     public List<AddressDTO> findAllByCompanyIdAndType(Long id, AddressType type) {
-        log.debug("Find all addresses by Company id: {} and type: {}", id, type);
+        LOG.debug("Find all addresses by Company id: {} and type: {}", id, type);
         return getMapper().mapToDTOs(addressRepository.findAllByCompanyIdAndType(id, type));
     }
 
     @Override
     public List<AddressDTO> findAllByType(AddressType type) {
-        log.debug("Find all addresses by address type: {}", type);
+        LOG.debug("Find all addresses by address type: {}", type);
         return getMapper().mapToDTOs(addressRepository.findAllByAddressType(type));
     }
 
     @Override
     public boolean isExist(AddressDTO addressDTO) throws IllegalArgumentException {
-        log.debug("Check if address is exits: {}", addressDTO);
+        LOG.debug("Check if address is exits: {}", addressDTO);
         return getRepository().exists(addressDTO.getId());
 }
 

@@ -28,21 +28,6 @@ public class HomeController {
     @Autowired
     private CurrentUserService currentUserService;
 
-    @RequestMapping("/")
-    public String getHomePage() {
-        LOG.debug("Getting home page");
-        Set<String> roles = AuthorityUtils.authorityListToSet(SecurityContextHolder
-                .getContext().getAuthentication().getAuthorities());
-        if (roles.contains("ADMIN")){
-            return "redirect:/admin";
-        } else if (roles.contains("MANAGER")){
-            return "redirect:/manager";
-        } else if (roles.contains("ACCOUNTANT")){
-            return "redirect:/accountant";
-        }
-        return "home";
-    }
-
     @PreAuthorize("hasAuthority('ADMIN')")
     @RequestMapping("/admin")
     public String getHomePageForAdmin() {
