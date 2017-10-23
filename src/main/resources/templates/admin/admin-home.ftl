@@ -7,9 +7,6 @@
 <div class="container text-center">
     <h1 class="mt-5 center-block">Admin Home page</h1>
 
-<#if currentUser?? >
-    <h1>OK !</h1>
-</#if>
 </div>
 
 
