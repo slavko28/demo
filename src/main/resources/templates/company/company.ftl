@@ -8,7 +8,6 @@
     <br/>
     <div class="col-md-4 col-lg-6 mx-auto">
         <form method="post" action="/#" role="update">
-            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
             <div class="text-center">
                 <h3>${company.shortName}</h3>
                 <hr>
@@ -22,7 +21,7 @@
                 <div class="col-sm-9">
                     <div class="form-group">
                         <div class="input-group mb-2 mr-sm-2 mb-sm-0">
-                            <div class="input-group-addon" style="width: 2.6rem"><i class="fa fa-id-card-o"></i></div>
+                            <div class="input-group-addon" style="width: 2.6rem"><i class=""></i></div>
                             <input readOnly type="number" name="id" class="form-control" id="id"
                                    value=${company.id}>
                         </div>
@@ -34,7 +33,7 @@
                 <div class="col-sm-9">
                     <div class="form-group">
                         <div class="input-group mb-2 mr-sm-2 mb-sm-0">
-                            <div class="input-group-addon" style="width: 2.6rem"><i class="fa fa-id-card-o"></i></div>
+                            <div class="input-group-addon" style="width: 2.6rem"><i class=""></i></div>
                             <input type="text" name="shortName" class="form-control" id="shortName"
                                    value=${company.shortName}>
                         </div>
@@ -47,7 +46,7 @@
                 <div class="col-sm-9">
                     <div class="form-group">
                         <div class="input-group mb-2 mr-sm-2 mb-sm-0">
-                            <div class="input-group-addon" style="width: 2.6rem"><i class="fa fa-id-card-o"></i></div>
+                            <div class="input-group-addon" style="width: 2.6rem"><i class=""></i></div>
                             <input type="text" name="fullName" class="form-control" id="fullName"
                                    value=${company.fullName}>
                         </div>
@@ -60,7 +59,7 @@
                 <div class="col-sm-9">
                     <div class="form-group">
                         <div class="input-group mb-2 mr-sm-2 mb-sm-0">
-                            <div class="input-group-addon" style="width: 2.6rem"><i class="fa fa-user"></i></div>
+                            <div class="input-group-addon" style="width: 2.6rem"><i class=""></i></div>
                             <input type="text" name="cod" class="form-control" id="cod"
                                    value=${company.companyCod}>
                         </div>

@@ -29,10 +29,10 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarResponsive">
             <ul class="navbar-nav ml-auto">
-                <li class="nav-item">
-                    <a class="nav-link" href="/">Home</a>
-                </li>
                 <#if currentUser??>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/">Home</a>
+                    </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" data-toggle="dropdown" id="Preview" href="#" role="button"
                            aria-haspopup="true" aria-expanded="false">
@@ -53,7 +53,6 @@
                 </#if>
                 <#if currentUser??>
                     <li class="nav-item">
-                        <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
                         <a class="nav-link" href="/logout">Logout</a>
                     </li>
                 <#else>
