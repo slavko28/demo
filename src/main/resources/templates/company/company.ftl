@@ -8,6 +8,7 @@
     <br/>
     <div class="col-md-4 col-lg-6 mx-auto">
         <form method="post" action="/#" role="update">
+            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
             <div class="text-center">
                 <h3>${company.shortName}</h3>
                 <hr>

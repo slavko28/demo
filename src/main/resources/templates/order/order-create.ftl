@@ -20,6 +20,7 @@
     <div class="row">
         <div class="col-md-4">
             <form class="form" role="form" method="post" action="/order">
+                <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
                 <div class="row">
                     <div class="col-md-4 field-label-responsive">
                         <label for="orderDate">Date</label>

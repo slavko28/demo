@@ -53,6 +53,7 @@
                 </#if>
                 <#if currentUser??>
                     <li class="nav-item">
+                        <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
                         <a class="nav-link" href="/logout">Logout</a>
                     </li>
                 <#else>
