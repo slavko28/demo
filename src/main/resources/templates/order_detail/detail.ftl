@@ -9,6 +9,7 @@
     <br/>
     <div class="col-md-4 col-lg-6 mx-auto">
         <form method="post" action="/detail/update" role="form">
+            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
             <div class="text-center">
                 <h4>Detail's of order id: ${id} </h4>
                 <hr>
@@ -52,26 +53,26 @@
             </div>
             <div class="row">
                 <div class="col-sm-3 field-label-responsive">
-                    <label for="truck">Truck</label>
+                    <label for="truck">Truck / Num</label>
                 </div>
                 <div class="col-sm-9">
                     <div class="form-group">
                         <div class="input-group mb-2 mr-sm-2 mb-sm-0">
                             <input readOnly type="text" name="truck" class="form-control" id="truck"
-                                   value="${detail.truck.model} ${detail.truck.licensePlate}">
+                                   value="${detail.truck.model} / ${detail.truck.licensePlate}">
                         </div>
                     </div>
                 </div>
             </div>
             <div class="row">
                 <div class="col-sm-3 field-label-responsive">
-                    <label for="trailer">Trailer</label>
+                    <label for="trailer">Trailer / Num</label>
                 </div>
                 <div class="col-sm-9">
                     <div class="form-group">
                         <div class="input-group mb-2 mr-sm-2 mb-sm-0">
                             <input readOnly type="text" name="trailer" class="form-control" id="trailer"
-                                   value="${detail.trailer.model} ${detail.trailer.licensePlate}">
+                                   value="${detail.trailer.model} / ${detail.trailer.licensePlate}">
                         </div>
                     </div>
                 </div>

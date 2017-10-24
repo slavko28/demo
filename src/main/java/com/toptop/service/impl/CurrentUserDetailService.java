@@ -14,18 +14,16 @@ import org.springframework.stereotype.Service;
 @Service
 public class CurrentUserDetailService implements UserDetailsService {
 
-    private final Logger log = LoggerFactory.getLogger(CurrentUserDetailService.class);
+    private final Logger LOG = LoggerFactory.getLogger(CurrentUserDetailService.class);
 
     @Autowired
     private UserService userService;
 
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-        log.debug("Authenticating user with email={}", email.replaceFirst("@.*", "@***"));
-        User user = userService.getUserByEmail(email);
-        if (user == null) {
-            throw new UsernameNotFoundException(String.format("User with email=%s was not found", email));
-        }
+        LOG.debug("Authenticating user with email={}", email.replaceFirst("@.*", "@***"));
+        User user = userService.getUserByEmail(email)
+                .orElseThrow(() -> new UsernameNotFoundException(String.format("User with email=%s was not found", email)));
         return new CurrentUser(user);
     }
 }

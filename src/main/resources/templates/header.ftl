@@ -1,6 +1,8 @@
+<#-- @ftlvariable name="_csrf" type="org.springframework.security.web.csrf.CsrfToken" -->
+<#-- @ftlvariable name="currentUser" type="com.toptop.domain.CurrentUser" -->
 <#macro header pagetitle="TTTrans-Logictic" >
-<#--<#assign security=JspTaglibs["http://www.springframework.org/security/tags"] />-->
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
     <meta charset="utf-8">
@@ -30,31 +32,35 @@
                 <li class="nav-item">
                     <a class="nav-link" href="/">Home</a>
                 </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" id="Preview" href="#" role="button"
-                       aria-haspopup="true" aria-expanded="false">
-                        Entities
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="Preview">
-                        <a class="dropdown-item" href="/admin/user/all">Users</a>
-                        <a class="dropdown-item" href="/company/all">Company</a>
-                        <a class="dropdown-item" href="/employee/all">Company employee</a>
-                        <a class="dropdown-item" href="/truck/all">Truck</a>
-                        <a class="dropdown-item" href="/trailer/all">Trailer</a>
-                        <a class="dropdown-item" href="/order/all">Order</a>
-                        <a class="dropdown-item" href="/detail/all">Order details</a>
-                    </div>
-                </li>
-                <li class="nav-item">
-                <#--<@sec.authorize access="! isAuthenticated()">-->
-                    <a class="nav-link" href="/login">Login</a>
-                <#--</@sec.authorize>-->
-                </li>
-                <li class="nav-item">
-                <#--<@sec.authorize access="isAuthenticated()">-->
-                    <a class="nav-link" href="/logout">Logout</a>
-                <#--</@sec.authorize>-->
-                </li>
+                <#if currentUser??>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" data-toggle="dropdown" id="Preview" href="#" role="button"
+                           aria-haspopup="true" aria-expanded="false">
+                            Entities
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="Preview">
+                            <#if currentUser.role == "ADMIN">
+                                <a class="dropdown-item" href="/admin/user/all">Users</a>
+                            </#if>
+                            <a class="dropdown-item" href="/company/all">Company</a>
+                            <a class="dropdown-item" href="/employee/all">Company employee</a>
+                            <a class="dropdown-item" href="/truck/all">Truck</a>
+                            <a class="dropdown-item" href="/trailer/all">Trailer</a>
+                            <a class="dropdown-item" href="/order/all">Order</a>
+                            <a class="dropdown-item" href="/detail/all">Order details</a>
+                        </div>
+                    </li>
+                </#if>
+                <#if currentUser??>
+                    <li class="nav-item">
+                        <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+                        <a class="nav-link" href="/logout">Logout</a>
+                    </li>
+                <#else>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/login">Login</a>
+                    </li>
+                </#if>
             </ul>
         </div>
     </div>
@@ -68,7 +74,6 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js"
         integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1"
         crossorigin="anonymous"></script>
-
 </#macro>
 
 

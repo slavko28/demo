@@ -18,7 +18,7 @@ import java.util.List;
 @Transactional
 public class CargoServiceImpl extends TransactionService<Cargo, Long, CargoMapper, CargoDTO> implements CargoService {
 
-    private static final Logger log = LoggerFactory.getLogger(CargoServiceImpl.class);
+    private static final Logger LOG = LoggerFactory.getLogger(CargoServiceImpl.class);
 
     @Autowired
     private CargoRepository cargoRepository;
@@ -35,7 +35,7 @@ public class CargoServiceImpl extends TransactionService<Cargo, Long, CargoMappe
     @Override
     @Transactional(readOnly = true)
     public boolean isExist(CargoDTO cargoDTO) {
-        log.debug("Check if cargo is exits: {}", cargoDTO);
+        LOG.debug("Check if cargo is exits: {}", cargoDTO);
         return getRepository().exists(cargoDTO.getId());
     }
 
