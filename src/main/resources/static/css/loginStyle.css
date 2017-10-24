@@ -16,13 +16,13 @@ body {
 
 .login-form {
     font: 16px/2em Lato, serif;
-    margin: 100px auto;
+    margin: 50px auto 0px auto;
     max-width: 400px;
 }
 
 form[role=login] {
     color: #5d5d5d;
-    background: #f2f2f2;
+    background: #eeeeee;
     padding: 26px;
     border-radius: 10px;
     -moz-border-radius: 10px;
@@ -31,7 +31,7 @@ form[role=login] {
 form[role=login] img {
     display: block;
     margin: 0 auto;
-    margin-bottom: 35px;
+    margin-bottom: 20px;
 }
 form[role=login] input,
 form[role=login] button {
