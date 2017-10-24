@@ -18,7 +18,8 @@ import java.util.NoSuchElementException;
 
 @Controller
 public class UserController {
-    private final Logger log = LoggerFactory.getLogger(UserController.class);
+
+    private final Logger LOG = LoggerFactory.getLogger(UserController.class);
 
     @Autowired
     private UserService userService;
@@ -34,7 +35,7 @@ public class UserController {
     @PreAuthorize("@currentUserServiceImpl.canAccessUser(principal, #id)")
     @RequestMapping("/user/{id}")
     public ModelAndView getUserPage(@PathVariable Long id) {
-        log.debug("Getting user page for user={}", id);
+        LOG.debug("Getting user page for user={}", id);
         UserDTO userDTO = userService.findOne(id);
         if (userDTO == null) {
             throw new NoSuchElementException(String.format("User=%s not found", id));
@@ -44,20 +45,20 @@ public class UserController {
 
     @RequestMapping(value = "/user/create", method = RequestMethod.GET)
     public ModelAndView getUserCreatePage() {
-        log.debug("Getting user create form");
+        LOG.debug("Getting user create form");
         return new ModelAndView("user_create", "form", new UserDTO());
     }
 
     @RequestMapping(value = "/user/create", method = RequestMethod.POST)
     public String handleUserCreateForm(@Valid @ModelAttribute("form") UserDTO userDTO, BindingResult bindingResult) {
-        log.debug("Processing user create form={}, bindingResult={}", userDTO, bindingResult);
+        LOG.debug("Processing user create form={}, bindingResult={}", userDTO, bindingResult);
         if (bindingResult.hasErrors()) {
             return "user_create";
         }
         try {
             userService.saveUser(userDTO);
         } catch (DataIntegrityViolationException e) {
-            log.warn("Exception occurred when trying to save the user, assuming duplicate email", e);
+            LOG.warn("Exception occurred when trying to save the user, assuming duplicate email", e);
             bindingResult.reject("email.exists", "Email already exists");
             return "user_create";
         }
@@ -66,14 +67,14 @@ public class UserController {
 
     @RequestMapping(value = "/user/update", method = RequestMethod.POST)
     public String updateUser(@ModelAttribute UserDTO userDTO) {
-        log.debug("Updating user's data. ID: {}", userDTO.getId());
+        LOG.debug("Updating user's data. ID: {}", userDTO.getId());
         userService.update(userDTO);
         return "redirect:/admin/user/all";
     }
 
     @RequestMapping("/admin/user/all")
     public ModelAndView getUsersPage() {
-        log.debug("Getting users page");
+        LOG.debug("Getting users page");
         return new ModelAndView("admin/user_all", "users", userService.findAll());
     }
 

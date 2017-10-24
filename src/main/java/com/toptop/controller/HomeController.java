@@ -28,6 +28,11 @@ public class HomeController {
     @Autowired
     private CurrentUserService currentUserService;
 
+    @RequestMapping("/")
+    public String getHomePage(){
+        return "home";
+    }
+
     @PreAuthorize("hasAuthority('ADMIN')")
     @RequestMapping("/admin")
     public String getHomePageForAdmin() {
