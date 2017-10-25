@@ -2,6 +2,7 @@
 <#import "../modal/company-create-modal.ftl" as company_modal>
 <#import "../modal/manager-create-modal.ftl" as manager_modal>
 <#import "../modal/cargo-create-modal.ftl" as cargo_modal>
+<#import "../modal/route-create-modal.ftl" as route_modal>
 
 <@h.header></@h.header>
 <link rel="stylesheet" href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css">
@@ -20,7 +21,6 @@
     <div class="row">
         <div class="col-md-4">
             <form class="form" role="form" method="post" action="/order">
-                <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
                 <div class="row">
                     <div class="col-md-4 field-label-responsive">
                         <label for="orderDate">Date</label>
@@ -172,11 +172,12 @@
                             </#list>
                             </select>
                             <span class="input-group-btn">
-                                    <button type="button" id="addCompamy"
+                                    <button type="button" data-toggle="modal" data-target="#new_Route"
                                             class="btn btn-outline-secondary btn-add">
                                             <i class="fa fa-plus"></i>
                                     </button>
                             </span>
+                        <@route_modal.route_create></@route_modal.route_create>
                         </div>
                     </div>
                 </div>
