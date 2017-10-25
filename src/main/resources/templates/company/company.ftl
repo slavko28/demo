@@ -35,7 +35,7 @@
                         <div class="input-group mb-2 mr-sm-2 mb-sm-0">
                             <div class="input-group-addon" style="width: 2.6rem"><i class=""></i></div>
                             <input type="text" name="shortName" class="form-control" id="shortName"
-                                   value=${company.shortName}>
+                                   value="${company.shortName}">
                         </div>
                     </div>
                 </div>
@@ -48,7 +48,7 @@
                         <div class="input-group mb-2 mr-sm-2 mb-sm-0">
                             <div class="input-group-addon" style="width: 2.6rem"><i class=""></i></div>
                             <input type="text" name="fullName" class="form-control" id="fullName"
-                                   value=${company.fullName}>
+                                   value="${company.fullName}">
                         </div>
                     </div>
                 </div>
@@ -61,7 +61,7 @@
                         <div class="input-group mb-2 mr-sm-2 mb-sm-0">
                             <div class="input-group-addon" style="width: 2.6rem"><i class=""></i></div>
                             <input type="text" name="cod" class="form-control" id="cod"
-                                   value=${company.companyCod}>
+                                   value="${company.companyCod}" pattern="[0-9]*">
                         </div>
                     </div>
                 </div>
