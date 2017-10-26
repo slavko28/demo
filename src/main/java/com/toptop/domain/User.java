@@ -29,4 +29,6 @@ public class User extends BaseObject implements Serializable {
 
     @Enumerated(EnumType.STRING)
     private UserRole role;
+
+    private String resetToken;
 }
