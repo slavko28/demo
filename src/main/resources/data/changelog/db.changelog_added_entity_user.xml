@@ -29,6 +29,7 @@
             <column name="enabled" type="tinyint(1)" defaultValue="1">
                 <constraints nullable="false"/>
             </column>
+            <column name="reset_token" type="varchar(50)"/>
         </createTable>
 
         <createIndex indexName="idx_user_email"
