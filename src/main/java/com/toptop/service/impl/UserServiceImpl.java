@@ -14,12 +14,13 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
+import java.util.UUID;
 
 @Service
 @Transactional
 public class UserServiceImpl extends TransactionService<User, Long, UserMapper, UserDTO> implements UserService {
 
-    private static final Logger log = LoggerFactory.getLogger(UserServiceImpl.class);
+    private static final Logger LOG = LoggerFactory.getLogger(UserServiceImpl.class);
 
     @Autowired
     private UserRepository userRepository;
@@ -31,15 +32,20 @@ public class UserServiceImpl extends TransactionService<User, Long, UserMapper, 
     @Override
     @Transactional(readOnly = true)
     public Optional<User> getUserByEmail(String email) {
-        log.debug("Searching user by email: {}", email);
+        LOG.debug("Searching user by email: {}", email);
         return userRepository.findOneByEmail(email);
+    }
+
+    @Override
+    public Optional<User> getUserByResetToken(String resetToken) {
+        return userRepository.findByResetToken(resetToken);
     }
 
     @Override
     public void saveUser(UserDTO userDTO) {
         userDTO.setPassword(bCryptPasswordEncoder.encode(userDTO.getPassword()));
         userDTO.setActive(false);
-        log.debug("Save user with name: {}", userDTO.getName());
+        LOG.debug("Save user with name: {}", userDTO.getName());
         save(userDTO);
     }
 
@@ -55,9 +61,25 @@ public class UserServiceImpl extends TransactionService<User, Long, UserMapper, 
     }
 
     @Override
+    public String createResetToken(User user) {
+        String token = UUID.randomUUID().toString();
+        user.setResetToken(token);
+        userRepository.save(user);
+        return token;
+    }
+
+    @Override
+    public void resetPassword(User user, String password) {
+        LOG.debug("Reset password by user {}", user.getEmail());
+        user.setPassword(bCryptPasswordEncoder.encode(password));
+        user.setResetToken(null);
+        getRepository().save(user);
+    }
+
+    @Override
     @Transactional(readOnly = true)
     public boolean isExist(UserDTO userDTO) throws IllegalArgumentException{
-        log.debug("Check if user is exits: {}", userDTO);
+        LOG.debug("Check if user is exits: {}", userDTO);
         return getRepository().exists(userDTO.getId());
     }
 
