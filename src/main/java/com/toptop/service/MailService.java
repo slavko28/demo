@@ -6,5 +6,5 @@ import javax.servlet.http.HttpServletRequest;
 
 public interface MailService {
 
-    void sentMailToPasswordReset(HttpServletRequest url, User user);
+    void sentMailToPasswordReset(HttpServletRequest url, User user) throws Exception;
 }

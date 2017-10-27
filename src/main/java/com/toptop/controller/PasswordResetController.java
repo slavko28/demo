@@ -35,7 +35,7 @@ public class PasswordResetController {
     }
 
     @RequestMapping(value = "/reset", method = RequestMethod.POST)
-    public ModelAndView resetPasswordByEmail(ModelAndView modelAndView, HttpServletRequest request, @RequestParam("email") String email) {
+    public ModelAndView resetPasswordByEmail(ModelAndView modelAndView, HttpServletRequest request, @RequestParam("email") String email) throws Exception {
         Optional<User> maybeUser = userService.getUserByEmail(email);
         if (!maybeUser.isPresent()) {
             LOG.debug("User with this email address {} wasn't found.", email);
