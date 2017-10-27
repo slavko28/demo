@@ -51,6 +51,7 @@ public class UserServiceImpl extends TransactionService<User, Long, UserMapper, 
 
     @Override
     public void update(UserDTO userDTO) {
+        LOG.debug("Updating user with id: {}", userDTO.getId());
         User userFromBase = getRepository().getOne(userDTO.getId());
         userFromBase.setName(userDTO.getName());
         userFromBase.setLastName(userDTO.getLastName());
@@ -62,6 +63,7 @@ public class UserServiceImpl extends TransactionService<User, Long, UserMapper, 
 
     @Override
     public String createResetToken(User user) {
+        LOG.debug("Preparing token to password reset");
         String token = UUID.randomUUID().toString();
         user.setResetToken(token);
         userRepository.save(user);

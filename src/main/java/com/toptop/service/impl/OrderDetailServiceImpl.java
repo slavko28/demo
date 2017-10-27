@@ -1,7 +1,6 @@
 package com.toptop.service.impl;
 
 import com.toptop.domain.OrderDetail;
-import com.toptop.domain.User;
 import com.toptop.repository.OrderDetailsRepository;
 import com.toptop.service.CurrentUserService;
 import com.toptop.service.OrderDetailService;
@@ -17,7 +16,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @Transactional
@@ -55,13 +53,6 @@ public class OrderDetailServiceImpl extends TransactionService<OrderDetail, Long
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         log.debug("Find all order details by current manager: {}", auth.getName());
         return findAllByManagerId(currentUserService.getCurrentUser().get().getId());
-    }
-
-    @Override
-    @Transactional(readOnly = true)
-    public OrderDetailDTO findOneById(Long id) {
-        log.debug("Find order detail by company order id: {}", id);
-        return getMapper().mapToDTO(orderDetailsRepository.findOne(id));
     }
 
     @Override
