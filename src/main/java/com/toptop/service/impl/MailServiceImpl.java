@@ -44,15 +44,19 @@ public class MailServiceImpl implements MailService {
     public void sentMailToPasswordReset(HttpServletRequest url, User user) throws Exception {
         MimeMessage message = mailSender.createMimeMessage();
         MimeMessageHelper helper = new MimeMessageHelper(message);
-        String token = userService.createResetToken(user);
         helper.setFrom(fromEmail);
         helper.setTo(user.getEmail());
         helper.setSubject(passwordResetSubject);
-        String link = url.getScheme() + "://" + url.getHeader("Host");
-        Template template = getTemplate();
+
         Map<String, Object> model = new HashMap<>();
+
+        String link = url.getScheme() + "://" + url.getHeader("Host");
         model.put("link", link);
+
+        String token = userService.createResetToken(user);
         model.put("token", token);
+
+        Template template = getTemplate();
         String text = FreeMarkerTemplateUtils.processTemplateIntoString(template, model);
         helper.setText(text, true);
         LOG.debug("Sending reset password message to email address: {} with path: {}, token: {} ", user.getEmail(), link, token);
