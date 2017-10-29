@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.time.LocalDateTime;
 
 /**
  * User.
@@ -31,4 +32,5 @@ public class User extends BaseObject implements Serializable {
     private UserRole role;
 
     private String resetToken;
+    private LocalDateTime expiryDate;
 }

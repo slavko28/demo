@@ -54,4 +54,12 @@ public interface UserService extends AbstractService<User, Long, UserDTO> {
      * @param password new password
      */
     void resetPassword(User user, String password);
+
+    /**
+     * Checks if the token is valid
+     *
+     * @param token the token
+     * @return true if valid or false if not
+     */
+    boolean checkToken(String token);
 }

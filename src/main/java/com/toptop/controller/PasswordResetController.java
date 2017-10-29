@@ -50,8 +50,7 @@ public class PasswordResetController {
 
     @RequestMapping(value = "/reset/pass", method = RequestMethod.GET)
     public ModelAndView getResetPasswordPage(ModelAndView modelAndView, @RequestParam("token") String token) {
-        Optional<User> maybeUser = userService.getUserByResetToken(token);
-        if (maybeUser.isPresent()) {
+        if (userService.checkToken(token)) {
             modelAndView.addObject("token", token);
         } else {
             modelAndView.addObject("errorMessage", "Oops!  This is an invalid password reset link.");

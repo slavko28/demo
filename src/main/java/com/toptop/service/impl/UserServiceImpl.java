@@ -13,6 +13,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDateTime;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -66,6 +67,8 @@ public class UserServiceImpl extends TransactionService<User, Long, UserMapper, 
         LOG.debug("Preparing token to password reset");
         String token = UUID.randomUUID().toString();
         user.setResetToken(token);
+        LocalDateTime expiryDate = LocalDateTime.now().plusHours(2);
+        user.setExpiryDate(expiryDate);
         userRepository.save(user);
         return token;
     }
@@ -74,8 +77,20 @@ public class UserServiceImpl extends TransactionService<User, Long, UserMapper, 
     public void resetPassword(User user, String password) {
         LOG.debug("Reset password by user {}", user.getEmail());
         user.setPassword(bCryptPasswordEncoder.encode(password));
+        LOG.debug("Reset token");
         user.setResetToken(null);
         getRepository().save(user);
+    }
+
+    @Override
+    public boolean checkToken(String token) {
+        LOG.debug("Checking if token: {} - is valid", token);
+        Optional<User> maybeUser = userRepository.findByResetToken(token);
+        if (!maybeUser.isPresent()) {
+            return false;
+        }
+        User user = maybeUser.get();
+        return LocalDateTime.now().isBefore(user.getExpiryDate());
     }
 
     @Override
