@@ -30,6 +30,7 @@
                 <constraints nullable="false"/>
             </column>
             <column name="reset_token" type="varchar(50)"/>
+            <column name="expiry_date" type="timestamp"/>
         </createTable>
 
         <createIndex indexName="idx_user_email"
