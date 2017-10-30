@@ -22,8 +22,9 @@ public abstract class TransactionService<T extends BaseObject, ID extends Serial
 
     @Override
     @Transactional(readOnly = true)
-    public DTO findOne(ID id) {
-        return getMapper().mapToDTO(getRepository().findOne(id));
+    public Optional<DTO> findOne(ID id) {
+        T object = getRepository().findOne(id);
+        return Optional.ofNullable(getMapper().mapToDTO(object));
     }
 
     @Override

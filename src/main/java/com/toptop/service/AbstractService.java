@@ -22,7 +22,7 @@ public interface AbstractService<T extends BaseObject, ID extends Serializable, 
      * @param id the entity id
      * @return the entity
      */
-    DTO findOne(ID id);
+    Optional<DTO> findOne(ID id);
 
     /**
      * Find all entities.
@@ -38,13 +38,4 @@ public interface AbstractService<T extends BaseObject, ID extends Serializable, 
      * @throws IllegalArgumentException in case the given entity is {@literal null}.
      */
     void delete(ID id);
-
-    /**
-     * Check if entity is already exists.
-     *
-     * @param dto the entity to check
-     * @return true if entity exists, and false - if not
-     * @throws IllegalArgumentException in case the given entity has ID as {@literal null}.
-     */
-    boolean isExist(DTO dto);
 }
