@@ -15,14 +15,15 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/employee")
 public class CompanyEmployeeController {
 
-    private final Logger log = LoggerFactory.getLogger(CompanyEmployeeController.class);
+    private static final Logger LOG = LoggerFactory.getLogger(CompanyEmployeeController.class);
 
-    private final CompanyEmployeeService companyEmployeeService;
+    private CompanyEmployeeService companyEmployeeService;
 
     @Autowired
     public CompanyEmployeeController(CompanyEmployeeService companyEmployeeService) {
@@ -40,13 +41,13 @@ public class CompanyEmployeeController {
      */
     @RequestMapping(value = "/", method = RequestMethod.POST)
     public ResponseEntity create(@Valid @RequestBody CompanyEmployeeDTO employeeDTO) throws URISyntaxException {
-        log.debug("request to create mew company employee: {}", employeeDTO);
+        LOG.debug("request to create mew company employee: {}", employeeDTO);
         if (employeeDTO.getId() != null) {
             HttpHeaders headers = new HttpHeaders();
             headers.setLocation(new URI("/api/employee/all"));
             return new ResponseEntity<>(headers, HttpStatus.CREATED);
         }
-        log.error("employee with ID: {} is already exists.", employeeDTO.getId());
+        LOG.error("employee with ID: {} is already exists.", employeeDTO.getId());
         return new ResponseEntity<>("Employee with ID: " + employeeDTO.getId() + " is already exists.", HttpStatus.CONFLICT);
     }
 
@@ -57,16 +58,15 @@ public class CompanyEmployeeController {
      * @return the ResponseEntity with status 200 (Ok) and with body the updated CompanyEmployeeDTO,
      * or with status 400 (Bad Request) if the CompanyEmployeeDTO is not valid,
      * or with status 404 (Not Found) if the company employee couldn't be found
-     * @throws IllegalArgumentException in case the given CompanyEmployeeDTO's ID is null.
      */
     @RequestMapping(value = "/", method = RequestMethod.PUT)
     public ResponseEntity update(@Valid @RequestBody CompanyEmployeeDTO employeeDTO) {
-        log.debug("request to update company employee {}", employeeDTO);
-        Assert.notNull(employeeDTO.getId(), "ID can not be null");
-        if (companyEmployeeService.isExist(employeeDTO)) {
+        LOG.debug("request to update company employee {}", employeeDTO);
+        Optional<CompanyEmployeeDTO> maybeEmployee = companyEmployeeService.findOne(employeeDTO.getId());
+        if (maybeEmployee.isPresent()) {
             return ResponseEntity.ok(companyEmployeeService.save(employeeDTO));
         }
-        log.error("employee with ID: {} does not found.", employeeDTO.getId());
+        LOG.error("employee with ID: {} does not found.", employeeDTO.getId());
         return new ResponseEntity<>("employee with ID: " + employeeDTO.getId() + " does not found.", HttpStatus.NOT_FOUND);
     }
 
@@ -76,17 +76,15 @@ public class CompanyEmployeeController {
      * @param id the Company employee ID
      * @return the ResponseEntity with status 200 (Ok) and with body the CompanyEmployeeDTO,
      * or with status 404 (Not Found) if the company employee couldn't be found
-     * @throws IllegalArgumentException in case the given ID is null.
      */
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public ResponseEntity getById(@PathVariable Long id) {
-        log.debug("request to get company employee by id: {}", id);
-        Assert.notNull(id, "ID can not be null");
-        CompanyEmployeeDTO employeeDTO = companyEmployeeService.findOne(id);
-        if (employeeDTO != null) {
-            return ResponseEntity.ok(employeeDTO);
+        LOG.debug("request to get company employee by id: {}", id);
+        Optional<CompanyEmployeeDTO> maybeEmployee = companyEmployeeService.findOne(id);
+        if (maybeEmployee.isPresent()) {
+            return ResponseEntity.ok(maybeEmployee.get());
         }
-        log.error("employee with ID: {} does not found.", id);
+        LOG.error("employee with ID: {} does not found.", id);
         return new ResponseEntity<>("employee with ID: " + id + " does not found.", HttpStatus.NOT_FOUND);
     }
 
@@ -97,7 +95,7 @@ public class CompanyEmployeeController {
      */
     @RequestMapping(value = "/all", method = RequestMethod.GET)
     public ResponseEntity getAll() {
-        log.debug("request to get all employees");
+        LOG.debug("request to get all employees");
         return ResponseEntity.ok(companyEmployeeService.findAll());
     }
 
@@ -109,7 +107,7 @@ public class CompanyEmployeeController {
      */
     @RequestMapping(value = "/company/{id}", method = RequestMethod.GET)
     public ResponseEntity getAllByCompanyId(@PathVariable("id") Long id) {
-        log.debug("request to get all employee by company id: {}", id);
+        LOG.debug("request to get all employee by company id: {}", id);
         Assert.notNull(id, "ID can not be null");
         return ResponseEntity.ok(companyEmployeeService.findAllByCompanyId(id));
     }
@@ -123,7 +121,7 @@ public class CompanyEmployeeController {
      */
     @RequestMapping(value = "/type/{type}", method = RequestMethod.GET)
     public ResponseEntity getAllByType(@PathVariable("type") EmployeeType type) {
-        log.debug("request to get all employees by type {}", type);
+        LOG.debug("request to get all employees by type {}", type);
         Assert.notNull(type, "Type can not be null");
         return ResponseEntity.ok(companyEmployeeService.findAllByType(type));
     }
@@ -139,7 +137,7 @@ public class CompanyEmployeeController {
     @RequestMapping(value = "/company/{id}/type/{type}", method = RequestMethod.GET)
     public ResponseEntity getAllByCompanyIdAndEmployeeType(@PathVariable("id") Long id,
                                                            @PathVariable("type") EmployeeType type) {
-        log.debug("request to get all employee by company id: {} and employee type {}", id, type);
+        LOG.debug("request to get all employee by company id: {} and employee type {}", id, type);
         Assert.notNull(id, "ID can not be null");
         Assert.notNull(type, "Type can not be null");
         return ResponseEntity.ok(companyEmployeeService.findAllByCompanyIdAndEmployeeType(id, type));

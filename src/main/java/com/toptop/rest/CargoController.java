@@ -14,14 +14,15 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/cargo")
 public class CargoController {
 
-    private final Logger log = LoggerFactory.getLogger(CargoController.class);
+    private static final Logger LOG = LoggerFactory.getLogger(CargoController.class);
 
-    private final CargoService cargoService;
+    private CargoService cargoService;
 
     @Autowired
     public CargoController(CargoService cargoService) {
@@ -39,14 +40,14 @@ public class CargoController {
      */
     @RequestMapping(value = "/", method = RequestMethod.POST)
     public ResponseEntity create(@Valid @RequestBody CargoDTO cargoDTO) throws URISyntaxException {
-        log.debug("request to create new Cargo: {}", cargoDTO);
+        LOG.debug("request to create new Cargo: {}", cargoDTO);
         if (cargoDTO.getId() == null) {
             cargoService.save(cargoDTO);
             HttpHeaders headers = new HttpHeaders();
             headers.setLocation(new URI("/api/cargo/all"));
             return new ResponseEntity<>(headers, HttpStatus.CREATED);
         }
-        log.error("cargo with ID: {} is already exists.", cargoDTO.getId());
+        LOG.error("cargo with ID: {} is already exists.", cargoDTO.getId());
         return new ResponseEntity<>("cargo with ID: " + cargoDTO.getId() + " is already exists.", HttpStatus.CONFLICT);
     }
 
@@ -57,16 +58,15 @@ public class CargoController {
      * @return the ResponseEntity with status 200 (Ok) and with body the updated cargoDTO,
      * or with status 400 (Bad Request) if the cargoDTO is not valid,
      * or with status 404 (Not Found) if the cargo couldn't be found
-     * @throws IllegalArgumentException in case the given Cargo's ID is null.
      **/
     @RequestMapping(value = "/", method = RequestMethod.PUT)
     public ResponseEntity update(@Valid @RequestBody CargoDTO cargoDTO) {
-        log.debug("request to update Cargo : {}", cargoDTO);
-        Assert.notNull(cargoDTO.getId(), "ID can not be null");
-        if (cargoService.isExist(cargoDTO)) {
+        LOG.debug("request to update Cargo : {}", cargoDTO);
+        Optional<CargoDTO> maybeCargo = cargoService.findOne(cargoDTO.getId());
+        if (maybeCargo.isPresent()) {
             return ResponseEntity.ok(cargoService.save(cargoDTO));
         }
-        log.error("cargo with ID: {} does not found.", cargoDTO.getId());
+        LOG.error("cargo with ID: {} does not found.", cargoDTO.getId());
         return new ResponseEntity<>("cargo with ID: " + cargoDTO.getId() + " - does not found.", HttpStatus.NOT_FOUND);
     }
 
@@ -76,17 +76,15 @@ public class CargoController {
      * @param id the cargo ID
      * @return the ResponseEntity with status 200 (Ok) and with body the CargoDTO,
      * or with status 404 (Not Found) if the cargo couldn't be found
-     * @throws IllegalArgumentException in case the given ID is null.
      */
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public ResponseEntity getById(@PathVariable Long id) {
-        log.debug("request to get Cargo by ID: {}", id);
-        Assert.notNull(id, "ID can not be null");
-        CargoDTO cargoDTO = cargoService.findOne(id);
-        if (cargoDTO != null) {
-            return ResponseEntity.ok(cargoDTO);
+        LOG.debug("request to get Cargo by ID: {}", id);
+       Optional<CargoDTO> maybeCargo = cargoService.findOne(id);
+        if (maybeCargo.isPresent()) {
+            return ResponseEntity.ok(maybeCargo.get());
         }
-        log.error("cargo with ID: {} does not found.", id);
+        LOG.error("cargo with ID: {} does not found.", id);
         return new ResponseEntity<>("cargo with ID: " + id + " - does not found.", HttpStatus.NOT_FOUND);
     }
 
@@ -97,7 +95,7 @@ public class CargoController {
      */
     @RequestMapping(value = "/all", method = RequestMethod.GET)
     public ResponseEntity getAll() {
-        log.debug("request to get all Cargo entities.");
+        LOG.debug("request to get all Cargo entities.");
         return ResponseEntity.ok(cargoService.findAll());
     }
 
@@ -110,7 +108,7 @@ public class CargoController {
      */
     @RequestMapping(value = "/company/{id}", method = RequestMethod.GET)
     public ResponseEntity getAllByCompanyId(@PathVariable Long id) {
-        log.debug("request to get all Cargo entities by company ID: {}", id);
+        LOG.debug("request to get all Cargo entities by company ID: {}", id);
         Assert.notNull(id, "ID can not be null");
         return ResponseEntity.ok(cargoService.findAllByCompanyId(id));
     }
