@@ -19,7 +19,7 @@ import java.util.List;
 @Transactional
 public class CompanyEmployeeServiceImpl extends TransactionService<CompanyEmployee, Long, CompanyEmployeeMapper, CompanyEmployeeDTO> implements CompanyEmployeeService {
 
-    private static final Logger log = LoggerFactory.getLogger(UserServiceImpl.class);
+    private static final Logger LOG = LoggerFactory.getLogger(UserServiceImpl.class);
 
     @Autowired
     private CompanyEmployeeRepository employeeRepository;
@@ -30,29 +30,22 @@ public class CompanyEmployeeServiceImpl extends TransactionService<CompanyEmploy
     @Override
     @Transactional(readOnly = true)
     public List<CompanyEmployeeDTO> findAllByCompanyId(Long id) {
-        log.debug("Find all company employee by company id: {}", id);
+        LOG.debug("Find all company employee by company id: {}", id);
         return getMapper().mapToDTOs(employeeRepository.findAllByCompanyId(id));
     }
 
     @Override
     @Transactional(readOnly = true)
     public List<CompanyEmployeeDTO> findAllByType(EmployeeType type) {
-        log.debug("Find all employees by type: {}", type);
+        LOG.debug("Find all employees by type: {}", type);
         return getMapper().mapToDTOs(employeeRepository.findAllByType(type));
     }
 
     @Override
     @Transactional(readOnly = true)
     public List<CompanyEmployeeDTO> findAllByCompanyIdAndEmployeeType(Long companyId, EmployeeType employeeType) {
-        log.debug("Find all employee by company id: {}, and employee type: {}", companyId, employeeType);
+        LOG.debug("Find all employee by company id: {}, and employee type: {}", companyId, employeeType);
         return getMapper().mapToDTOs(employeeRepository.findAllByCompanyIdAndType(companyId, employeeType));
-    }
-
-    @Override
-    @Transactional(readOnly = true)
-    public boolean isExist(CompanyEmployeeDTO employeeDTO) throws IllegalArgumentException {
-        log.debug("Check if company employee is exits: {}", employeeDTO);
-        return getRepository().exists(employeeDTO.getId());
     }
 
     @Override

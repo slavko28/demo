@@ -94,13 +94,6 @@ public class UserServiceImpl extends TransactionService<User, Long, UserMapper, 
     }
 
     @Override
-    @Transactional(readOnly = true)
-    public boolean isExist(UserDTO userDTO) throws IllegalArgumentException{
-        LOG.debug("Check if user is exits: {}", userDTO);
-        return getRepository().exists(userDTO.getId());
-    }
-
-    @Override
     protected JpaRepository<User, Long> getRepository() {
         return userRepository;
     }

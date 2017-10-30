@@ -18,7 +18,7 @@ import java.util.List;
 @Transactional
 public class TruckServiceImpl extends TransactionService<Truck, Long, TruckMapper, TruckDTO> implements TruckService {
 
-    private static final Logger log = LoggerFactory.getLogger(UserServiceImpl.class);
+    private static final Logger LOG = LoggerFactory.getLogger(UserServiceImpl.class);
 
     @Autowired
     private TruckRepository truckRepository;
@@ -30,15 +30,8 @@ public class TruckServiceImpl extends TransactionService<Truck, Long, TruckMappe
     @Override
     @Transactional(readOnly = true)
     public List<TruckDTO> findAllByCompanyId(Long id) {
-        log.debug("Find all trucks by company id: {}", id);
+        LOG.debug("Find all trucks by company id: {}", id);
         return getMapper().mapToDTOs(truckRepository.findAllByCompanyId(id));
-    }
-
-    @Override
-    @Transactional(readOnly = true)
-    public boolean isExist(TruckDTO truckDTO) throws IllegalArgumentException{
-        log.debug("Check if trailer is exits: {}", truckDTO);
-        return getRepository().exists(truckDTO.getId());
     }
 
     @Override

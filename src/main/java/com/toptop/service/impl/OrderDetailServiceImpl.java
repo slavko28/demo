@@ -21,7 +21,7 @@ import java.util.List;
 @Transactional
 public class OrderDetailServiceImpl extends TransactionService<OrderDetail, Long, OrderDetailMapper, OrderDetailDTO> implements OrderDetailService {
 
-    private static final Logger log = LoggerFactory.getLogger(UserServiceImpl.class);
+    private static final Logger LOG = LoggerFactory.getLogger(UserServiceImpl.class);
 
     @Autowired
     private OrderDetailsRepository orderDetailsRepository;
@@ -36,14 +36,14 @@ public class OrderDetailServiceImpl extends TransactionService<OrderDetail, Long
     @Override
     @Transactional(readOnly = true)
     public List<OrderDetailDTO> findAllByDriverId(Long id) {
-        log.debug("Find all order details by driver id: {}", id);
+        LOG.debug("Find all order details by driver id: {}", id);
         return getMapper().mapToDTOs(orderDetailsRepository.findAllByDriverId(id));
     }
 
     @Override
     @Transactional(readOnly = true)
     public List<OrderDetailDTO> findAllByManagerId(Long id) {
-        log.debug("Find all order details by manager id: {}", id);
+        LOG.debug("Find all order details by manager id: {}", id);
         return getMapper().mapToDTOs(orderDetailsRepository.findAllByManagerId(id));
     }
 
@@ -51,15 +51,8 @@ public class OrderDetailServiceImpl extends TransactionService<OrderDetail, Long
     @Transactional(readOnly = true)
     public List<OrderDetailDTO> getOrderDetailByCurrentUser() {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        log.debug("Find all order details by current manager: {}", auth.getName());
+        LOG.debug("Find all order details by current manager: {}", auth.getName());
         return findAllByManagerId(currentUserService.getCurrentUser().get().getId());
-    }
-
-    @Override
-    @Transactional(readOnly = true)
-    public boolean isExist(OrderDetailDTO orderDetailDTO) throws IllegalArgumentException {
-        log.debug("Check if order details is exits: {}", orderDetailDTO);
-        return getRepository().exists(orderDetailDTO.getId());
     }
 
     @Override

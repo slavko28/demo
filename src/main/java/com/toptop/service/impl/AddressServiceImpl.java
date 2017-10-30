@@ -47,12 +47,6 @@ public class AddressServiceImpl extends TransactionService<Address, Long, Addres
     }
 
     @Override
-    public boolean isExist(AddressDTO addressDTO) throws IllegalArgumentException {
-        LOG.debug("Check if address is exits: {}", addressDTO);
-        return getRepository().exists(addressDTO.getId());
-}
-
-    @Override
     protected JpaRepository<Address, Long> getRepository() {
         return addressRepository;
     }

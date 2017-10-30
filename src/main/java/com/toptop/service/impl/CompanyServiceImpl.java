@@ -18,7 +18,7 @@ import java.util.Optional;
 @Transactional
 public class CompanyServiceImpl extends TransactionService<Company, Long, CompanyMapper, CompanyDTO> implements CompanyService {
 
-    private static final Logger log = LoggerFactory.getLogger(UserServiceImpl.class);
+    private static final Logger LOG = LoggerFactory.getLogger(UserServiceImpl.class);
 
     @Autowired
     private CompanyRepository companyRepository;
@@ -30,7 +30,7 @@ public class CompanyServiceImpl extends TransactionService<Company, Long, Compan
     @Override
     @Transactional(readOnly = true)
     public Optional<CompanyDTO> findByOneByCompanyCod(Long companyCod) {
-        log.debug("Find company cod: {}", companyCod);
+        LOG.debug("Find company cod: {}", companyCod);
         Company company = companyRepository.findOneByCompanyCod(companyCod);
         return Optional.ofNullable(getMapper().mapToDTO(company));
     }

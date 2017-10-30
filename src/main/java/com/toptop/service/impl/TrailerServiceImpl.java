@@ -19,7 +19,7 @@ import java.util.List;
 @Transactional
 public class TrailerServiceImpl extends TransactionService<Trailer, Long, TrailerMapper, TrailerDTO> implements TrailerService {
 
-    private static final Logger log = LoggerFactory.getLogger(UserServiceImpl.class);
+    private static final Logger LOG = LoggerFactory.getLogger(UserServiceImpl.class);
 
     @Autowired
     private TrailerRepository trailerRepository;
@@ -31,29 +31,22 @@ public class TrailerServiceImpl extends TransactionService<Trailer, Long, Traile
     @Override
     @Transactional(readOnly = true)
     public List<TrailerDTO> findAllByType(TrailerType trailerType) {
-        log.debug("Find all trailers by type: {}", trailerType);
+        LOG.debug("Find all trailers by type: {}", trailerType);
         return getMapper().mapToDTOs(trailerRepository.findAllByType(trailerType));
     }
 
     @Override
     @Transactional(readOnly = true)
     public List<TrailerDTO> findAllByCompanyId(Long id) {
-        log.debug("Find all trailers by company id: {}", id);
+        LOG.debug("Find all trailers by company id: {}", id);
         return getMapper().mapToDTOs(trailerRepository.findAllByCompanyId(id));
     }
 
     @Override
     @Transactional(readOnly = true)
     public List<TrailerDTO> findAllByCompanyIdAndType(Long companyId, TrailerType type) {
-        log.debug("Find all trailers by company ID: {} and type: {}", companyId, type);
+        LOG.debug("Find all trailers by company ID: {} and type: {}", companyId, type);
         return getMapper().mapToDTOs(trailerRepository.findAllByCompanyIdAndType(companyId, type));
-    }
-
-    @Override
-    @Transactional(readOnly = true)
-    public boolean isExist(TrailerDTO trailerDTO) throws IllegalArgumentException{
-        log.debug("Check if trailer is exits: {}", trailerDTO);
-        return getRepository().exists(trailerDTO.getId());
     }
 
     @Override

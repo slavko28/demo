@@ -29,14 +29,8 @@ public class CargoServiceImpl extends TransactionService<Cargo, Long, CargoMappe
     @Override
     @Transactional(readOnly = true)
     public List<CargoDTO> findAllByCompanyId(Long companyId) {
+        LOG.debug("Getting list of cargo by company id: {}", companyId);
         return getMapper().mapToDTOs(cargoRepository.findAllByCompanyId(companyId));
-    }
-
-    @Override
-    @Transactional(readOnly = true)
-    public boolean isExist(CargoDTO cargoDTO) {
-        LOG.debug("Check if cargo is exits: {}", cargoDTO);
-        return getRepository().exists(cargoDTO.getId());
     }
 
     @Override

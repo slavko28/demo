@@ -22,7 +22,7 @@ import java.util.List;
 @Transactional
 public class CompanyOrderServiceImpl extends TransactionService<CompanyOrder, Long, CompanyOrderMapper, CompanyOrderDTO> implements CompanyOrderService {
 
-    private static final Logger log = LoggerFactory.getLogger(UserServiceImpl.class);
+    private static final Logger LOG = LoggerFactory.getLogger(UserServiceImpl.class);
 
     @Autowired
     private CurrentUserService currentUserService;
@@ -36,21 +36,21 @@ public class CompanyOrderServiceImpl extends TransactionService<CompanyOrder, Lo
     @Override
     @Transactional(readOnly = true)
     public List<CompanyOrderDTO> findAllByCompanyEmployeeId(Long id) {
-        log.debug("Find all orders by company id: {}", id);
+        LOG.debug("Find all orders by company id: {}", id);
         return getMapper().mapToDTOs(orderRepository.findAllByManagerId(id));
     }
 
     @Override
     @Transactional(readOnly = true)
     public List<CompanyOrderDTO> findAllByCompanyId(Long id) {
-        log.debug("Find all orders by company id: {}", id);
+        LOG.debug("Find all orders by company id: {}", id);
         return getMapper().mapToDTOs(orderRepository.findAllByCompanyId(id));
     }
 
     @Override
     @Transactional(readOnly = true)
     public List<CompanyOrderDTO> findAllByStatus(OrderStatus orderStatus) {
-        log.debug("Find all orders by status: {}", orderStatus);
+        LOG.debug("Find all orders by status: {}", orderStatus);
         return getMapper().mapToDTOs(orderRepository.findAllByStatus(orderStatus));
     }
 
@@ -58,15 +58,8 @@ public class CompanyOrderServiceImpl extends TransactionService<CompanyOrder, Lo
     @Transactional(readOnly = true)
     public List<CompanyOrderDTO> getCompanyOrderByCurrentUser() {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        log.debug("Find all orders by current user: {}", auth.getName());
+        LOG.debug("Find all orders by current user: {}", auth.getName());
         return getMapper().mapToDTOs(orderRepository.findAllByUserId(currentUserService.getCurrentUser().get().getId()));
-    }
-
-    @Override
-    @Transactional(readOnly = true)
-    public boolean isExist(CompanyOrderDTO companyOrderDTO) throws IllegalArgumentException{
-        log.debug("Check if company order is exits: {}", companyOrderDTO);
-        return getRepository().exists(companyOrderDTO.getId());
     }
 
     @Override
