@@ -16,6 +16,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.NoSuchElementException;
+import java.util.Optional;
 
 @Controller
 public class UserController {
@@ -35,11 +36,11 @@ public class UserController {
     @RequestMapping("/user/{id}")
     public ModelAndView getUserPage(@PathVariable Long id) {
         LOG.debug("Getting user page for user={}", id);
-        UserDTO userDTO = userService.findOne(id);
-        if (userDTO == null) {
+        Optional<UserDTO> maybeUser = userService.findOne(id);
+        if (!maybeUser.isPresent()) {
             throw new NoSuchElementException(String.format("User=%s not found", id));
         }
-        return new ModelAndView("admin/user", "user", userDTO);
+        return new ModelAndView("admin/user", "user", maybeUser.get());
     }
 
     @RequestMapping(value = "/user/create")

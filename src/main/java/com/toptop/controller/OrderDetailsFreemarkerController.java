@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.NoSuchElementException;
+import java.util.Optional;
 
 @Controller
 public class OrderDetailsFreemarkerController {
@@ -24,11 +25,11 @@ public class OrderDetailsFreemarkerController {
     @RequestMapping(value = "/detail/{id}", method = RequestMethod.GET)
     public ModelAndView getOrderDetailPage(@PathVariable Long id) {
         LOG.debug("Getting order detail page for order's detail={}", id);
-        OrderDetailDTO orderDetailDTO = orderDetailService.findOne(id);
-        if (orderDetailDTO == null) {
+        Optional<OrderDetailDTO> maybeOrder = orderDetailService.findOne(id);
+        if (!maybeOrder.isPresent()) {
             throw new NoSuchElementException(String.format("Order detail = %d not found", id));
         }
-        ModelAndView view = new ModelAndView("order_detail/detail", "detail", orderDetailDTO);
+        ModelAndView view = new ModelAndView("order_detail/detail", "detail", maybeOrder.get());
         view.addObject("order",id);
         return view;
     }
