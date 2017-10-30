@@ -11,7 +11,7 @@
         <div class="text-center">
             <h3>Password reset</h3>
             <#if errorMessage??>
-                <p>${errorMessage}</p>
+                <p class="text-danger">${errorMessage}</p>
             <#elseif successMessage??>
                 <p>${successMessage}</p>
             </#if>
