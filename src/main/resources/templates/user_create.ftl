@@ -1,4 +1,5 @@
 <#import "header.ftl" as h>
+<#-- @ftlvariable name="error" type="java.util.Optional<String>" -->
 
 
 <@h.header></@h.header>
@@ -47,6 +48,11 @@
                     </div>
                 </div>
             </div>
+        <#if error??>
+            <div class="text-center">
+                <p class="text-danger">${error}</p>
+            </div>
+        </#if>
             <div class="row">
                 <div class="col-md-12">
                     <div class="form-group">
@@ -106,6 +112,7 @@
                 </div>
             </div>
         </form>
+
     </div><!-- /.col-lg-12 -->
 </div>
 

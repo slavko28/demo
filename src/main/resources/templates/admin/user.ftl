@@ -34,7 +34,7 @@
                         <div class="input-group mb-2 mr-sm-2 mb-sm-0">
                             <div class="input-group-addon" style="width: 2.6rem"><i class="fa fa-user"></i></div>
                             <input type="text" name="name" class="form-control" id="name"
-                                   value=${user.name}>
+                                   value="${user.name}">
                         </div>
                     </div>
                 </div>
@@ -47,7 +47,7 @@
                         <div class="input-group mb-2 mr-sm-2 mb-sm-0">
                             <div class="input-group-addon" style="width: 2.6rem"><i class="fa fa-user"></i></div>
                             <input type="text" name="lastName" class="form-control" id="LastName"
-                                   value=${user.lastName}>
+                                   value="${user.lastName}">
                         </div>
                     </div>
                 </div>
@@ -61,7 +61,7 @@
                         <div class="input-group mb-2 mr-sm-2 mb-sm-0">
                             <div class="input-group-addon" style="width: 2.6rem"><i class="fa fa-at"></i></div>
                             <input readOnly type="email" name="email" class="form-control" id="email"
-                                   value=${user.email}>
+                                   value="${user.email}">
                         </div>
                     </div>
                 </div>
@@ -75,7 +75,7 @@
                         <div class="input-group mb-2 mr-sm-2 mb-sm-0">
                             <div class="input-group-addon" style="width: 2.6rem"><i class="fa fa-phone"></i></div>
                             <input type="text" name="phoneNumber" class="form-control" id="email"
-                                   value=${user.phoneNumber}>
+                                   value="${user.phoneNumber}">
                         </div>
                     </div>
                 </div>

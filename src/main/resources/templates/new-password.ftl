@@ -23,7 +23,7 @@
                     <div class="input-group mb-2 mr-sm-2 mb-sm-0">
                         <div class="input-group-addon" style="width: 2.6rem"><i class="fa fa-key"></i></div>
                         <input type="password" name="password" class="form-control" id="password"
-                               placeholder="Enter you password" required>
+                               placeholder="Enter new password" required>
                     </div>
                 </div>
             </div>
@@ -36,7 +36,7 @@
                         <div class="input-group-addon" style="width: 2.6rem"><i class="fa fa-key"></i></div>
                         <input type="password" name="passwordRepeated" class="form-control"
                                id="confirm_password"
-                               placeholder="Confirm password" required>
+                               placeholder="Confirm your password" required>
                     </div>
                 </div>
             </div>

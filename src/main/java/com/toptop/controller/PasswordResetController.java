@@ -6,6 +6,7 @@ import com.toptop.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -22,6 +23,18 @@ public class PasswordResetController {
 
     private final Logger LOG = LoggerFactory.getLogger(PasswordResetController.class);
 
+    @Value("${spring.messages.password-reset-no_user}")
+    private String userNotFound;
+
+    @Value("${spring.messages.password-reset-token-sent}")
+    private String tokenSent;
+
+    @Value("${spring.messages.password-reset-token-invalid}")
+    private String tokenInvalid;
+
+    @Value("${spring.messages.password-reset-success}")
+    private String resetSuccess;
+
     @Autowired
     private UserService userService;
 
@@ -29,9 +42,9 @@ public class PasswordResetController {
     private MailService mailService;
 
     @RequestMapping(value = "/reset", method = RequestMethod.GET)
-    public ModelAndView getPasswordResetPage(@RequestParam Optional<String> error) {
-        LOG.debug("Getting reset password page error={}", error);
-        return new ModelAndView("password-reset", "error", error);
+    public ModelAndView getPasswordResetPage() {
+        LOG.debug("Getting reset password page");
+        return new ModelAndView("password-reset");
     }
 
     @RequestMapping(value = "/reset", method = RequestMethod.POST)
@@ -39,21 +52,22 @@ public class PasswordResetController {
         Optional<User> maybeUser = userService.getUserByEmail(email);
         if (!maybeUser.isPresent()) {
             LOG.debug("User with this email address {} wasn't found.", email);
-            modelAndView.addObject("errorMessage", "User with this email address " + email + " wasn't found.");
+            modelAndView.addObject("errorMessage", String.format(userNotFound, email));
         } else {
             mailService.sentMailToPasswordReset(request, maybeUser.get());
-            modelAndView.addObject("successMessage", "A password reset link has been sent to " + email);
+            modelAndView.addObject("successMessage", String.format(tokenSent, email));
         }
         modelAndView.setViewName("password-reset");
         return modelAndView;
     }
 
     @RequestMapping(value = "/reset/pass", method = RequestMethod.GET)
-    public ModelAndView getResetPasswordPage(ModelAndView modelAndView, @RequestParam("token") String token) {
+    public ModelAndView getNewPasswordPage(ModelAndView modelAndView, @RequestParam("token") String token) {
+        LOG.debug("Getting page for creating new password");
         if (userService.checkToken(token)) {
             modelAndView.addObject("token", token);
         } else {
-            modelAndView.addObject("errorMessage", "Oops!  This is an invalid password reset link.");
+            modelAndView.addObject("errorMessage", tokenInvalid);
         }
         modelAndView.setViewName("new-password");
         return modelAndView;
@@ -63,7 +77,7 @@ public class PasswordResetController {
     public ModelAndView setNewPassword(ModelAndView modelAndView, @RequestParam Map<String, String> requestParams, RedirectAttributes redir) {
         Optional<User> maybeUser = userService.getUserByResetToken(requestParams.get("token"));
         maybeUser.ifPresent(user -> userService.resetPassword(user, requestParams.get("password")));
-        redir.addFlashAttribute("successMessage", "You have successfully reset your password.  You may now login.");
+        redir.addFlashAttribute("successMessage", resetSuccess);
         modelAndView.setViewName("redirect:/login");
         return modelAndView;
     }

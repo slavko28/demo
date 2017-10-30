@@ -5,15 +5,16 @@ import com.toptop.service.dto.UserDTO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
-import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.WebDataBinder;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import javax.validation.Valid;
 import java.util.NoSuchElementException;
 
 @Controller
@@ -21,16 +22,14 @@ public class UserController {
 
     private final Logger LOG = LoggerFactory.getLogger(UserController.class);
 
+    @Value("${spring.messages.user-create-success}")
+    private String createSuccess;
+
+    @Value("${spring.messages.user-create-error}")
+    private String createError;
+
     @Autowired
     private UserService userService;
-
-    @Autowired
-    private UserValidator userValidator;
-
-    @InitBinder("form")
-    public void initBinder(WebDataBinder binder) {
-        binder.addValidators(userValidator);
-    }
 
     @PreAuthorize("@currentUserServiceImpl.canAccessUser(principal, #id)")
     @RequestMapping("/user/{id}")
@@ -43,26 +42,26 @@ public class UserController {
         return new ModelAndView("admin/user", "user", userDTO);
     }
 
-    @RequestMapping(value = "/user/create", method = RequestMethod.GET)
+    @RequestMapping(value = "/user/create")
     public ModelAndView getUserCreatePage() {
         LOG.debug("Getting user create form");
-        return new ModelAndView("user_create", "form", new UserDTO());
+        return new ModelAndView("user_create", "user", new UserDTO());
     }
 
     @RequestMapping(value = "/user/create", method = RequestMethod.POST)
-    public String handleUserCreateForm(@Valid @ModelAttribute("form") UserDTO userDTO, BindingResult bindingResult) {
-        LOG.debug("Processing user create form={}, bindingResult={}", userDTO, bindingResult);
-        if (bindingResult.hasErrors()) {
-            return "user_create";
+    public ModelAndView handleUserCreateForm(@ModelAttribute UserDTO userDTO,
+                                             RedirectAttributes redirectAttributes) {
+        ModelAndView modelAndView = new ModelAndView("user_create");
+        LOG.debug("Processing user create form={}", userDTO);
+        if (userService.getUserByEmail(userDTO.getEmail()).isPresent()) {
+            LOG.warn("User with email {} is already exist", userDTO.getEmail());
+            modelAndView.addObject("error", String.format(createError, userDTO.getEmail()));
+            return modelAndView;
         }
-        try {
-            userService.saveUser(userDTO);
-        } catch (DataIntegrityViolationException e) {
-            LOG.warn("Exception occurred when trying to save the user, assuming duplicate email", e);
-            bindingResult.reject("email.exists", "Email already exists");
-            return "user_create";
-        }
-        return "redirect:/";
+        userService.saveUser(userDTO);
+        redirectAttributes.addFlashAttribute("successMessage", createSuccess);
+        modelAndView.setViewName("redirect:/login");
+        return modelAndView;
     }
 
     @RequestMapping(value = "/user/update", method = RequestMethod.POST)
