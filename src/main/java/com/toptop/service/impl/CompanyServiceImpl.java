@@ -12,6 +12,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Optional;
+
 @Service
 @Transactional
 public class CompanyServiceImpl extends TransactionService<Company, Long, CompanyMapper, CompanyDTO> implements CompanyService {
@@ -27,16 +29,10 @@ public class CompanyServiceImpl extends TransactionService<Company, Long, Compan
 
     @Override
     @Transactional(readOnly = true)
-    public CompanyDTO findByOneByCompanyCod(Long companyCod) {
+    public Optional<CompanyDTO> findByOneByCompanyCod(Long companyCod) {
         log.debug("Find company cod: {}", companyCod);
-        return getMapper().mapToDTO(companyRepository.findOneByCompanyCod(companyCod));
-    }
-
-    @Override
-    @Transactional(readOnly = true)
-    public boolean isExist(CompanyDTO companyDTO) throws IllegalArgumentException {
-        log.debug("Check if company is exits: {}", companyDTO);
-        return getRepository().exists(companyDTO.getId());
+        Company company = companyRepository.findOneByCompanyCod(companyCod);
+        return Optional.ofNullable(getMapper().mapToDTO(company));
     }
 
     @Override

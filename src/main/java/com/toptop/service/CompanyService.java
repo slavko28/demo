@@ -3,6 +3,8 @@ package com.toptop.service;
 import com.toptop.domain.Company;
 import com.toptop.service.dto.CompanyDTO;
 
+import java.util.Optional;
+
 /**
  * Service Interface for managing Company entities.
  */
@@ -14,6 +16,6 @@ public interface CompanyService extends AbstractService<Company, Long, CompanyDT
      * @param companyCod the Company cod
      * @return the entity
      */
-    CompanyDTO findByOneByCompanyCod(Long companyCod);
+    Optional<CompanyDTO> findByOneByCompanyCod(Long companyCod);
 
 }
