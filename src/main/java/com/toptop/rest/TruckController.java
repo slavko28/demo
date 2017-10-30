@@ -9,21 +9,20 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.Assert;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.util.UriComponentsBuilder;
 
 import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/truck")
 public class TruckController {
 
-    private final Logger log = LoggerFactory.getLogger(TruckController.class);
+    private static final Logger LOG = LoggerFactory.getLogger(TruckController.class);
 
-    private final TruckService truckService;
+    private TruckService truckService;
 
     @Autowired
     public TruckController(TruckService truckService) {
@@ -39,16 +38,16 @@ public class TruckController {
      * or with status 409 ("Conflict") if the TruckDTO has already an ID
      * @throws URISyntaxException if the Location URI syntax is incorrect
      */
-    @RequestMapping(method = RequestMethod.POST)
+    @RequestMapping(value = "/", method = RequestMethod.POST)
     public ResponseEntity create(@Valid @RequestBody TruckDTO truckDTO) throws URISyntaxException {
-        log.debug("request to create new truck: {}", truckDTO);
+        LOG.debug("request to create new truck: {}", truckDTO);
         if (truckDTO.getId() == null) {
             truckService.save(truckDTO);
             HttpHeaders headers = new HttpHeaders();
             headers.setLocation(new URI("/api/truck/all"));
             return new ResponseEntity<>(headers, HttpStatus.CREATED);
         }
-        log.error("truck with ID: {} is already exists.", truckDTO.getId());
+        LOG.error("truck with ID: {} is already exists.", truckDTO.getId());
         return new ResponseEntity<>("truck with ID: " + truckDTO.getId() + " is already exists.", HttpStatus.CONFLICT);
     }
 
@@ -59,15 +58,15 @@ public class TruckController {
      * @return the ResponseEntity with status 200 (Ok) and with body the updated TruckDTO,
      * or with status 400 (Bad Request) if the TruckDTO is not valid,
      * or with status 404 (Not Found) if the truck couldn't be found
-     * @throws IllegalArgumentException in case the given TruckDTO's ID is {@literal null}.
      */
-    @RequestMapping(method = RequestMethod.PUT)
+    @RequestMapping(value = "/", method = RequestMethod.PUT)
     public ResponseEntity update(@Valid @RequestBody TruckDTO truckDTO) {
-        log.debug("request to update truck: {}", truckDTO);
-        if (truckService.isExist(truckDTO)) {
+        LOG.debug("request to update truck: {}", truckDTO);
+        Optional<TruckDTO> maybeTruck = truckService.findOne(truckDTO.getId());
+        if (maybeTruck.isPresent()) {
             return ResponseEntity.ok(truckService.save(truckDTO));
         }
-        log.error("truck with ID: {} does not found.", truckDTO.getId());
+        LOG.error("truck with ID: {} does not found.", truckDTO.getId());
         return new ResponseEntity<>("truck with ID: " + truckDTO.getId() + " does not found.", HttpStatus.NOT_FOUND);
     }
 
@@ -81,13 +80,12 @@ public class TruckController {
      */
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public ResponseEntity getById(@PathVariable Long id) {
-        log.debug("request to get truck by id: {}", id);
-        Assert.notNull(id, "ID can not be null.");
-        TruckDTO truck = truckService.findOne(id);
-        if (truck != null) {
-            return ResponseEntity.ok(truck);
+        LOG.debug("request to get truck by id: {}", id);
+        Optional<TruckDTO> maybeTruck = truckService.findOne(id);
+        if (maybeTruck.isPresent()) {
+            return ResponseEntity.ok(maybeTruck.get());
         }
-        log.error("truck with ID: {} does not found.", id);
+        LOG.error("truck with ID: {} does not found.", id);
         return new ResponseEntity<>("truck with ID: " + id + " does not found.", HttpStatus.NOT_FOUND);
     }
 
@@ -98,7 +96,7 @@ public class TruckController {
      */
     @RequestMapping(value = "/all", method = RequestMethod.GET)
     public ResponseEntity getAll() {
-        log.debug("request to get all trucks");
+        LOG.debug("request to get all trucks");
         return ResponseEntity.ok(truckService.findAll());
     }
 
@@ -110,7 +108,7 @@ public class TruckController {
      */
     @RequestMapping(value = "company/{id}", method = RequestMethod.GET)
     public ResponseEntity getAllByCompanyId(@PathVariable Long id) {
-        log.debug("request to get all trucks by company id {}", id);
+        LOG.debug("request to get all trucks by company id {}", id);
         Assert.notNull(id, "ID can not be null.");
         return ResponseEntity.ok(truckService.findAllByCompanyId(id));
     }

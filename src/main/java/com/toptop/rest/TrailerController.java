@@ -15,14 +15,15 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.Optional;
 
 @RestController
 @RequestMapping(value = "/api/trailer")
 public class TrailerController {
 
-    private final Logger log = LoggerFactory.getLogger(TrailerController.class);
+    private static final Logger LOG = LoggerFactory.getLogger(TrailerController.class);
 
-    private final TrailerService trailerService;
+    private TrailerService trailerService;
 
     @Autowired
     public TrailerController(TrailerService trailerService) {
@@ -40,14 +41,14 @@ public class TrailerController {
      */
     @RequestMapping(value = "/", method = RequestMethod.POST)
     public ResponseEntity create(@Valid @RequestBody TrailerDTO trailerDTO) throws URISyntaxException {
-        log.debug("request to create new trailer: {}", trailerDTO);
+        LOG.debug("request to create new trailer: {}", trailerDTO);
         if (trailerDTO.getId() == null) {
             trailerService.save(trailerDTO);
             HttpHeaders headers = new HttpHeaders();
             headers.setLocation(new URI("/api/trailer/all"));
             return new ResponseEntity<>(headers, HttpStatus.CREATED);
         }
-        log.error("trailer with ID: {} is already exists.", trailerDTO.getId());
+        LOG.error("trailer with ID: {} is already exists.", trailerDTO.getId());
         return new ResponseEntity<>("trailer with ID: " + trailerDTO.getId() + " is already exists.", HttpStatus.CONFLICT);
     }
 
@@ -58,16 +59,15 @@ public class TrailerController {
      * @return the ResponseEntity with status 200 (Ok) and with body the updated TrailerDTO,
      * or with status 400 (Bad Request) if the TrailerDTO is not valid,
      * or with status 404 (Not Found) if the trailer couldn't be found
-     * @throws IllegalArgumentException in case the given TrailerDTO's ID is null.
      */
     @RequestMapping(value = "/", method = RequestMethod.PUT)
     public ResponseEntity update(@Valid @RequestBody TrailerDTO trailerDTO) {
-        log.debug("request to update truck: {}", trailerDTO);
-        Assert.notNull(trailerDTO.getId(), "ID can not be null.");
-        if (trailerService.isExist(trailerDTO)) {
+        LOG.debug("request to update truck: {}", trailerDTO);
+        Optional<TrailerDTO> maybeTrailer = trailerService.findOne(trailerDTO.getId());
+        if (maybeTrailer.isPresent()) {
             return ResponseEntity.ok(trailerService.save(trailerDTO));
         }
-        log.error("trailer with ID: {} does not found.", trailerDTO.getId());
+        LOG.error("trailer with ID: {} does not found.", trailerDTO.getId());
         return new ResponseEntity<>("trailer with ID: " + trailerDTO.getId() + " does not found.", HttpStatus.NOT_FOUND);
     }
 
@@ -81,13 +81,12 @@ public class TrailerController {
      */
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public ResponseEntity getById(@PathVariable Long id) {
-        log.debug("request to get trailer by id: {}", id);
-        Assert.notNull(id, "ID can not be null.");
-        TrailerDTO trailerDTO = trailerService.findOne(id);
-        if (trailerDTO != null) {
-            return ResponseEntity.ok(trailerDTO);
+        LOG.debug("request to get trailer by id: {}", id);
+        Optional<TrailerDTO> maybeTrailer = trailerService.findOne(id);
+        if (maybeTrailer.isPresent()) {
+            return ResponseEntity.ok(maybeTrailer.get());
         }
-        log.error("trailer with ID: {} does not found.", id);
+        LOG.error("trailer with ID: {} does not found.", id);
         return new ResponseEntity<>("trailer with ID: " + id + " does not found.", HttpStatus.NOT_FOUND);
     }
 
@@ -98,7 +97,7 @@ public class TrailerController {
      */
     @RequestMapping(value = "/all", method = RequestMethod.GET)
     public ResponseEntity getAll() {
-        log.debug("request to get all trailers");
+        LOG.debug("request to get all trailers");
         return ResponseEntity.ok(trailerService.findAll());
     }
 
@@ -110,7 +109,7 @@ public class TrailerController {
      */
     @RequestMapping(value = "/company/{id}", method = RequestMethod.GET)
     public ResponseEntity getAllByCompanyId(@PathVariable Long id) {
-        log.debug("request to get all trailers by company id {}", id);
+        LOG.debug("request to get all trailers by company id {}", id);
         Assert.notNull(id, "ID can not be null.");
         return ResponseEntity.ok(trailerService.findAllByCompanyId(id));
     }
@@ -124,7 +123,7 @@ public class TrailerController {
      */
     @RequestMapping(value = "/type/{type}", method = RequestMethod.GET)
     public ResponseEntity getAllByType(@PathVariable TrailerType type) {
-        log.debug("request to get all trailers by trailer type {}", type);
+        LOG.debug("request to get all trailers by trailer type {}", type);
         Assert.notNull(type, "ID can not be null.");
         return ResponseEntity.ok(trailerService.findAllByType(type));
     }
@@ -140,7 +139,7 @@ public class TrailerController {
     @RequestMapping(value = "/company/{id}/type/{type}", method = RequestMethod.GET)
     public ResponseEntity getAllByCompanyIdAndType(@PathVariable Long id,
                                                    @PathVariable TrailerType type) {
-        log.debug("request to get all trailers by company id {}, trailer type {}", id, type);
+        LOG.debug("request to get all trailers by company id {}, trailer type {}", id, type);
         Assert.notNull(id, "ID can not be null.");
         Assert.notNull(type, "ID can not be null.");
         return ResponseEntity.ok(trailerService.findAllByCompanyIdAndType(id, type));

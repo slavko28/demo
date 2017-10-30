@@ -14,14 +14,15 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.Optional;
 
 @RestController
 @RequestMapping(value = "api/detail")
 public class OrderDetailController {
 
-    private final Logger log = LoggerFactory.getLogger(OrderDetailController.class);
+    private static final Logger LOG = LoggerFactory.getLogger(OrderDetailController.class);
 
-    private final OrderDetailService orderDetailService;
+    private OrderDetailService orderDetailService;
 
     @Autowired
     public OrderDetailController(OrderDetailService orderDetailService) {
@@ -39,14 +40,14 @@ public class OrderDetailController {
      */
     @RequestMapping(value = "/", method = RequestMethod.POST)
     public ResponseEntity create(@Valid @RequestBody OrderDetailDTO orderDetailDTO) throws URISyntaxException {
-        log.debug("request to create new Order detail: {}", orderDetailDTO);
+        LOG.debug("request to create new Order detail: {}", orderDetailDTO);
         if (orderDetailDTO.getId() == null) {
             orderDetailService.save(orderDetailDTO);
             HttpHeaders headers = new HttpHeaders();
             headers.setLocation(new URI("api/detail/all"));
             return new ResponseEntity(headers, HttpStatus.CREATED);
         }
-        log.error("order detail with ID: {} is already exists.", orderDetailDTO.getId());
+        LOG.error("order detail with ID: {} is already exists.", orderDetailDTO.getId());
         return new ResponseEntity<>("order detail with ID: " + orderDetailDTO.getId() + " is already exists.", HttpStatus.CONFLICT);
     }
 
@@ -57,15 +58,15 @@ public class OrderDetailController {
      * @return the ResponseEntity with status 200 (Ok) and with body the updated OrderDetailDTO,
      * or with status 400 (Bad Request) if the OrderDetailDTO is not valid,
      * or with status 404 (Not Found) if the Order detail couldn't be found
-     * @throws IllegalArgumentException in case the given OrderDetailDTO's ID is null.
      */
+    @RequestMapping(value = "/", method = RequestMethod.PUT)
     public ResponseEntity update(@Valid @RequestBody OrderDetailDTO orderDetailDTO) {
-        log.debug("request to update Order detail {}", orderDetailDTO);
-        Assert.notNull(orderDetailDTO.getId(), "ID can not be null");
-        if (orderDetailService.isExist(orderDetailDTO)) {
+        LOG.debug("request to update Order detail {}", orderDetailDTO);
+        Optional<OrderDetailDTO> maybeOrderDetail = orderDetailService.findOne(orderDetailDTO.getId());
+        if (maybeOrderDetail.isPresent()) {
             return ResponseEntity.ok(orderDetailService.save(orderDetailDTO));
         }
-        log.error("order detail with ID: {} couldn't be found.");
+        LOG.error("order detail with ID: {} couldn't be found.");
         return new ResponseEntity<>("order detail with ID: " + orderDetailDTO.getId() + " does not found.", HttpStatus.CONFLICT);
     }
 
@@ -75,17 +76,15 @@ public class OrderDetailController {
      * @param id the Order detail ID
      * @return the ResponseEntity with status 200 (Ok) and with body the OrderDetailDTO,
      * or with status 404 (Not Found) if the order detail couldn't be found
-     * @throws IllegalArgumentException if the ID is null
      */
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public ResponseEntity getById(@PathVariable("id") Long id) {
-        log.debug("request to get order detail by ID: {}", id);
-        Assert.notNull(id, "ID can not be null");
-        OrderDetailDTO orderDetailDTO = orderDetailService.findOne(id);
-        if (orderDetailDTO != null) {
-            return ResponseEntity.ok(orderDetailDTO);
+        LOG.debug("request to get order detail by ID: {}", id);
+        Optional<OrderDetailDTO> maybeOrderDetail = orderDetailService.findOne(id);
+        if (maybeOrderDetail.isPresent()) {
+            return ResponseEntity.ok(maybeOrderDetail.get());
         }
-        log.error("order detail with ID: {} does not found.", id);
+        LOG.error("order detail with ID: {} does not found.", id);
         return new ResponseEntity<>("order's detail with ID: " + id + " does not found.", HttpStatus.NOT_FOUND);
     }
 
@@ -96,7 +95,7 @@ public class OrderDetailController {
      */
     @RequestMapping(value = "/all", method = RequestMethod.GET)
     public ResponseEntity getAll() {
-        log.debug("request to get all order detail entities");
+        LOG.debug("request to get all order detail entities");
         return ResponseEntity.ok(orderDetailService.findAll());
     }
 
@@ -109,7 +108,7 @@ public class OrderDetailController {
      */
     @RequestMapping(value = "manager/{id}", method = RequestMethod.GET)
     public ResponseEntity getAllByManagerId(@PathVariable Long id) {
-        log.debug("request to find all order's detail by user ID: {}", id);
+        LOG.debug("request to find all order's detail by user ID: {}", id);
         Assert.notNull(id, "ID can not be null");
         return ResponseEntity.ok(orderDetailService.findAllByManagerId(id));
     }
@@ -123,7 +122,7 @@ public class OrderDetailController {
      */
     @RequestMapping(value = "/driver/{id}", method = RequestMethod.GET)
     public ResponseEntity getAllByDriverId(@PathVariable Long id) {
-        log.debug("request to find all order's detail by company employee ID: {}", id);
+        LOG.debug("request to find all order's detail by company employee ID: {}", id);
         Assert.notNull(id, "ID can not be null");
         return ResponseEntity.ok(orderDetailService.findAllByDriverId(id));
     }

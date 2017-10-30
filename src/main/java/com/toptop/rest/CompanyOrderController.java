@@ -16,14 +16,15 @@ import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping(value = "/api/order")
 public class CompanyOrderController {
 
-    private final Logger log = LoggerFactory.getLogger(CompanyOrderController.class);
+    private static final Logger LOG = LoggerFactory.getLogger(CompanyOrderController.class);
 
-    private final CompanyOrderService orderService;
+    private CompanyOrderService orderService;
 
     @Autowired
     public CompanyOrderController(CompanyOrderService orderService) {
@@ -41,14 +42,14 @@ public class CompanyOrderController {
      */
     @RequestMapping(value = "/", method = RequestMethod.POST)
     public ResponseEntity create(@Valid @RequestBody CompanyOrderDTO orderDTO) throws URISyntaxException {
-        log.debug("request to create new order: {}", orderDTO);
+        LOG.debug("request to create new order: {}", orderDTO);
         if (orderDTO.getId() == null) {
             orderService.save(orderDTO);
             HttpHeaders headers = new HttpHeaders();
             headers.setLocation(new URI("api/order/all"));
             return new ResponseEntity<>(headers, HttpStatus.CREATED);
         }
-        log.error("order with ID: {} is already exists.", orderDTO.getId());
+        LOG.error("order with ID: {} is already exists.", orderDTO.getId());
         return new ResponseEntity<>("Order with ID:" + orderDTO.getId() + " is already exists.", HttpStatus.CONFLICT);
     }
 
@@ -59,16 +60,15 @@ public class CompanyOrderController {
      * @return the ResponseEntity with status 200 (Ok) and with body the updated CompanyOrderDTO,
      * or with status 400 (Bad Request) if the CompanyOrderDTO is not valid,
      * or with status 404 (Not Found) if the order couldn't be found
-     * @throws IllegalArgumentException in case the given CompanyOrderDTO's ID is null.
      */
     @RequestMapping(value = "/", method = RequestMethod.PUT)
     public ResponseEntity update(@Valid @RequestBody CompanyOrderDTO orderDTO) {
-        log.debug("request to update Order : {}", orderDTO);
-        Assert.notNull(orderDTO.getId(), "ID can not be null");
-        if (orderService.isExist(orderDTO)) {
+        LOG.debug("request to update Order : {}", orderDTO);
+        Optional<CompanyOrderDTO> maybeOrder = orderService.findOne(orderDTO.getId());
+        if (maybeOrder.isPresent()) {
             return ResponseEntity.ok(orderService.save(orderDTO));
         }
-        log.error("order: {} does not found.", orderDTO);
+        LOG.error("order: {} does not found.", orderDTO);
         return new ResponseEntity<>("order: " + orderDTO + " - does not found.", HttpStatus.NOT_FOUND);
     }
 
@@ -79,7 +79,7 @@ public class CompanyOrderController {
      */
     @RequestMapping(value = "/all", method = RequestMethod.GET)
     public ResponseEntity<?> getAll() {
-        log.debug("request to get all Company orders");
+        LOG.debug("request to get all Company orders");
         List<CompanyOrderDTO> list = orderService.findAll();
         return new ResponseEntity<>(list, HttpStatus.OK);
     }
@@ -94,13 +94,12 @@ public class CompanyOrderController {
      */
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public ResponseEntity getById(@PathVariable("id") Long id) {
-        log.debug("request to get Company order by id :{}", id);
-        Assert.notNull(id, "ID can not be null");
-        CompanyOrderDTO orderDTO = orderService.findOne(id);
-        if (orderDTO != null) {
-            return ResponseEntity.ok(orderDTO);
+        LOG.debug("request to get Company order by id :{}", id);
+        Optional<CompanyOrderDTO> maybeOrder = orderService.findOne(id);
+        if (maybeOrder.isPresent()) {
+            return ResponseEntity.ok(maybeOrder.get());
         }
-        log.error("order with ID: {} does not found.", id);
+        LOG.error("order with ID: {} does not found.", id);
         return new ResponseEntity<>("order with ID: " + id + " - does not found.", HttpStatus.NOT_FOUND);
     }
 
@@ -113,7 +112,7 @@ public class CompanyOrderController {
      */
     @RequestMapping(value = "/manager/{id}", method = RequestMethod.GET)
     public ResponseEntity getAllByCompanyEmployeeId(@PathVariable("id") Long id) {
-        log.debug("request to get all orders by Company employee ID: {}", id);
+        LOG.debug("request to get all orders by Company employee ID: {}", id);
         Assert.notNull(id, "ID can not be null");
         return ResponseEntity.ok(orderService.findAllByCompanyEmployeeId(id));
     }
@@ -127,7 +126,7 @@ public class CompanyOrderController {
      */
     @RequestMapping(value = "/company/{id}", method = RequestMethod.GET)
     public ResponseEntity getAllByCompanyId(@PathVariable("id") Long id) {
-        log.debug("request to get all CompanyOrder entities by company ID: {}", id);
+        LOG.debug("request to get all CompanyOrder entities by company ID: {}", id);
         Assert.notNull(id, "ID can not be null");
         return ResponseEntity.ok(orderService.findAllByCompanyId(id));
     }
@@ -141,7 +140,7 @@ public class CompanyOrderController {
      */
     @RequestMapping(value = "/status/{status}", method = RequestMethod.GET)
     public ResponseEntity getAllByOrderStatus(@PathVariable("status") OrderStatus status) {
-        log.debug("request to get all CompanyOrder entities by Order status: {}", status);
+        LOG.debug("request to get all CompanyOrder entities by Order status: {}", status);
         Assert.notNull(status, "Status can not be null");
         return ResponseEntity.ok(orderService.findAllByStatus(status));
     }

@@ -8,20 +8,20 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.util.Assert;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.Optional;
 
 @RestController
 @RequestMapping(value = "api/route")
 public class RouteController {
 
-    private final Logger log = LoggerFactory.getLogger(RouteController.class);
+    private static final Logger LOG = LoggerFactory.getLogger(RouteController.class);
 
-    private final RouteService routeService;
+    private RouteService routeService;
 
     @Autowired
     public RouteController(RouteService routeService) {
@@ -39,14 +39,14 @@ public class RouteController {
      */
     @RequestMapping(value = "/", method = RequestMethod.POST)
     public ResponseEntity create(@Valid @RequestBody RouteDTO routeDTO) throws URISyntaxException {
-        log.debug("request to create new route : {}", routeDTO);
+        LOG.debug("request to create new route : {}", routeDTO);
         if (routeDTO.getId() == null) {
             routeService.save(routeDTO);
             HttpHeaders headers = new HttpHeaders();
             headers.setLocation(new URI("/api/route/all"));
             return new ResponseEntity<>(headers, HttpStatus.CREATED);
         }
-        log.error("route with ID: {} is already exists.", routeDTO.getId());
+        LOG.error("route with ID: {} is already exists.", routeDTO.getId());
         return new ResponseEntity<>("route with ID: " + routeDTO.getId() + " is already exists.", HttpStatus.CONFLICT);
     }
 
@@ -57,16 +57,15 @@ public class RouteController {
      * @return the ResponseEntity with status 200 (Ok) and with body the updated RouteDTO,
      * or with status 400 (Bad Request) if the RouteDTO is not valid,
      * or with status 404 (Not Found) if the route couldn't be found
-     * @throws IllegalArgumentException in case the given RouteDTO's ID is null.
      */
     @RequestMapping(value = "/", method = RequestMethod.PUT)
     public ResponseEntity update(@Valid @RequestBody RouteDTO routeDTO) {
-        log.debug("request to update route: {}", routeDTO);
-        Assert.notNull(routeDTO.getId(), "ID can not be null.");
-        if (routeService.isExist(routeDTO)) {
+        LOG.debug("request to update route: {}", routeDTO);
+        Optional<RouteDTO> maybeRoute = routeService.findOne(routeDTO.getId());
+        if (maybeRoute.isPresent()) {
             return ResponseEntity.ok(routeService.save(routeDTO));
         }
-        log.error("route : {} does not found.", routeDTO);
+        LOG.error("route : {} does not found.", routeDTO);
         return new ResponseEntity<>("route: " + routeDTO + " does not found.", HttpStatus.NOT_FOUND);
     }
 
@@ -80,13 +79,12 @@ public class RouteController {
      */
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public ResponseEntity getById(@PathVariable("id") Long id) {
-        log.debug("request to get route by id: {}", id);
-        Assert.notNull(id, "ID can not be null.");
-        RouteDTO routeDTO = routeService.findOne(id);
-        if (routeDTO != null) {
-            return ResponseEntity.ok(routeDTO);
+        LOG.debug("request to get route by id: {}", id);
+        Optional<RouteDTO> maybeRoute = routeService.findOne(id);
+        if (maybeRoute.isPresent()) {
+            return ResponseEntity.ok(maybeRoute.get());
         }
-        log.error("route with ID: {} does not found.", id);
+        LOG.error("route with ID: {} does not found.", id);
         return new ResponseEntity<>("route with ID: " + id + " does not found.", HttpStatus.NOT_FOUND);
     }
 
@@ -97,7 +95,7 @@ public class RouteController {
      */
     @RequestMapping(value = "/all", method = RequestMethod.GET)
     public ResponseEntity getAll() {
-        log.debug("Request to get all routes");
+        LOG.debug("Request to get all routes");
         return ResponseEntity.ok(routeService.findAll());
     }
 }
