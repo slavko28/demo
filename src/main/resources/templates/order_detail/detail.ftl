@@ -9,7 +9,6 @@
     <br/>
     <div class="col-md-4 col-lg-6 mx-auto">
         <form method="post" action="/detail/update" role="form">
-            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
             <div class="text-center">
                 <h4>Detail's of order id: ${id} </h4>
                 <hr>
