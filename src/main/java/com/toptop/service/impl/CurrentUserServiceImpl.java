@@ -18,7 +18,7 @@ import java.util.Optional;
 @Service
 public class CurrentUserServiceImpl implements CurrentUserService {
 
-    private final Logger LOG = LoggerFactory.getLogger(CurrentUserServiceImpl.class);
+    private static final Logger LOG = LoggerFactory.getLogger(CurrentUserServiceImpl.class);
 
     @Autowired
     private UserRepository userRepository;
