@@ -2,13 +2,10 @@ package com.toptop.service.impl;
 
 import com.toptop.domain.CompanyOrder;
 import com.toptop.domain.User;
-import com.toptop.domain.enums.LoadingType;
 import com.toptop.domain.enums.OrderStatus;
 import com.toptop.repository.CompanyOrderRepository;
 import com.toptop.service.CompanyOrderService;
 import com.toptop.service.CurrentUserService;
-import com.toptop.service.dto.CargoDTO;
-import com.toptop.service.dto.CompanyDTO;
 import com.toptop.service.dto.CompanyOrderDTO;
 import com.toptop.service.mapper.CompanyOrderMapper;
 import org.junit.Before;
@@ -21,7 +18,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -62,9 +58,6 @@ public class CompanyOrderServiceImplTest {
     public void setUp() throws Exception {
         CompanyOrder order = new CompanyOrder();
         order.setId(1L);
-        order.setOrderDate(LocalDateTime.now());
-        order.setLoadingType(LoadingType.BACK_LOADING);
-        order.setStatus(OrderStatus.INCOMING);
 
         List<CompanyOrder> orderList = new ArrayList<>();
         orderList.add(order);
@@ -76,11 +69,6 @@ public class CompanyOrderServiceImplTest {
 
         companyOrderDTO = CompanyOrderDTO.builder()
                 .id(order.getId())
-                .orderDate(order.getOrderDate())
-                .loadingType(order.getLoadingType())
-                .company(new CompanyDTO())
-                .cargo(new CargoDTO())
-                .status(order.getStatus())
                 .build();
         List<CompanyOrderDTO> orderDTOList = new ArrayList<>();
         orderDTOList.add(companyOrderDTO);
@@ -98,6 +86,8 @@ public class CompanyOrderServiceImplTest {
         CompanyOrderDTO orderDTO = allByCompanyEmployeeId.get(0);
         assertEquals(this.companyOrderDTO, orderDTO);
         verify(companyOrderRepository, atMost(1)).findAllByManagerId(anyLong());
+        verify(companyOrderMapper, atMost(1)).mapToDTOs(anyListOf(CompanyOrder.class));
+
     }
 
     @Test
@@ -107,6 +97,7 @@ public class CompanyOrderServiceImplTest {
         CompanyOrderDTO orderDTO = allByCompanyId.get(0);
         assertEquals(this.companyOrderDTO, orderDTO);
         verify(companyOrderRepository, atMost(1)).findAllByCompanyId(anyLong());
+        verify(companyOrderMapper, atMost(1)).mapToDTOs(anyListOf(CompanyOrder.class));
     }
 
     @Test
@@ -116,6 +107,7 @@ public class CompanyOrderServiceImplTest {
         CompanyOrderDTO orderDTO = allByStatus.get(0);
         assertEquals(this.companyOrderDTO, orderDTO);
         verify(companyOrderRepository, atMost(1)).findAllByStatus(any(OrderStatus.class));
+        verify(companyOrderMapper, atMost(1)).mapToDTOs(anyListOf(CompanyOrder.class));
     }
 
     @Test
@@ -127,6 +119,7 @@ public class CompanyOrderServiceImplTest {
         assertEquals(this.companyOrderDTO, orderDTO);
         verify(companyOrderRepository, atMost(1)).findAllByUserId(anyLong());
         verify(currentUserService, atMost(1)).getCurrentUser();
+        verify(companyOrderMapper, atMost(1)).mapToDTOs(anyListOf(CompanyOrder.class));
     }
 
 }

@@ -51,9 +51,6 @@ public class CompanyEmployeeServiceImplTest {
     public void setUp() throws Exception {
         CompanyEmployee companyEmployee = new CompanyEmployee();
         companyEmployee.setId(1L);
-        companyEmployee.setFirstName("Employee");
-        companyEmployee.setLastName("CompanyEmployee");
-        companyEmployee.setEmail("employee@company");
 
         List<CompanyEmployee> listOfEmployee = new ArrayList<>();
         listOfEmployee.add(companyEmployee);
@@ -64,10 +61,6 @@ public class CompanyEmployeeServiceImplTest {
 
         companyEmployeeDTO = CompanyEmployeeDTO.builder()
                 .id(companyEmployee.getId())
-                .firstName(companyEmployee.getFirstName())
-                .lastName(companyEmployee.getLastName())
-                .email(companyEmployee.getEmail())
-                .company(new CompanyDTO())
                 .build();
         List<CompanyEmployeeDTO> listOfEmployeeDTO = new ArrayList<>();
         listOfEmployeeDTO.add(companyEmployeeDTO);
@@ -82,6 +75,7 @@ public class CompanyEmployeeServiceImplTest {
         CompanyEmployeeDTO employeeDTO = allByCompanyId.get(0);
         assertEquals(this.companyEmployeeDTO, employeeDTO);
         verify(companyEmployeeRepository, atMost(1)).findAllByCompanyId(anyLong());
+        verify(employeeMapper, atMost(1)).mapToDTOs(anyListOf(CompanyEmployee.class));
     }
 
     @Test
@@ -91,6 +85,7 @@ public class CompanyEmployeeServiceImplTest {
         CompanyEmployeeDTO employeeDTO = allByType.get(0);
         assertEquals(this.companyEmployeeDTO, employeeDTO);
         verify(companyEmployeeRepository, atMost(1)).findAllByType(any(EmployeeType.class));
+        verify(employeeMapper, atMost(1)).mapToDTOs(anyListOf(CompanyEmployee.class));
     }
 
     @Test
@@ -100,6 +95,7 @@ public class CompanyEmployeeServiceImplTest {
         assertEquals(1, allByCompanyIdAndEmployeeType.size());
         CompanyEmployeeDTO employeeDTO = allByCompanyIdAndEmployeeType.get(0);
         verify(companyEmployeeRepository, atMost(1)).findAllByCompanyIdAndType(anyLong(), any(EmployeeType.class));
+        verify(employeeMapper, atMost(1)).mapToDTOs(anyListOf(CompanyEmployee.class));
     }
 
 }

@@ -87,6 +87,9 @@ public class AddressServiceImplTest {
         assertEquals(this.addressDTO, addressDTO);
         verify(addressRepository, atMost(1))
                 .findAllByAddressType(any(AddressType.class));
+        verify(addressMapper, atMost(1))
+                .mapToDTOs(anyListOf(Address.class));
+
     }
 
     @Test
@@ -97,6 +100,8 @@ public class AddressServiceImplTest {
         assertEquals(this.addressDTO, addressDTO);
         verify(addressRepository, atMost(1))
                 .findAllByCompanyId(anyLong());
+        verify(addressMapper, atMost(1))
+                .mapToDTOs(anyListOf(Address.class));
     }
 
     @Test
@@ -107,6 +112,8 @@ public class AddressServiceImplTest {
         assertEquals(this.addressDTO, addressDTO);
         verify(addressRepository, atMost(1))
                 .findAllByCompanyIdAndType(anyLong(), any(AddressType.class));
+        verify(addressMapper, atMost(1))
+                .mapToDTOs(anyListOf(Address.class));
     }
 
 }

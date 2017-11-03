@@ -49,13 +49,8 @@ public class CargoServiceImplTest {
 
     @Before
     public void setUp() throws Exception {
-        Company company = new Company();
         Cargo cargo = new Cargo();
         cargo.setId(1L);
-        cargo.setCompany(company);
-        cargo.setVolume(86);
-        cargo.setWeight(22.0);
-        cargo.setDescription("Cargo description");
 
         List<Cargo> cargoList = new ArrayList<>();
         cargoList.add(cargo);
@@ -64,10 +59,6 @@ public class CargoServiceImplTest {
 
         cargoDTO = CargoDTO.builder()
                 .id(cargo.getId())
-                .company(new CompanyDTO())
-                .volume(cargo.getVolume())
-                .weight(cargo.getWeight())
-                .description(cargo.getDescription())
                 .build();
         List<CargoDTO> cargoDTOList = new ArrayList<>();
         cargoDTOList.add(cargoDTO);
@@ -83,6 +74,8 @@ public class CargoServiceImplTest {
         assertEquals(this.cargoDTO, cargoDTO);
         verify(cargoRepository, atMost(1))
                 .findAllByCompanyId(anyLong());
+        verify(cargoMapper, atMost(1))
+                .mapToDTOs(anyListOf(Cargo.class));
     }
 
 }
