@@ -3,6 +3,8 @@ package com.toptop.service.impl;
 import com.toptop.domain.BaseObject;
 import com.toptop.service.AbstractService;
 import com.toptop.service.mapper.BaseMapper;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -14,8 +16,11 @@ import java.util.Optional;
 public abstract class TransactionService<T extends BaseObject, ID extends Serializable,
         M extends BaseMapper<T, DTO>, DTO extends Object> implements AbstractService<T, ID, DTO> {
 
+    private static final Logger LOG = LoggerFactory.getLogger(TransactionService.class);
+
     @Override
     public DTO save(DTO dto) {
+        LOG.debug("Saving entity: {}", dto);
         T entity = getMapper().map(dto);
         return getMapper().mapToDTO(getRepository().save(entity));
     }
@@ -23,6 +28,7 @@ public abstract class TransactionService<T extends BaseObject, ID extends Serial
     @Override
     @Transactional(readOnly = true)
     public Optional<DTO> findOne(ID id) {
+        LOG.debug("Searching entity with id: {}", id);
         T object = getRepository().findOne(id);
         return Optional.ofNullable(getMapper().mapToDTO(object));
     }
@@ -30,13 +36,16 @@ public abstract class TransactionService<T extends BaseObject, ID extends Serial
     @Override
     @Transactional(readOnly = true)
     public List<DTO> findAll() {
+        LOG.debug("Getting all entities");
         return getMapper().mapToDTOs(getRepository().findAll());
     }
 
     @Override
     public void delete(ID id) {
+        LOG.debug("Deleting entity with id: {}", id);
         T entity = getRepository().findOne(id);
         if (entity == null) {
+            LOG.warn("Entity does not exists, ID: " + id);
             throw new IllegalArgumentException("Entity does not exists, ID: " + id);
         }
         entity.setEnabled(false);
