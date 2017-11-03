@@ -40,5 +40,5 @@ public interface CompanyOrderService extends AbstractService<CompanyOrder, Long,
      *
      * @return the list of entities
      */
-    List<CompanyOrderDTO> getCompanyOrderByCurrentUser();
+    List<CompanyOrderDTO> findAllByCurrentUser();
 }

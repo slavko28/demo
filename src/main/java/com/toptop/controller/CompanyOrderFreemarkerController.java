@@ -1,10 +1,7 @@
 package com.toptop.controller;
 
-import com.toptop.service.CargoService;
-import com.toptop.service.CompanyOrderService;
 import com.toptop.service.CompanyService;
 import com.toptop.service.RouteService;
-import com.toptop.service.dto.CargoDTO;
 import com.toptop.service.dto.CompanyDTO;
 import com.toptop.service.dto.CompanyOrderDTO;
 import com.toptop.service.dto.RouteDTO;
@@ -20,12 +17,9 @@ import org.springframework.web.servlet.ModelAndView;
 import java.util.List;
 
 @Controller
-public class CompanyOrderFremarkerController {
+public class CompanyOrderFreemarkerController {
 
-    private static final Logger LOG = LoggerFactory.getLogger(CompanyOrderFremarkerController.class);
-
-    @Autowired
-    private CompanyOrderService companyOrderService;
+    private static final Logger LOG = LoggerFactory.getLogger(CompanyOrderFreemarkerController.class);
 
     @Autowired
     private CompanyService companyService;
@@ -33,8 +27,6 @@ public class CompanyOrderFremarkerController {
     @Autowired
     private RouteService routeService;
 
-    @Autowired
-    private CargoService cargoService;
 
     @PreAuthorize("hasAuthority('MANAGER')")
     @RequestMapping(value = "/order", method = RequestMethod.GET)

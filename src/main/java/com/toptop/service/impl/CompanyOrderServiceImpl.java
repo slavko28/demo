@@ -20,7 +20,8 @@ import java.util.List;
 
 @Service
 @Transactional
-public class CompanyOrderServiceImpl extends TransactionService<CompanyOrder, Long, CompanyOrderMapper, CompanyOrderDTO> implements CompanyOrderService {
+public class CompanyOrderServiceImpl extends TransactionService<CompanyOrder, Long, CompanyOrderMapper, CompanyOrderDTO>
+        implements CompanyOrderService {
 
     private static final Logger LOG = LoggerFactory.getLogger(UserServiceImpl.class);
 
@@ -56,7 +57,7 @@ public class CompanyOrderServiceImpl extends TransactionService<CompanyOrder, Lo
 
     @Override
     @Transactional(readOnly = true)
-    public List<CompanyOrderDTO> getCompanyOrderByCurrentUser() {
+    public List<CompanyOrderDTO> findAllByCurrentUser() {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         LOG.debug("Find all orders by current user: {}", auth.getName());
         return getMapper().mapToDTOs(orderRepository.findAllByUserId(currentUserService.getCurrentUser().get().getId()));
