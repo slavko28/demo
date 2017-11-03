@@ -16,6 +16,6 @@ public interface CompanyService extends AbstractService<Company, Long, CompanyDT
      * @param companyCod the Company cod
      * @return the entity
      */
-    Optional<CompanyDTO> findByOneByCompanyCod(Long companyCod);
+    Optional<CompanyDTO> findOneByCompanyCod(Long companyCod);
 
 }

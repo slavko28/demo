@@ -29,7 +29,7 @@ public class CompanyServiceImpl extends TransactionService<Company, Long, Compan
 
     @Override
     @Transactional(readOnly = true)
-    public Optional<CompanyDTO> findByOneByCompanyCod(Long companyCod) {
+    public Optional<CompanyDTO> findOneByCompanyCod(Long companyCod) {
         LOG.debug("Find company cod: {}", companyCod);
         Company company = companyRepository.findOneByCompanyCod(companyCod);
         return Optional.ofNullable(getMapper().mapToDTO(company));

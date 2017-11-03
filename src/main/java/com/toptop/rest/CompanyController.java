@@ -99,7 +99,7 @@ public class CompanyController {
     public ResponseEntity getByCompanyCod(@PathVariable("companyCod") Long companyCod) {
         LOG.debug("Request to get company by company cod: {}", companyCod);
         Assert.notNull(companyCod, "ID can not be null");
-        Optional<CompanyDTO> maybeCompany = companyService.findByOneByCompanyCod(companyCod);
+        Optional<CompanyDTO> maybeCompany = companyService.findOneByCompanyCod(companyCod);
         if (maybeCompany.isPresent()) {
             return ResponseEntity.ok(maybeCompany.get());
         }
