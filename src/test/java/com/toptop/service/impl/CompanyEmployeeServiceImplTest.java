@@ -10,7 +10,6 @@ import com.toptop.service.mapper.CompanyEmployeeMapper;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.TestConfiguration;
 import org.springframework.boot.test.mock.mockito.MockBean;
@@ -77,7 +76,7 @@ public class CompanyEmployeeServiceImplTest {
     }
 
     @Test
-    public void findAllByCompanyId() throws Exception {
+    public void shouldFindAllByCompanyId() throws Exception {
         List<CompanyEmployeeDTO> allByCompanyId = companyEmployeeService.findAllByCompanyId(1L);
         assertEquals(1, allByCompanyId.size());
         CompanyEmployeeDTO employeeDTO = allByCompanyId.get(0);
@@ -86,7 +85,7 @@ public class CompanyEmployeeServiceImplTest {
     }
 
     @Test
-    public void findAllByType() throws Exception {
+    public void shouldFindAllByType() throws Exception {
         List<CompanyEmployeeDTO> allByType = companyEmployeeService.findAllByType(EmployeeType.COMPANY_MANAGER);
         assertEquals(1, allByType.size());
         CompanyEmployeeDTO employeeDTO = allByType.get(0);
@@ -95,7 +94,7 @@ public class CompanyEmployeeServiceImplTest {
     }
 
     @Test
-    public void findAllByCompanyIdAndEmployeeType() throws Exception {
+    public void shouldFindAllByCompanyIdAndEmployeeType() throws Exception {
         List<CompanyEmployeeDTO> allByCompanyIdAndEmployeeType = companyEmployeeService
                 .findAllByCompanyIdAndEmployeeType(1L, EmployeeType.COMPANY_MANAGER);
         assertEquals(1, allByCompanyIdAndEmployeeType.size());

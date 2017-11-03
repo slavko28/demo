@@ -11,7 +11,6 @@ import com.toptop.service.dto.CargoDTO;
 import com.toptop.service.dto.CompanyDTO;
 import com.toptop.service.dto.CompanyOrderDTO;
 import com.toptop.service.mapper.CompanyOrderMapper;
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -19,10 +18,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.TestConfiguration;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.context.annotation.Bean;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContext;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.context.SecurityContextImpl;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.junit4.SpringRunner;
 
@@ -35,9 +30,7 @@ import static org.junit.Assert.assertEquals;
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyListOf;
 import static org.mockito.Matchers.anyLong;
-import static org.mockito.Mockito.atMost;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 @RunWith(SpringRunner.class)
 public class CompanyOrderServiceImplTest {
@@ -134,6 +127,6 @@ public class CompanyOrderServiceImplTest {
         assertEquals(this.companyOrderDTO, orderDTO);
         verify(companyOrderRepository, atMost(1)).findAllByUserId(anyLong());
         verify(currentUserService, atMost(1)).getCurrentUser();
-
     }
+
 }

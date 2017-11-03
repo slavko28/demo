@@ -6,13 +6,10 @@ import com.toptop.repository.AddressRepository;
 import com.toptop.service.AddressService;
 import com.toptop.service.dto.AddressDTO;
 import com.toptop.service.mapper.AddressMapper;
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.TestConfiguration;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.context.annotation.Bean;
@@ -21,9 +18,12 @@ import org.springframework.test.context.junit4.SpringRunner;
 import java.util.ArrayList;
 import java.util.List;
 
+import static org.junit.Assert.assertEquals;
+import static org.mockito.Matchers.*;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 import static org.mockito.internal.verification.VerificationModeFactory.atMost;
 
-@SpringBootTest
 @RunWith(SpringRunner.class)
 public class AddressServiceImplTest {
 
@@ -39,14 +39,14 @@ public class AddressServiceImplTest {
 
     private AddressDTO addressDTO;
 
-    @Autowired
-    private AddressService addressService;
+    @MockBean
+    private AddressMapper addressMapper;
 
     @MockBean
     private AddressRepository addressRepository;
 
-    @MockBean
-    private AddressMapper addressMapper;
+    @Autowired
+    private AddressService addressService;
 
     @Before
     public void setUp() {
@@ -60,11 +60,11 @@ public class AddressServiceImplTest {
         List<Address> addressList = new ArrayList<>();
         addressList.add(address);
 
-        Mockito.when(addressRepository.findAllByAddressType(Mockito.any(AddressType.class)))
+        when(addressRepository.findAllByAddressType(any(AddressType.class)))
                 .thenReturn(addressList);
-        Mockito.when(addressRepository.findAllByCompanyId(Mockito.anyLong()))
+        when(addressRepository.findAllByCompanyId(anyLong()))
                 .thenReturn(addressList);
-        Mockito.when(addressRepository.findAllByCompanyIdAndType(Mockito.anyLong(), Mockito.any(AddressType.class)))
+        when(addressRepository.findAllByCompanyIdAndType(anyLong(), any(AddressType.class)))
                 .thenReturn(addressList);
 
         addressDTO = new AddressDTO();
@@ -76,36 +76,37 @@ public class AddressServiceImplTest {
 
         List<AddressDTO> addressDTOList = new ArrayList<>();
         addressDTOList.add(addressDTO);
-        Mockito.when(addressMapper.mapToDTOs(Mockito.anyListOf(Address.class))).thenReturn(addressDTOList);
+        when(addressMapper.mapToDTOs(anyListOf(Address.class))).thenReturn(addressDTOList);
     }
 
     @Test
-    public void findAllByType() throws Exception {
+    public void shouldFindAllByType() throws Exception {
         List<AddressDTO> allByType = addressService.findAllByType(AddressType.STORAGE);
-        Assert.assertTrue(allByType.size() == 1);
+        assertEquals(1, allByType.size());
         AddressDTO addressDTO = allByType.get(0);
-        Assert.assertTrue(this.addressDTO.equals(addressDTO));
-        Mockito.verify(addressRepository, atMost(1))
-                .findAllByAddressType(Mockito.any(AddressType.class));
+        assertEquals(this.addressDTO, addressDTO);
+        verify(addressRepository, atMost(1))
+                .findAllByAddressType(any(AddressType.class));
     }
 
     @Test
-    public void findAllByCompanyId() throws Exception {
+    public void shouldFindAllByCompanyId() throws Exception {
         List<AddressDTO> allByCompanyId = addressService.findAllByCompanyId(1L);
-        Assert.assertTrue(allByCompanyId.size() == 1);
+        assertEquals(1, allByCompanyId.size());
         AddressDTO addressDTO = allByCompanyId.get(0);
-        Assert.assertTrue(this.addressDTO.equals(addressDTO));
-        Mockito.verify(addressRepository, atMost(1))
-                .findAllByCompanyId(Mockito.anyLong());
+        assertEquals(this.addressDTO, addressDTO);
+        verify(addressRepository, atMost(1))
+                .findAllByCompanyId(anyLong());
     }
 
     @Test
-    public void findAllByCompanyIdAndType() throws Exception {
+    public void shouldFindAllByCompanyIdAndType() throws Exception {
         List<AddressDTO> allByCompanyIdAndType = addressService.findAllByCompanyIdAndType(1L, AddressType.STORAGE);
-        Assert.assertTrue(allByCompanyIdAndType.size() == 1);
+        assertEquals(1, allByCompanyIdAndType.size());
         AddressDTO addressDTO = allByCompanyIdAndType.get(0);
-        Assert.assertTrue(this.addressDTO.equals(addressDTO));
-        Mockito.verify(addressRepository, atMost(1))
-                .findAllByCompanyIdAndType(Mockito.anyLong() ,Mockito.any(AddressType.class));
+        assertEquals(this.addressDTO, addressDTO);
+        verify(addressRepository, atMost(1))
+                .findAllByCompanyIdAndType(anyLong(), any(AddressType.class));
     }
+
 }
