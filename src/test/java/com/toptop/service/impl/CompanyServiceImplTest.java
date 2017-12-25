@@ -54,7 +54,7 @@ public class CompanyServiceImplTest {
     }
 
     @Test
-    public void findByOneByCompanyCod() throws Exception {
+    public void shouldFindByOneByCompanyCod() throws Exception {
         Optional<CompanyDTO> oneByCompanyCod = companyService.findOneByCompanyCod(111111111L);
         assertTrue(oneByCompanyCod.isPresent());
         assertEquals(this.companyDTO, oneByCompanyCod.get());
