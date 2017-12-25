@@ -16,7 +16,8 @@ import java.util.List;
 
 @Service
 @Transactional
-public class CargoServiceImpl extends TransactionService<Cargo, Long, CargoMapper, CargoDTO> implements CargoService {
+public class CargoServiceImpl extends TransactionService<Cargo, Long, CargoMapper, CargoDTO>
+        implements CargoService {
 
     private static final Logger LOG = LoggerFactory.getLogger(CargoServiceImpl.class);
 

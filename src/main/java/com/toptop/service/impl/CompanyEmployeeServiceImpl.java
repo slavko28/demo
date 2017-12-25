@@ -17,7 +17,8 @@ import java.util.List;
 
 @Service
 @Transactional
-public class CompanyEmployeeServiceImpl extends TransactionService<CompanyEmployee, Long, CompanyEmployeeMapper, CompanyEmployeeDTO> implements CompanyEmployeeService {
+public class CompanyEmployeeServiceImpl extends TransactionService<CompanyEmployee, Long, CompanyEmployeeMapper, CompanyEmployeeDTO>
+        implements CompanyEmployeeService {
 
     private static final Logger LOG = LoggerFactory.getLogger(UserServiceImpl.class);
 
